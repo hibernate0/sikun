@@ -123,6 +123,7 @@ select.in{background-image:linear-gradient(45deg,transparent 50%,var(--ink3) 50%
 .ns>div{padding:16px 8px;text-align:center;border-radius:28px}
 .empty{padding:34px 22px;text-align:center;margin-top:10px}
 .empty p{margin-bottom:18px}
+.savebar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:19;filter:drop-shadow(0 8px 16px rgba(0,0,0,.2))}
 .toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--on);color:var(--onink);padding:11px 18px;border-radius:99px;font-size:13.5px;opacity:0;pointer-events:none;transition:.28s;z-index:40;white-space:nowrap}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 .kv{display:flex;justify-content:space-between;gap:16px;padding:9px 0;font-size:14px}
@@ -524,7 +525,7 @@ if(f&&f.ok)hero=`<p class="tx">${f.line}</p><div class="sc"><span class="d d2">$
 else if(f)hero=`<p class="tx">운세를 계산하지 못했어요</p><p class="sm go">${esc(f.msg)}</p>`;
 else hero=`<p class="tx">생년월일을 넣으면 오늘의 운세로 메뉴를 골라요</p><div class="go">${goMe}</div>`;
 const T=c.T,e=c.eat,pct=clamp(e.k/T.k*100,0,100);
-let h=`<section class="hero"><div class="aura"><i></i><i></i><i></i></div><div class="top"><span class="sm">${now.getMonth()+1}월 ${now.getDate()}일 ${WDAY[now.getDay()]}요일</span><button class="sm" data-a="wx">${curTemp()!=null?R(curTemp())+'° 날씨':'날씨 선택'}</button></div>${hero}</section>`;
+let h=`<section class="hero"><div class="aura"><i></i><i></i><i></i></div><div class="top"><span class="sm">${now.getMonth()+1}월 ${now.getDate()}일 ${WDAY[now.getDay()]}요일</span><button class="sm" data-a="wx">${curTemp()!=null?R(curTemp())+'°':'날씨 선택'}</button></div>${hero}</section>`;
 h+=`<div class="slab bud"><div class="t"><span class="d d3">${R(e.k)}</span><span class="sm">/ ${T.k} kcal</span></div><div class="track"><i style="width:${pct}%"></i></div><div class="m"><span class="xs">탄수 ${R(e.c)}/${T.c}g</span><span class="xs">단백질 ${R(e.p)}/${T.p}g</span><span class="xs">지방 ${R(e.f)}/${T.f}g</span></div></div>`;
 order.forEach((s,i)=>{
 const it=pickFor(s,c);
@@ -634,7 +635,8 @@ const get=p=>p.split('.').reduce((o,k)=>o&&o[k],S);
 const inp=(p,type,ph,extra)=>`<input class="in" type="${type}" data-f="${p}" value="${esc(get(p))}" ${ph?`placeholder="${ph}"`:''} ${extra||''}>`;
 function vMe(){
 const b=S.profile.birth,bd=S.profile.body,T=targets(),pr=S.prefs;
-let h=`<h1 class="ttl">나</h1>`;
+const bs=b.date?[b.date.replace(/-/g,'.'),b.noTime||!b.time?'시간 모름':b.time,b.cal==='lunar'?'음력':'양력',place(b.place).name].join(' '):'';
+let h=`<h1 class="ttl">나</h1><p class="sm" style="margin:-8px 0 8px">${b.date?'저장된 정보 '+esc(bs):'생년월일을 입력해 주세요'}</p>`;
 h+=`<h3 class="sec" style="margin-top:6px">생년월일시</h3><div class="slab cards"><div class="fld" style="margin-top:0"><span>달력</span>${sel('profile.birth.cal',b.cal,[['solar','양력'],['lunar','음력']])}</div><label class="fld"><span>생년월일</span>${inp('profile.birth.date','date')}</label>${b.cal==='lunar'?`<label class="sw"><span>윤달이에요</span><input type="checkbox" data-f="profile.birth.leap" ${b.leap?'checked':''}></label>`:''}<label class="fld"><span>태어난 시각</span>${inp('profile.birth.time','time','',b.noTime?'disabled':'')}</label><label class="sw"><span>태어난 시간을 몰라요</span><input type="checkbox" data-f="profile.birth.noTime" ${b.noTime?'checked':''}></label><div class="fld"><span>성별</span>${sel('profile.birth.gender',b.gender,[['M','남'],['F','여']])}</div><label class="fld"><span>태어난 곳</span><select class="in" data-f="profile.birth.place"><optgroup label="한국">${PLACES.slice(0,31).map(p=>`<option value="${p.id}" ${b.place===p.id?'selected':''}>${p.name}</option>`).join('')}</optgroup><optgroup label="해외">${PLACES.slice(31).map(p=>`<option value="${p.id}" ${b.place===p.id?'selected':''}>${p.name}</option>`).join('')}</optgroup></select></label></div>`;
 h+=`<h3 class="sec">식단 목표</h3><div class="pills" style="margin-bottom:0">${Object.keys(GOALS).map(k=>btn('set',`data-p="profile.goal" data-v="${k}"`,GOALS[k],'pill'+(S.profile.goal===k?' on':''))).join('')}</div><div class="slab cards" style="margin-top:6px"><div class="fld" style="margin-top:0"><span>성별</span>${sel('profile.body.sex',bd.sex,[['M','남'],['F','여']])}</div><div class="g2"><label class="fld"><span>키 (cm)</span>${inp('profile.body.h','number','172','inputmode="decimal"')}</label><label class="fld"><span>몸무게 (kg)</span>${inp('profile.body.w','number','68','inputmode="decimal"')}</label></div><label class="fld"><span>활동량</span><select class="in" data-f="profile.body.act">${ACTS.map(a=>`<option value="${a[0]}" ${+bd.act===a[0]?'selected':''}>${a[1]}</option>`).join('')}</select></label></div>`;
 h+=`<div class="well" style="padding:8px 18px;margin-top:18px"><div class="kv"><span>하루 목표</span><span>${T.k} kcal</span></div><div class="kv"><span>탄수화물</span><span>${T.c}g</span></div><div class="kv"><span>단백질</span><span>${T.p}g</span></div><div class="kv"><span>지방</span><span>${T.f}g</span></div><div class="kv"><span>식이섬유</span><span>${T.fi}g 이상</span></div></div>`;
@@ -642,7 +644,7 @@ h+=`<details style="margin-top:14px"><summary class="sm" style="padding:8px 0;cu
 h+=`<h3 class="sec">추천에 쓸 방식</h3><div class="pills" style="margin-bottom:0">${['h','c','o'].map(k=>btn('meth',`data-v="${k}"`,METH[k],'pill'+(pr.methods.includes(k)?' on':''))).join('')}</div>`;
 h+=`<h3 class="sec">운세 체계</h3><div class="slab cards">${Object.keys(SYN).map(k=>`<div style="padding:6px 0"><label class="sw" style="padding:6px 0"><span>${SYN[k]}</span><input type="checkbox" data-f="prefs.on.${k}" ${pr.on[k]?'checked':''}></label><div style="display:flex;align-items:center;gap:12px"><input class="rng" type="range" min="0" max="100" step="5" data-f="prefs.w.${k}" value="${pr.w[k]}"><span class="xs" style="width:30px;text-align:right">${pr.w[k]}</span></div></div>`).join('')}<label class="sw"><span>진태양시 보정</span><input type="checkbox" data-f="prefs.tst" ${pr.tst?'checked':''}></label><div class="fld"><span>자시 기준</span>${sel('prefs.zasi',pr.zasi,[[2,'야자시'],[1,'조자시']])}</div></div>`;
 h+=`<h3 class="sec">위치와 화면</h3><div class="slab cards"><div class="kv" style="padding-top:0"><span>오늘 날씨</span><span>${curTemp()!=null?R(curTemp())+'°':'선택 안 함'}</span></div><div style="display:flex;gap:10px;flex-wrap:wrap">${btn('wx','','날씨 직접 고르기','pillbtn ghost')}${btn('geo','','위치로 자동 반영','pillbtn ghost')}</div><div class="fld"><span>화면</span>${sel('prefs.theme',pr.theme,[['auto','자동'],['light','밝게'],['dark','어둡게']])}</div></div>`;
-h+=`<h3 class="sec">데이터</h3><div style="display:flex;gap:10px">${btn('copy','','복사','pillbtn ghost')}${btn('reset','','초기화','pillbtn ghost')}</div><p class="note">모든 정보는 이 기기의 브라우저에만 저장돼요. 홈 화면에 추가해서 쓰면 오래 유지돼요.</p>`;
+h+=`<h3 class="sec">데이터</h3><div style="display:flex;gap:10px">${btn('copy','','복사','pillbtn ghost')}${btn('reset','','초기화','pillbtn ghost')}</div><p class="note">입력하는 즉시 이 기기에 저장돼요. 홈 화면에 추가해서 쓰면 오래 유지돼요.</p><div class="savebar">${btn('applysave','','저장하고 적용','pillbtn')}</div>`;
 return h}
 const VIEWS={today:vToday,fortune:vFortune,log:vLog,menu:vMenu,me:vMe};
 function render(){
@@ -679,8 +681,9 @@ function logAdd(o){S.log.push(Object.assign({id:'e'+Date.now()+Math.floor(Math.r
 const ACT={
 tab(d){tab=d.v;window.scrollTo(0,0);render()},
 ftab(d){ftab=d.v;render()},
-set(d){let v=d.v;if(d.p==='prefs.zasi')v=+v;if(d.p==='profile.body.act')v=+v;setPath(d.p,v);dirty();save();refresh(true)},
-meth(d){const m=S.prefs.methods,i=m.indexOf(d.v);if(i>=0){if(m.length>1)m.splice(i,1)}else m.push(d.v);S.picks={};save();refresh(true)},
+set(d){let v=d.v;if(d.p==='prefs.zasi')v=+v;if(d.p==='profile.body.act')v=+v;setPath(d.p,v);dirty();save();toast('저장했어요');refresh(true)},
+applysave(){dirty();save();tab='today';window.scrollTo(0,0);render();toast('저장하고 적용했어요')},
+meth(d){const m=S.prefs.methods,i=m.indexOf(d.v);if(i>=0){if(m.length>1)m.splice(i,1)}else m.push(d.v);S.picks={};save();toast('저장했어요');refresh(true)},
 open(d){SH={id:d.id,sl:d.sl||'l',n:1};sheetMenu()},
 close(){sheetClose()},
 sv(d){SH.n=Math.max(.5,Math.round((SH.n+ +d.d)*2)/2);sheetMenu()},
@@ -712,7 +715,14 @@ reset2(){try{localStorage.removeItem(KEY)}catch(e){}S=defaults();dirty();sheetCl
 };
 async function weather(){
 const g=S.geo;if(!g)return;
-try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+g.lat.toFixed(2)+'&longitude='+g.lon.toFixed(2)+'&current=temperature_2m&timezone=auto');const j=await r.json();g.temp=j.current.temperature_2m}catch(e){}}
+try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+g.lat.toFixed(2)+'&longitude='+g.lon.toFixed(2)+'&current=temperature_2m&timezone=auto');const j=await r.json();g.temp=j.current.temperature_2m;g.ts=Date.now()}catch(e){}}
+function autoGeo(){
+if(!navigator.geolocation)return;
+if(S.geo&&S.geo.temp!=null&&S.geo.ts&&Date.now()-S.geo.ts<108e5)return;
+const go=()=>navigator.geolocation.getCurrentPosition(async p=>{
+S.geo={lat:p.coords.latitude,lon:p.coords.longitude};await weather();
+if(S.geo.temp!=null){if(!dayLog(dstr()).length)['b','l','d'].forEach(s=>{delete S.picks[dstr()+s]});save();refresh(true)}else save()},()=>{},{timeout:8000,maximumAge:6e5});
+if(navigator.permissions&&navigator.permissions.query){navigator.permissions.query({name:'geolocation'}).then(r=>{if(r.state!=='denied')go()},go)}else go()}
 document.addEventListener('click',e=>{
 const a=e.target.closest('[data-a]');
 if(!a)return;
@@ -724,7 +734,9 @@ const t=e.target,p=t.dataset&&t.dataset.f;
 if(!p)return;
 let v=t.type==='checkbox'?t.checked:t.type==='range'?+t.value:t.value;
 if(p==='profile.body.act')v=+v;
-setPath(p,v);dirty();save();refresh(true)});
+setPath(p,v);dirty();save();toast('저장했어요');
+if(['date','time','number','text'].includes(t.type))return;
+refresh(true)});
 document.addEventListener('input',e=>{
 const t=e.target;
 if(t.id==='mq'){mq=t.value;$('#mlist').innerHTML=mList()}
@@ -733,7 +745,7 @@ else if(t.type==='range'&&t.dataset.f){const s=t.parentNode.querySelector('span'
 $('#veil').addEventListener('click',sheetClose);
 (function icon(){try{const c=document.createElement('canvas');c.width=c.height=180;const x=c.getContext('2d');x.fillStyle='#e9eaed';x.fillRect(0,0,180,180);const g=x.createRadialGradient(62,52,8,92,92,110);g.addColorStop(0,'#f6b4d1');g.addColorStop(.55,'#bcd0ff');g.addColorStop(1,'#8fd6b1');x.fillStyle=g;x.beginPath();x.arc(90,90,64,0,7);x.fill();x.fillStyle='#121315';x.font='600 56px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('食',90,95);const l=document.createElement('link');l.rel='apple-touch-icon';l.href=c.toDataURL('image/png');document.head.appendChild(l)}catch(e){}})();
 render();
-if(S.geo&&S.geo.lat!=null){weather().then(()=>{save();if(tab==='today')refresh(true)})}
+autoGeo();
 </script>
 </body>
 </html>
