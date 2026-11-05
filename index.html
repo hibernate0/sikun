@@ -74,8 +74,8 @@ h1,h2,h3,p{margin:0}
 .pills::-webkit-scrollbar{display:none}
 .pill{flex:none;height:38px;padding:0 16px;border-radius:99px;background:var(--sf);box-shadow:4px 4px 10px var(--lo),-4px -4px 10px var(--hi);font-size:13.5px;color:var(--ink2)}
 .pill.on{background:var(--on);color:var(--onink);box-shadow:none}
-.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:2px;padding:6px;border-radius:99px;background:var(--on);color:var(--onink);box-shadow:0 14px 34px rgba(0,0,0,.28);z-index:20}
-.dock button{height:42px;padding:0 17px;border-radius:99px;font-size:14px;font-weight:400;opacity:.62}
+.dock{position:fixed;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:2px;padding:6px;border-radius:99px;background:var(--on);color:var(--onink);box-shadow:0 14px 34px rgba(0,0,0,.28);z-index:20}
+.dock button{height:42px;padding:0 16px;white-space:nowrap;border-radius:99px;font-size:14px;font-weight:400;opacity:.62}
 .dock button.on{opacity:1;background:rgba(128,128,128,.3);background:color-mix(in srgb,currentColor 18%,transparent)}
 .veil{position:fixed;inset:0;background:rgba(10,10,12,.38);opacity:0;pointer-events:none;transition:opacity .25s;z-index:30}
 .veil.on{opacity:1;pointer-events:auto}
