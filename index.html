@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="식운">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#e4e5e8">
+<title>식운</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&family=Syne:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e4e5e8;--sf:#e8e9ec;--well:#dbdce0;--ink:#121315;--ink2:#575a61;--ink3:#92959c;--line:rgba(18,19,21,.1);--hi:#fafafb;--lo:#bfc2c8;--on:#121315;--onink:#f4f4f6;--pink:#f46a9f;--a1:#a9c9ff;--a2:#f6b4d1;--a3:#d7f0e0;--ao:.9;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141518;--sf:#191a1e;--well:#101114;--ink:#ececef;--ink2:#a0a3aa;--ink3:#686b72;--line:rgba(236,236,239,.1);--hi:#222429;--lo:#0a0b0d;--on:#ececef;--onink:#141518;--pink:#ff7db0;--ao:.55;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141518;--sf:#191a1e;--well:#101114;--ink:#ececef;--ink2:#a0a3aa;--ink3:#686b72;--line:rgba(236,236,239,.1);--hi:#222429;--lo:#0a0b0d;--on:#ececef;--onink:#141518;--pink:#ff7db0;--ao:.55;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:300 15px/1.55 "Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;letter-spacing:inherit}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+#app{max-width:480px;margin:0 auto;padding:18px 20px 140px;position:relative}
+.d{font-family:Syne,"Helvetica Neue",Arial,sans-serif;font-weight:600;letter-spacing:-.045em;line-height:.92}
+.d1{font-size:104px}.d2{font-size:60px}.d3{font-size:36px}.d4{font-size:22px}.d5{font-size:17px}
+.sm{font-size:13px;color:var(--ink2)}.xs{font-size:11.5px;color:var(--ink3)}
+.ttl{font-size:36px;font-weight:300;letter-spacing:-.04em;line-height:1.1;margin:10px 0 18px}
+.sec{font-size:15px;font-weight:500;margin:30px 0 12px}
+.slab{background:var(--sf);border-radius:40px;box-shadow:12px 12px 28px var(--lo),-12px -12px 28px var(--hi)}
+.rowc{background:var(--sf);border-radius:28px;box-shadow:8px 8px 18px var(--lo),-8px -8px 18px var(--hi)}
+.well{background:var(--well);border-radius:22px;box-shadow:inset 4px 4px 10px var(--lo),inset -4px -4px 10px var(--hi)}
+.hero{position:relative;min-height:350px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;margin:0 -20px;padding:0 28px}
+.hero .top{position:absolute;top:0;left:20px;right:20px;display:flex;justify-content:space-between;align-items:center}
+.aura{position:absolute;inset:0;pointer-events:none}
+.aura i{position:absolute;border-radius:50%;filter:blur(46px);opacity:var(--ao)}
+.aura i:nth-child(1){width:250px;height:250px;left:-2%;top:10%;background:var(--a1);animation:dr1 24s ease-in-out infinite alternate}
+.aura i:nth-child(2){width:270px;height:270px;right:-4%;top:18%;background:var(--a2);animation:dr2 28s ease-in-out infinite alternate}
+.aura i:nth-child(3){width:230px;height:230px;left:28%;bottom:0;background:var(--a3);animation:dr3 32s ease-in-out infinite alternate}
+@keyframes dr1{to{transform:translate(46px,30px) scale(1.14)}}
+@keyframes dr2{to{transform:translate(-40px,36px) scale(.9)}}
+@keyframes dr3{to{transform:translate(30px,-34px) scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.aura i{animation:none}}
+.hero .tx{position:relative;font-size:27px;font-weight:300;line-height:1.35;letter-spacing:-.045em;max-width:300px}
+.hero .sc{position:relative;margin-top:16px;display:flex;align-items:baseline;gap:8px;justify-content:center}
+.hero .go{position:relative;margin-top:20px}
+.pillbtn{height:44px;padding:0 22px;border-radius:99px;background:var(--on);color:var(--onink);font-size:14px;font-weight:400;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.pillbtn.ghost{background:var(--sf);color:var(--ink);box-shadow:5px 5px 12px var(--lo),-5px -5px 12px var(--hi)}
+.bud{padding:18px 20px;margin-top:6px}
+.bud .t{display:flex;align-items:baseline;gap:8px;margin-bottom:12px}
+.track{height:10px;border-radius:99px;background:var(--well);box-shadow:inset 2px 2px 5px var(--lo),inset -2px -2px 5px var(--hi);overflow:hidden}
+.track i{display:block;height:100%;border-radius:99px;background:var(--pink);min-width:0}
+.bud .m{display:flex;justify-content:space-between;margin-top:12px}
+.lead{padding:22px 22px 20px;margin-top:22px}
+.lead .tp{display:flex;justify-content:space-between;align-items:center}
+.lead .nm{font-size:30px;font-weight:300;line-height:1.2;margin:16px 0 6px;letter-spacing:-.045em}
+.kc{display:flex;align-items:baseline;gap:8px;margin:22px 0 14px}
+.mac{display:grid;grid-template-columns:repeat(4,1fr);padding:14px 4px;text-align:center}
+.mac b{display:block;font:600 19px Syne,"Helvetica Neue",Arial,sans-serif;letter-spacing:-.03em}
+.mac span{font-size:11.5px;color:var(--ink3)}
+.why{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.chip{font-size:12px;padding:5px 11px;border-radius:99px;background:var(--well);color:var(--ink2)}
+.ctl{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+.rnd{width:46px;height:46px;border-radius:50%;background:var(--sf);box-shadow:5px 5px 12px var(--lo),-5px -5px 12px var(--hi);display:grid;place-items:center}
+.rnd.on{background:var(--on);color:var(--onink);box-shadow:none}
+.rnd svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rnd.sm2{width:38px;height:38px}
+.mrow{display:flex;align-items:center;gap:14px;padding:16px 16px 16px 22px;margin-top:16px}
+.mrow .nm{flex:1;min-width:0}
+.mrow .nm b{display:block;font-weight:400;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow.done{opacity:.55}
+.pills{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px 18px;padding:6px 20px 14px}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex:none;height:38px;padding:0 16px;border-radius:99px;background:var(--sf);box-shadow:4px 4px 10px var(--lo),-4px -4px 10px var(--hi);font-size:13.5px;color:var(--ink2)}
+.pill.on{background:var(--on);color:var(--onink);box-shadow:none}
+.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:2px;padding:6px;border-radius:99px;background:var(--on);color:var(--onink);box-shadow:0 14px 34px rgba(0,0,0,.28);z-index:20}
+.dock button{height:42px;padding:0 17px;border-radius:99px;font-size:14px;font-weight:400;opacity:.62}
+.dock button.on{opacity:1;background:rgba(128,128,128,.3);background:color-mix(in srgb,currentColor 18%,transparent)}
+.veil{position:fixed;inset:0;background:rgba(10,10,12,.38);opacity:0;pointer-events:none;transition:opacity .25s;z-index:30}
+.veil.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:90%;overflow:auto;background:var(--bg);border-radius:36px 36px 0 0;padding:10px 22px calc(28px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .34s cubic-bezier(.2,.8,.2,1);z-index:31;box-shadow:0 -20px 50px rgba(0,0,0,.2)}
+.sheet.on{transform:none}
+.grab{width:40px;height:5px;border-radius:9px;background:var(--line);margin:4px auto 18px}
+.in{width:100%;height:48px;border:0;border-radius:16px;background:var(--well);box-shadow:inset 3px 3px 8px var(--lo),inset -3px -3px 8px var(--hi);padding:0 16px;font:400 16px "Noto Sans KR",-apple-system,sans-serif;color:var(--ink);-webkit-appearance:none;appearance:none;min-width:0}
+select.in{background-image:linear-gradient(45deg,transparent 50%,var(--ink3) 50%),linear-gradient(135deg,var(--ink3) 50%,transparent 50%);background-position:calc(100% - 22px) 21px,calc(100% - 16px) 21px;background-size:6px 6px;background-repeat:no-repeat;padding-right:36px}
+.fld{display:block;margin-top:14px}
+.fld>span{display:block;font-size:12.5px;color:var(--ink2);margin-bottom:7px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:flex;gap:6px;padding:5px;border-radius:18px}
+.seg button{flex:1;height:38px;border-radius:14px;font-size:14px;color:var(--ink2)}
+.seg button.on{background:var(--on);color:var(--onink)}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0}
+.sw input{appearance:none;-webkit-appearance:none;width:50px;height:30px;border-radius:99px;background:var(--well);box-shadow:inset 2px 2px 6px var(--lo),inset -2px -2px 6px var(--hi);position:relative;flex:none;transition:background .2s}
+.sw input::after{content:"";position:absolute;top:4px;left:4px;width:22px;height:22px;border-radius:50%;background:var(--ink3);transition:transform .2s,background .2s}
+.sw input:checked{background:var(--on)}
+.sw input:checked::after{transform:translateX(20px);background:var(--onink)}
+.rng{width:100%;accent-color:var(--pink)}
+.cards{padding:20px}
+.lst{margin-top:6px}
+.li{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.li:last-child{border:0}
+.li .nm{flex:1;min-width:0}
+.li .nm b{display:block;font-weight:400;font-size:15.5px}
+.ky{display:flex;align-items:baseline;gap:4px}
+.pil{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.pil>div{padding:14px 4px 16px;border-radius:26px;text-align:center}
+.pil .h{font-size:26px;font-weight:400;line-height:1.2}
+.pil .k{font-size:12px;color:var(--ink2)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+.bars>div{display:grid;grid-template-columns:34px 1fr 38px;align-items:center;gap:10px;margin:11px 0}
+.bars .track i{background:var(--c,var(--pink))}
+.zw{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:22px;overflow:hidden}
+.zw>div{background:var(--bg);min-height:92px;padding:7px 6px;font-size:11.5px;line-height:1.35;position:relative}
+.zw .c{grid-column:2/4;grid-row:2/4;padding:14px;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.zw .pn{color:var(--ink3);font-size:10.5px;display:block}
+.zw .st{font-weight:400;font-size:12px}
+.zw .st.s{color:var(--ink2);font-weight:300}
+.zw .me{position:absolute;right:7px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--pink)}
+.zw .on2{background:var(--well)}
+.wheel{width:100%;height:auto;display:block}
+.ns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ns>div{padding:16px 8px;text-align:center;border-radius:28px}
+.empty{padding:34px 22px;text-align:center;margin-top:10px}
+.empty p{margin-bottom:18px}
+.toast{position:fixed;left:50%;bottom:calc(86px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--on);color:var(--onink);padding:11px 18px;border-radius:99px;font-size:13.5px;opacity:0;pointer-events:none;transition:.28s;z-index:40;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.kv{display:flex;justify-content:space-between;gap:16px;padding:9px 0;font-size:14px}
+.kv span:first-child{color:var(--ink2)}
+.kv span:last-child{text-align:right}
+.step{display:flex;align-items:center;gap:14px}
+.step .d{min-width:54px;text-align:center}
+.wk{width:100%;height:auto;display:block}
+.note{font-size:12.5px;color:var(--ink3);line-height:1.6;margin-top:10px}
+.srch{position:relative;margin-bottom:14px}
+.mt{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.err{padding:18px;font-size:13.5px;color:var(--ink2)}
+.tg{font-size:11.5px;color:var(--ink3);border:1px solid var(--line);border-radius:99px;padding:2px 9px}
+</style>
+</head>
+<body>
+<div id="app"><main id="view"></main></div>
+<nav class="dock" id="dock"></nav>
+<div class="veil" id="veil"></div>
+<section class="sheet" id="sheet"></section>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+<script>
+const $=(s,r=document)=>r.querySelector(s);
+const P2=n=>String(n).padStart(2,'0');
+const mod=(a,n)=>((a%n)+n)%n;
+const R=n=>Math.round(n);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const dstr=(d=new Date())=>d.getFullYear()+'-'+P2(d.getMonth()+1)+'-'+P2(d.getDate());
+const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return dstr(d)};
+const hash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0)};
+const ELS=['木','火','土','金','水'];
+const EK={木:'목',火:'화',土:'토',金:'금',水:'수'};
+const EC={木:'#6fbf94',火:'#f0766e',土:'#e5b94f',金:'#a9b2c2',水:'#6f9bf2'};
+const EF={木:'신맛, 푸른 채소',火:'쓴맛·매운맛, 붉은 음식',土:'단맛, 노란 음식',金:'매운맛, 흰 음식',水:'짠맛, 해조류·검은 음식'};
+const EH={木:'푸른',火:'붉은',土:'노란',金:'하얀',水:'어두운 푸른'};
+const GEN={木:'火',火:'土',土:'金',金:'水',水:'木'};
+const KE={木:'土',土:'水',水:'火',火:'金',金:'木'};
+const SL={b:'아침',l:'점심',d:'저녁',s:'간식'};
+const SLT={b:'08:00',l:'12:30',d:'19:00'};
+const METH={h:'간단 조리',c:'편의점·시판',o:'배달·외식'};
+const GOALS={cut:'체중 감량',keep:'체중 유지',bulk:'근성장',lowcarb:'저탄수',protein:'고단백'};
+const ACTS=[[1.2,'거의 안 움직임'],[1.375,'가벼운 활동 주 1~3회'],[1.55,'보통 활동 주 3~5회'],[1.725,'활발한 활동 주 6~7회']];
+const PLACES=[['seoul','서울',37.57,126.98,9],['gangnam','서울 강남',37.52,127.05,9],['busan','부산',35.18,129.08,9],['daegu','대구',35.87,128.6,9],['incheon','인천',37.46,126.71,9],['gwangju','광주',35.16,126.85,9],['daejeon','대전',36.35,127.38,9],['ulsan','울산',35.54,129.31,9],['sejong','세종',36.48,127.29,9],['suwon','수원',37.26,127.03,9],['seongnam','성남',37.42,127.13,9],['goyang','고양',37.66,126.83,9],['yongin','용인',37.24,127.18,9],['bucheon','부천',37.5,126.77,9],['ansan','안산',37.32,126.83,9],['anyang','안양',37.39,126.96,9],['namyangju','남양주',37.64,127.22,9],['hwaseong','화성',37.2,126.83,9],['dongtan','동탄',37.2,127.1,9],['pyeongtaek','평택',36.99,127.11,9],['chuncheon','춘천',37.88,127.73,9],['gangneung','강릉',37.75,128.88,9],['wonju','원주',37.34,127.92,9],['cheongju','청주',36.64,127.49,9],['cheonan','천안',36.82,127.11,9],['jeonju','전주',35.82,127.15,9],['mokpo','목포',34.81,126.39,9],['yeosu','여수',34.76,127.66,9],['pohang','포항',36.02,129.34,9],['changwon','창원',35.23,128.68,9],['jeju','제주',33.5,126.53,9],['tokyo','도쿄',35.68,139.69,9],['osaka','오사카',34.69,135.5,9],['beijing','베이징',39.9,116.4,8],['shanghai','상하이',31.23,121.47,8],['hongkong','홍콩',22.32,114.17,8],['taipei','타이베이',25.03,121.57,8],['singapore','싱가포르',1.35,103.82,8],['bangkok','방콕',13.75,100.5,7],['delhi','뉴델리',28.61,77.21,5.5],['dubai','두바이',25.2,55.27,4],['london','런던',51.51,-0.13,0],['paris','파리',48.86,2.35,1],['berlin','베를린',52.52,13.4,1],['newyork','뉴욕',40.71,-74.01,-5],['losangeles','로스앤젤레스',34.05,-118.24,-8],['sydney','시드니',-33.87,151.21,10]].map(a=>({id:a[0],name:a[1],lat:a[2],lon:a[3],tz:a[4]}));
+const place=id=>PLACES.find(p=>p.id===id)||PLACES[0];
+const RAW=[
+['그릭요거트 볼','b','hc',310,36,21,9,4,22,85,'木土','','그릭요거트 200g, 바나나, 견과'],
+['계란 고구마 세트','b','hc',330,41,15,11,5,14,160,'土金','','삶은 계란 2개, 고구마 1개'],
+['오트밀 베리','b','h',340,52,14,8,7,14,100,'水金','hot','오트밀 40g, 우유 200ml, 블루베리'],
+['아보카도 계란 토스트','b','h',390,32,15,22,8,4,420,'木土','','통밀빵 2장, 아보카도 반 개, 계란'],
+['편의점 샌드위치와 우유','b','c',470,52,23,17,2,14,800,'土金','','햄치즈 샌드위치, 우유 200ml'],
+['단백질 쉐이크와 바나나','b','hc',270,34,28,4,3,20,160,'土金','cold','단백질 파우더 1스쿱, 바나나 1개'],
+['두부 스크램블과 현미밥','b','h',360,38,22,12,4,2,380,'金土','hot','두부 반 모, 계란 1개, 현미밥 반 공기'],
+['전복죽','b','co',330,52,11,7,1,1,780,'水金','hot','전복죽 1인분'],
+['호박죽','b','co',260,52,4,3,4,16,160,'土火','hot','호박죽 1인분'],
+['닭가슴살 샐러드','bl','hco',280,14,32,10,5,6,480,'木金','cold','닭가슴살 100g, 믹스 채소, 드레싱'],
+['시리얼과 우유','b','hc',290,48,10,6,3,18,220,'金土','','통곡물 시리얼 40g, 우유 200ml'],
+['토마토 계란볶음과 밥','bd','h',380,44,16,14,3,8,520,'火土','','계란 2개, 토마토 1개, 밥 반 공기'],
+['바나나 아몬드 우유','b','hc',300,40,12,11,4,24,100,'土金','','바나나 1개, 아몬드 15알, 우유 200ml'],
+['샐러드와 삶은 계란','b','hc',330,36,17,13,6,5,460,'木土','cold','샐러드, 계란 2개, 통밀빵 1장'],
+['닭가슴살 포케볼','ld','ho',520,62,38,14,7,9,840,'木金水','cold','현미밥, 닭가슴살, 아보카도, 채소'],
+['비빔밥','ld','o',560,92,20,12,8,8,880,'木火土','','나물 5종, 계란, 고추장'],
+['제육덮밥','ld','o',700,95,28,22,4,14,1500,'火水土','','제육볶음, 밥 1공기'],
+['김치찌개와 밥','ld','ho',560,78,24,16,5,6,1900,'火木水','hot','김치찌개 1인분, 밥 1공기'],
+['된장찌개와 잡곡밥','ld','ho',520,80,22,10,7,5,1700,'土木','hot','된장찌개, 잡곡밥, 반찬'],
+['순두부찌개와 밥','ld','o',540,76,26,15,5,4,1650,'金火水','hot','순두부찌개, 밥 1공기'],
+['칼국수','ld','o',560,98,22,8,4,4,1800,'金水','hot','칼국수 1인분'],
+['냉메밀','ld','o',440,86,14,4,4,10,1400,'水金','cold','메밀면, 쯔유 육수'],
+['쌀국수','ld','o',480,80,22,6,3,6,1700,'金水','hot','소고기 쌀국수 1인분'],
+['마라탕','ld','o',720,62,34,36,7,6,2600,'火水','hot','채소·고기 위주 1인분'],
+['연어 덮밥','ld','o',590,72,29,20,3,6,1000,'水火','cold','연어 100g, 밥 1공기'],
+['돈가스 정식','ld','o',850,90,36,38,5,12,1600,'土水','','돈가스, 밥, 샐러드'],
+['편의점 제육 도시락','ld','c',710,98,24,24,4,12,1450,'火土','','제육볶음 도시락 1개'],
+['삼각김밥 2개와 삶은 계란','bld','c',480,82,18,8,2,6,1100,'金水土','','삼각김밥 2개, 맥반석 계란 1개'],
+['편의점 샐러드와 닭가슴살','ld','c',330,22,38,9,6,8,780,'木金','cold','샐러드 1개, 닭가슴살 1팩'],
+['닭가슴살 현미밥 채소','ld','h',480,54,42,8,7,5,520,'木金土','','닭가슴살 150g, 현미밥, 데친 채소'],
+['연어 스테이크와 샐러드','d','h',520,14,38,34,4,4,540,'水木','','연어 150g, 샐러드, 올리브유'],
+['미역국 밥 계란','ld','ho',480,66,22,14,4,2,1300,'水金土','hot','미역국, 밥 1공기, 계란프라이'],
+['소고기 샤브샤브','d','o',540,48,40,20,7,6,1500,'木火金','hot','소고기 150g, 채소, 칼국수 사리 약간'],
+['삼겹살과 쌈','d','ho',780,12,28,68,4,4,900,'火水木','','삼겹살 150g, 쌈 채소'],
+['곰탕과 밥','ld','o',600,62,38,20,1,2,1800,'金水','hot','곰탕 1인분, 밥 반 공기'],
+['떡볶이와 순대','ld','o',650,112,18,14,5,24,1900,'火土','','떡볶이 1인분, 순대 반 인분'],
+['라면 계란 김치','ld','ch',560,82,18,18,4,4,2000,'火金土','hot','라면 1봉, 계란 1개, 김치'],
+['카레라이스','ld','ho',680,104,18,20,5,10,1300,'土火','hot','카레, 밥 1공기'],
+['토마토 파스타','ld','ho',620,98,20,16,6,12,1100,'火金','','토마토 소스 파스타 1인분'],
+['두부 샐러드와 현미밥','ld','h',420,52,24,12,7,5,520,'金木土','','두부 반 모, 채소, 현미밥 반 공기'],
+['닭볶음탕과 밥','d','ho',650,86,40,16,6,10,1800,'火土','hot','닭볶음탕 1인분, 밥 1공기'],
+['치킨 샐러드 랩','l','co',380,36,24,14,4,5,780,'木金','','닭가슴살, 채소, 통밀 또띠아'],
+['순대국밥','ld','o',650,70,36,22,2,2,2000,'金水','hot','순대국밥 1인분'],
+['참치김밥','lb','co',430,70,15,10,3,6,1000,'水木土','','참치김밥 1줄'],
+['고등어구이 정식','d','ho',560,62,36,20,4,2,1200,'水土','','고등어 반 마리, 밥, 반찬'],
+['곤드레밥과 된장국','ld','o',520,90,15,8,6,3,1400,'木土','','곤드레밥 1공기, 된장국'],
+['계란찜 밥 나물','ld','h',450,68,18,10,5,2,800,'土木','','계란찜, 밥, 나물 2종'],
+['단호박 닭가슴살 볼','ld','hc',430,50,36,9,7,14,600,'土金木','','단호박, 닭가슴살, 채소'],
+['햄버거 세트','l','o',900,110,28,40,5,20,1500,'土火','','치즈버거, 감자튀김, 음료'],
+['쭈꾸미볶음과 밥','d','o',600,82,32,12,4,14,1500,'火水','hot','쭈꾸미볶음, 밥 1공기'],
+['훈제오리와 채소','d','hc',620,12,38,46,4,2,800,'水木','','훈제오리 150g, 구운 채소'],
+['닭가슴살 볶음밥','ld','hc',520,74,34,10,3,3,900,'金土','','닭가슴살 볶음밥 1인분'],
+['두부면 비빔면','ld','ch',360,38,22,12,8,10,1100,'火金木','cold','두부면, 양념장, 채소']
+];
+const MENU=RAW.map((r,i)=>({id:'m'+i,name:r[0],slots:r[1],meth:r[2],k:r[3],c:r[4],p:r[5],f:r[6],fi:r[7],su:r[8],na:r[9],el:r[10],t:r[11],d:r[12]}));
+const allMenu=()=>MENU.concat(S.custom);
+const findMenu=id=>allMenu().find(m=>m.id===id);
+const KEY='sikun:v1';
+const curTemp=()=>S.wx&&S.wx.d===dstr()?S.wx.t:(S.geo&&S.geo.temp!=null?S.geo.temp:null);
+const defaults=()=>({profile:{birth:{date:'',time:'',noTime:false,gender:'M',cal:'solar',leap:false,place:'seoul'},body:{sex:'M',h:'',w:'',act:1.375},goal:'cut',manual:{k:'',p:'',c:'',f:'',fi:''}},prefs:{methods:['h','c','o'],theme:'auto',zasi:2,tst:true,on:{saju:true,ziwei:true,west:true,nine:true,vedic:true},w:{saju:30,ziwei:15,west:20,nine:15,vedic:20}},log:[],custom:[],picks:{},geo:null,wx:null});
+function merge(a,b){for(const k in b){if(b[k]&&typeof b[k]==='object'&&!Array.isArray(b[k])&&a[k]&&typeof a[k]==='object'&&!Array.isArray(a[k]))merge(a[k],b[k]);else a[k]=b[k]}return a}
+function load(){try{const r=localStorage.getItem(KEY);if(r)return merge(defaults(),JSON.parse(r))}catch(e){}return defaults()}
+let S=load();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+let tab='today',ftab='all',mq='',mslot='',mmeth='',SH=null,FC=null,FK='';
+function birthParts(){
+const b=S.profile.birth;if(!b.date)return null;
+let [y,m,d]=b.date.split('-').map(Number);
+if(b.cal==='lunar'){try{const s=Lunar.fromYmd(y,b.leap?-m:m,d).getSolar();y=s.getYear();m=s.getMonth();d=s.getDay()}catch(e){return null}}
+const t=(b.noTime||!b.time)?[12,0]:b.time.split(':').map(Number);
+return{y,m,d,hh:t[0],mm:t[1],noTime:!!(b.noTime||!b.time),pl:place(b.place),gender:b.gender}}
+function eot(y,m,d){const N=Math.floor((Date.UTC(y,m-1,d)-Date.UTC(y,0,0))/864e5);const B=2*Math.PI*(N-81)/365;return 9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B)}
+function trueSolar(bp){let off=0;if(S.prefs.tst)off=(bp.pl.lon-bp.pl.tz*15)*4+eot(bp.y,bp.m,bp.d);const t=new Date(Date.UTC(bp.y,bp.m-1,bp.d,bp.hh,bp.mm)+off*60000);return{y:t.getUTCFullYear(),m:t.getUTCMonth()+1,d:t.getUTCDate(),hh:t.getUTCHours(),mm:t.getUTCMinutes()}}
+const birthUTC=bp=>new Date(Date.UTC(bp.y,bp.m-1,bp.d,bp.hh,bp.mm)-bp.pl.tz*36e5);
+function ageNow(){const bp=birthParts();if(!bp)return 25;return Math.max(14,Math.floor((Date.now()-Date.UTC(bp.y,bp.m-1,bp.d))/31557600000))}
+function targets(){
+const p=S.profile,b=p.body,sex=b.sex;
+const h=+b.h||(sex==='M'?172:160),w=+b.w||(sex==='M'?68:54),age=ageNow();
+const bmr=10*w+6.25*h-5*age+(sex==='M'?5:-161),tdee=bmr*(+b.act||1.375);
+const G={cut:[.85,1.8,.25],keep:[1,1.4,.28],bulk:[1.1,1.8,.25],lowcarb:[.92,1.6,.4],protein:[1,2,.27]}[p.goal]||[1,1.4,.28];
+const k=Math.max(R(tdee*G[0]/10)*10,sex==='M'?1500:1200);
+const P=R(G[1]*w);let C,F;
+if(p.goal==='lowcarb'){C=100;F=R((k-4*P-4*C)/9)}else{F=R(G[2]*k/9);C=R((k-4*P-9*F)/4)}
+const m=p.manual,o=(v,d)=>+v>0?+v:d;
+const kk=o(m.k,k);
+return{k:kk,c:o(m.c,C),p:o(m.p,P),f:o(m.f,F),fi:o(m.fi,Math.max(25,R(14*kk/1000))),na:2000,su:R(kk*.1/4),est:!(+b.h&&+b.w),bmr:R(bmr),tdee:R(tdee)}}
+const dayLog=d=>S.log.filter(e=>e.d===d);
+const sumLog=l=>l.reduce((a,e)=>{for(const k of ['k','c','p','f','fi','su','na'])a[k]+=e[k]||0;return a},{k:0,c:0,p:0,f:0,fi:0,su:0,na:0});
+function ctx(){
+const T=targets(),day=dstr(),lg=dayLog(day),eat=sumLog(lg),done=new Set(lg.map(e=>e.sl));
+const sh={b:.27,l:.38,d:.35},open=['b','l','d'].filter(s=>!done.has(s));
+const rem=Math.max(T.k-eat.k,T.k*.25),sum=open.reduce((a,s)=>a+sh[s],0)||1,tk={};
+['b','l','d'].forEach(s=>{tk[s]=open.includes(s)?rem*sh[s]/sum:T.k*sh[s]});
+const from=daysAgo(3),recent=new Set(S.log.filter(e=>e.d>=from&&e.mid).map(e=>e.mid));
+return{T,tk,rem,eat,recent,f:getFortune(),temp:curTemp()}}
+function scoreItem(it,slot,c){
+const g=S.profile.goal,t=c.tk[slot];let s=-Math.abs(it.k-t)/t*42;
+const pd=it.p*4/it.k,fd=it.fi/it.k*1000,cd=it.c*4/it.k,ft=it.f*9/it.k;
+const W={cut:{p:70,fi:2,na:1,su:1,ft:1},keep:{p:35,fi:1.5,na:.8,su:.8,ft:.6},bulk:{p:55,fi:.8,na:.4,su:.3,ft:0},lowcarb:{p:45,fi:1.5,na:.8,su:1.2,ft:0},protein:{p:100,fi:1,na:.7,su:.7,ft:.8}}[g]||{p:35,fi:1.5,na:.8,su:.8,ft:.6};
+s+=pd*W.p+Math.min(fd,14)*W.fi*.8;
+if(it.na>1500)s-=(it.na-1500)/220*W.na;
+if(it.su>20)s-=(it.su-20)*.5*W.su;
+if(ft>.38)s-=(ft-.38)*40*W.ft;
+if(g==='lowcarb'&&cd>.3)s-=(cd-.3)*70;
+if(c.f&&c.f.ok)s+=elFit(it.el,c.f.need)*22;
+if(c.temp!=null){if(c.temp<=8&&it.t==='hot')s+=5;if(c.temp>=26&&it.t==='cold')s+=5;if(c.temp<=8&&it.t==='cold')s-=3}
+if(c.recent.has(it.id))s-=12;
+s+=hash(dstr()+slot+it.id)%1000/1000*6;
+return s}
+function rank(slot,c){
+const ms=S.prefs.methods;
+return allMenu().filter(m=>m.slots.includes(slot)&&[...m.meth].some(x=>ms.includes(x))).map(it=>({it,s:scoreItem(it,slot,c)})).sort((a,b)=>b.s-a.s)}
+function pickFor(slot,c){
+const key=dstr()+slot;let pk=S.picks[key];
+if(pk){const it=findMenu(pk.id);if(it)return it}
+const rk=rank(slot,c),skip=pk&&pk.skip||[];
+const taken=['b','l','d'].filter(x=>x!==slot).map(x=>S.picks[dstr()+x]&&S.picks[dstr()+x].id);
+const it=(rk.find(r=>!skip.includes(r.it.id)&&!taken.includes(r.it.id))||rk.find(r=>!skip.includes(r.it.id))||rk[0]||{}).it;
+if(it){S.picks[key]={id:it.id,skip};save()}
+return it}
+function why(it,slot,c){
+const r=[];
+if(c.f&&c.f.ok){const hit=[...it.el].filter(e=>c.f.need[e]>=.6);if(hit.length)r.push(hit.map(e=>EK[e]).join('·')+' 기운 보충')}
+if(it.p>=30)r.push('단백질 '+it.p+'g');
+if(it.fi>=6)r.push('식이섬유 '+it.fi+'g');
+if(Math.abs(it.k-c.tk[slot])/c.tk[slot]<.18)r.push('남은 열량에 맞춤');
+if(c.temp!=null&&c.temp<=8&&it.t==='hot')r.push('쌀쌀한 날 따뜻하게');
+if(c.temp!=null&&c.temp>=26&&it.t==='cold')r.push('더운 날 시원하게');
+return r.slice(0,3)}
+const EW={1:[1],2:[.62,.38],3:[.5,.3,.2]};
+const elFit=(el,need)=>{const w=EW[el.length]||[1];return [...el].reduce((a,e,i)=>a+need[e]*(w[i]||.1),0)};
+const elTxt=(el,sep)=>[...el].map(e=>EK[e]).join(sep||'');
+const fmt=n=>Math.round(n*10)/10;
+const sc=(it,n)=>({k:R(it.k*n),c:fmt(it.c*n),p:fmt(it.p*n),f:fmt(it.f*n),fi:fmt(it.fi*n),su:fmt(it.su*n),na:R(it.na*n)});
+const GAN='甲乙丙丁戊己庚辛壬癸',ZHI='子丑寅卯辰巳午未申酉戌亥';
+const GANK='갑을병정무기경신임계',ZHIK='자축인묘진사오미신유술해';
+const GE=['木','木','火','火','土','土','金','金','水','水'];
+const ZE=['水','土','木','木','土','火','火','土','金','金','土','水'];
+const norm=o=>{const m=Math.max(...ELS.map(e=>o[e]),1e-9);const r={};ELS.forEach(e=>r[e]=o[e]/m);return r};
+const zero=()=>({木:0,火:0,土:0,金:0,水:0});
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function shishen(a,b){const ea=GE[a],eb=GE[b],sp=a%2===b%2;if(ea===eb)return sp?'비견':'겁재';if(GEN[ea]===eb)return sp?'식신':'상관';if(KE[ea]===eb)return sp?'편재':'정재';if(KE[eb]===ea)return sp?'편관':'정관';return sp?'편인':'정인'}
+const needLib=n=>{if(n==='undefined')throw new Error('계산 라이브러리를 불러오지 못했어요. 인터넷 연결을 확인해 주세요.')};
+function calcSaju(bp){
+needLib(typeof Solar);
+const t=trueSolar(bp);
+const lunar=Solar.fromYmdHms(t.y,t.m,t.d,t.hh,t.mm,0).getLunar();
+const ec=lunar.getEightChar();ec.setSect(S.prefs.zasi);
+const pil=[ec.getYear(),ec.getMonth(),ec.getDay(),ec.getTime()].map(s=>({s,g:GAN.indexOf(s[0]),z:ZHI.indexOf(s[1])}));
+const dm=pil[2].g,de=GE[dm];
+pil.forEach((p,i)=>{p.ss=i===2?'일간':shishen(dm,p.g)});
+const cnt=zero();
+pil.forEach((p,i)=>{if(i===3&&bp.noTime)return;cnt[GE[p.g]]+=1;cnt[ZE[p.z]]+=i===1?2:1});
+const total=ELS.reduce((a,e)=>a+cnt[e],0);
+const inEl=ELS.find(e=>GEN[e]===de),gwEl=ELS.find(e=>KE[e]===de);
+const strong=(cnt[de]+cnt[inEl])/total>=.5;
+const tl=Solar.fromDate(new Date()).getLunar(),tg=tl.getDayInGanZhi(),tm=tl.getMonthInGanZhi();
+const tgi=GAN.indexOf(tg[0]),tzi=ZHI.indexOf(tg[1]),tmg=GAN.indexOf(tm[0]),tmz=ZHI.indexOf(tm[1]);
+const eff=Object.assign({},cnt);
+eff[GE[tgi]]+=1;eff[ZE[tzi]]+=1;eff[GE[tmg]]+=.5;eff[ZE[tmz]]+=.5;
+const needOf=(c,tot)=>{const sp=(c[de]+c[inEl])/tot>=.5,n=zero();if(sp){n[GEN[de]]+=1;n[KE[de]]+=.8;n[gwEl]+=.6}else{n[inEl]+=1;n[de]+=.7}ELS.forEach(e=>{if(c[e]<1)n[e]+=.6;else if(c[e]<2)n[e]+=.2});return norm(n)};
+const nat=needOf(cnt,total),need=needOf(eff,total+3);
+const tss=shishen(dm,tgi);
+let score=45+30*nat[GE[tgi]]+20*nat[ZE[tzi]];
+if(['정관','정인','식신','정재'].includes(tss))score+=5;
+if(['겁재','상관','편관'].includes(tss))score-=4;
+score=clamp(R(score),15,95);
+const inToday=[...new Set([GE[tgi],ZE[tzi],GE[tmg],ZE[tmz]])];
+let dy=null;
+try{const list=ec.getYun(bp.gender==='M'?1:0).getDaYun(),cy=new Date().getFullYear();const c=list.find(x=>x.getGanZhi()&&cy>=x.getStartYear()&&cy<=x.getEndYear());if(c)dy={gz:c.getGanZhi(),a:c.getStartAge(),b:c.getEndAge(),y1:c.getStartYear(),y2:c.getEndYear()}}catch(e){}
+return{ok:true,pil,dm,de,strong,cnt,total,need,nat,score,today:{gz:tg,ss:tss,mz:tm,inEl:inToday},dy}}
+const STAR_EL={자미:'土',천기:'木',태양:'火',무곡:'金',천동:'水',염정:'火',천부:'土',태음:'水',탐랑:'木',거문:'水',천상:'水',천량:'木',칠살:'金',파군:'水',좌보:'土',우필:'水',문창:'金',문곡:'水'};
+const PAL=['명궁','형제','부처','자녀','재백','질액','천이','노복','관록','전택','복덕','부모'];
+const SIHUA=[['염정','파군','무곡','태양'],['천기','천량','자미','태음'],['천동','천기','문창','염정'],['태음','천동','천기','거문'],['탐랑','태음','우필','천기'],['무곡','탐랑','천량','문곡'],['태양','무곡','태음','천동'],['거문','태양','문곡','문창'],['천량','자미','좌보','무곡'],['파군','거문','태음','탐랑']];
+const SHN=['화록','화권','화과','화기'];
+function calcZiwei(bp){
+needLib(typeof Solar);
+if(bp.noTime)return{ok:false,msg:'자미두수는 태어난 시간이 있어야 계산돼요.'};
+const t=trueSolar(bp);
+const lunar=Solar.fromYmdHms(t.y,t.m,t.d,t.hh,t.mm,0).getLunar();
+let m=lunar.getMonth(),d=lunar.getDay();
+if(m<0){m=-m;if(d>15)m=m%12+1}
+const ygz=lunar.getYearInGanZhi(),yg=GAN.indexOf(ygz[0]);
+const hb=Math.floor(((t.hh+1)%24)/2);
+const base=(2+m-1)%12,ming=mod(base-hb,12),shen=(base+hb)%12;
+const tiger=[2,4,6,8,0][yg%5],stemOf=b=>(tiger+mod(b-2,12))%10;
+const sv=[1,1,2,2,3,3,4,4,5,5][stemOf(ming)],bv=[1,1,2,2,3,3,1,1,2,2,3,3][ming];
+let r=sv+bv;if(r>5)r-=5;
+const ju={1:4,2:2,3:6,4:5,5:3}[r],juN={4:'금사국',2:'수이국',6:'화육국',5:'토오국',3:'목삼국'}[ju],juE={4:'金',2:'水',6:'火',5:'土',3:'木'}[ju];
+let x=0;while((d+x)%ju!==0)x++;
+const q=(d+x)/ju;let zp=(2+q-1)%12;zp=x%2?mod(zp-x,12):(zp+x)%12;
+const st={};
+const add=(b,n)=>{b=mod(b,12);(st[b]=st[b]||[]).push(n)};
+add(zp,'자미');add(zp-1,'천기');add(zp-3,'태양');add(zp-4,'무곡');add(zp-5,'천동');add(zp-8,'염정');
+const tf=mod(4-zp,12);
+add(tf,'천부');add(tf+1,'태음');add(tf+2,'탐랑');add(tf+3,'거문');add(tf+4,'천상');add(tf+5,'천량');add(tf+6,'칠살');add(tf+10,'파군');
+add(4+m-1,'좌보');add(10-(m-1),'우필');add(10-hb,'문창');add(4+hb,'문곡');
+const palAt=b=>PAL[mod(ming-b,12)];
+const where=n=>{for(const b in st)if(st[b].includes(n))return +b;return -1};
+const nowL=Solar.fromDate(new Date()).getLunar();
+const vage=nowL.getYear()-lunar.getYear()+1;
+const dir=((yg%2===0)===(bp.gender==='M'))?1:-1;
+const k=Math.max(0,Math.floor((vage-ju)/10)),dhB=mod(ming+dir*k,12);
+const dh={b:dhB,pal:palAt(dhB),a:ju+10*k,e:ju+10*k+9};
+const ngz=nowL.getYearInGanZhi(),ng=GAN.indexOf(ngz[0]),nz=ZHI.indexOf(ngz[1]);
+const lnPal=palAt(nz);
+const sh=SIHUA[ng].map((s,i)=>({h:SHN[i],s,b:where(s),pal:where(s)>=0?palAt(where(s)):'-'}));
+const mainOf=b=>(st[b]||[]).filter(n=>STAR_EL[n]&&!['좌보','우필','문창','문곡'].includes(n));
+let score=50;
+sh.forEach((o,i)=>{if(o.pal==='-')return;if(i<3&&['명궁','재백','관록','복덕'].includes(o.pal))score+=7;if(i===3&&['명궁','재백','관록','복덕','질액'].includes(o.pal))score-=9});
+if(lnPal==='명궁')score+=3;
+score=clamp(score,25,88);
+const need=zero();
+mainOf(ming).forEach(n=>need[STAR_EL[n]]+=1);
+mainOf(dhB).forEach(n=>need[STAR_EL[n]]+=.6);
+need[juE]+=.5;
+const used=ELS.reduce((a,e)=>a+need[e],0);
+const dem=zero();ELS.forEach(e=>{dem[ELS.find(y=>GEN[y]===e)]+=need[e]*.6;dem[e]+=need[e]*.4});
+if(used===0)dem[juE]=1;
+return{ok:true,st,ming,shen,ju,juN,juE,dh,lnPal,sh,vage,palAt,mainOf,need:norm(dem),score,lunarTxt:(lunar.getYearInGanZhi())+'년 '+(lunar.getMonth()<0?'윤':'')+Math.abs(lunar.getMonth())+'월 '+lunar.getDay()+'일',hb}}
+const NSEL={1:'水',2:'土',3:'木',4:'木',5:'土',6:'金',7:'金',8:'土',9:'火'};
+const NSN={1:'일백수성',2:'이흑토성',3:'삼벽목성',4:'사록목성',5:'오황토성',6:'육백금성',7:'칠적금성',8:'팔백토성',9:'구자화성'};
+function elRel(d,b){if(d===b)return'same';if(GEN[d]===b)return'gen';if(GEN[b]===d)return'drain';if(KE[d]===b)return'hurt';return'win'}
+function calcNine(bp){
+needLib(typeof Solar);
+const t=trueSolar(bp);
+const lunar=Solar.fromYmdHms(t.y,t.m,t.d,t.hh,t.mm,0).getLunar();
+const c=parseInt(lunar.getYearNineStar().getNumber(),10);
+let bs=bp.gender==='M'?c:mod(6-c,9);if(bs===0)bs=9;
+const ms=parseInt(lunar.getMonthNineStar().getNumber(),10);
+const ds=parseInt(Solar.fromDate(new Date()).getLunar().getDayNineStar().getNumber(),10);
+const be=NSEL[bs],de=NSEL[ds],rel=elRel(de,be);
+const base={gen:78,same:64,drain:46,win:56,hurt:32}[rel];
+const need=zero();
+const inEl=ELS.find(e=>GEN[e]===be);
+need[inEl]+=.4;need[be]+=.3;
+if(rel==='hurt')need[GEN[de]]+=1;else if(rel==='drain')need[inEl]+=.8;else if(rel==='win')need[be]+=.5;else if(rel==='gen')need[be]+=.2;
+return{ok:true,bs,ms,ds,be,de,rel,score:base,need:norm(need)}}
+const SIGN=['양자리','황소자리','쌍둥이자리','게자리','사자자리','처녀자리','천칭자리','전갈자리','사수자리','염소자리','물병자리','물고기자리'];
+const SG=['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'].map(s=>s+'\uFE0E');
+const PLN=['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Uranus','Neptune','Pluto'];
+const PLK=['태양','달','수성','금성','화성','목성','토성','천왕성','해왕성','명왕성'];
+const PG=['☉','☽','☿','♀','♂','♃','♄','♅','♆','♇'].map(s=>s+'\uFE0E');
+const SEL=['火','土','木','水'];
+const ASP=[{n:'합',a:0,o:8,g:'☌'},{n:'육각',a:60,o:4,g:'⚹'},{n:'직각',a:90,o:6,g:'□'},{n:'삼각',a:120,o:6,g:'△'},{n:'충',a:180,o:8,g:'☍'}];
+const rad=d=>d*Math.PI/180,deg=r=>r*180/Math.PI;
+const J2000=946728e5;
+function eclLon(name,date){
+const t=Astronomy.MakeTime(date),v=Astronomy.GeoVector(name,t,true);
+if(Astronomy.Rotation_EQJ_ECT){const w=Astronomy.RotateVector(Astronomy.Rotation_EQJ_ECT(t),v);return mod(Astronomy.SphereFromVector(w).lon,360)}
+const e=Astronomy.Ecliptic(v);return mod(e.elon+.013969*(date.getTime()-J2000)/31557600000,360)}
+function houses(date,lat,lon){
+const t=Astronomy.MakeTime(date),ram=mod(Astronomy.SiderealTime(t)*15+lon,360);
+const T=(date.getTime()-J2000)/3155760000000,eps=23.439291-.0130042*T,se=Math.sin(rad(eps)),ce=Math.cos(rad(eps));
+const asc=mod(deg(Math.atan2(Math.cos(rad(ram)),-(Math.sin(rad(ram))*ce+Math.tan(rad(lat))*se))),360);
+const mc=mod(deg(Math.atan2(Math.sin(rad(ram)),Math.cos(rad(ram))*ce)),360);
+const lamRA=ra=>mod(deg(Math.atan2(Math.sin(rad(ra)),Math.cos(rad(ra))*ce)),360);
+const dsaAt=ra=>{const l=lamRA(ra),dec=Math.asin(se*Math.sin(rad(l)));const v=-Math.tan(rad(lat))*Math.tan(dec);return deg(Math.acos(clamp(v,-1,1)))};
+const cusp=(start,fn)=>{let ra=start;for(let i=0;i<12;i++)ra=fn(dsaAt(ra));return lamRA(ra)};
+const c11=cusp(ram+30,d=>ram+d/3),c12=cusp(ram+60,d=>ram+2*d/3);
+const c2=cusp(ram+120,d=>ram+180-2*(180-d)/3),c3=cusp(ram+150,d=>ram+180-(180-d)/3);
+return{asc,mc,cusps:[asc,c2,c3,mod(mc+180,360),mod(c11+180,360),mod(c12+180,360),mod(asc+180,360),mod(c2+180,360),mod(c3+180,360),mc,c11,c12]}}
+function houseOf(l,cusps){for(let i=0;i<12;i++){const a=cusps[i],b=cusps[(i+1)%12];if(mod(l-a,360)<mod(b-a,360))return i+1}return 1}
+function aspectOf(l1,l2){let d=Math.abs(l1-l2)%360;if(d>180)d=360-d;for(const a of ASP){const o=Math.abs(d-a.a);if(o<=a.o)return{a,o}}return null}
+function calcWest(bp){
+needLib(typeof Astronomy);
+const date=birthUTC(bp);
+const pls=PLN.map((n,i)=>({i,l:eclLon(n,date)}));
+let hs=null;
+if(!bp.noTime)hs=houses(date,bp.pl.lat,bp.pl.lon);
+pls.forEach(p=>{p.sg=Math.floor(p.l/30);p.dg=p.l%30;p.h=hs?houseOf(p.l,hs.cusps):null});
+const pts=pls.map(p=>({n:PLK[p.i],g:PG[p.i],l:p.l}));
+if(hs){pts.push({n:'상승점',g:'AC',l:hs.asc});pts.push({n:'MC',g:'MC',l:hs.mc})}
+const nat=[];
+for(let i=0;i<pls.length;i++)for(let j=i+1;j<pls.length;j++){const r=aspectOf(pls[i].l,pls[j].l);if(r)nat.push({a:PLK[i],b:PLK[j],...r})}
+nat.sort((x,y)=>x.o-y.o);
+const now=new Date(),tp=PLN.map((n,i)=>({i,l:eclLon(n,now)}));
+const tr=[];
+tp.forEach(p=>pts.forEach(q=>{let d=Math.abs(p.l-q.l)%360;if(d>180)d=360-d;for(const a of ASP){const o=Math.abs(d-a.a);if(o<=3){tr.push({p:PLK[p.i],pi:p.i,q:q.n,a,o});break}}}));
+tr.sort((x,y)=>x.o-y.o);
+let sum=0;
+tr.forEach(t=>{const soft=t.a.a===60||t.a.a===120,hard=t.a.a===90||t.a.a===180,con=t.a.a===0;
+if([3,5,0].includes(t.pi)){sum+=soft?2:con?2:-.6}
+else if([4,6,9].includes(t.pi)){sum+=soft?.6:-1.6}
+else sum+=soft?.4:hard?-.5:0});
+const moon=tp[1];
+const msg=Math.floor(moon.l/30);
+const need=zero();need[SEL[msg%4]]+=1;
+const natMoon=SEL[pls[1].sg%4],natSun=SEL[pls[0].sg%4];
+need[natMoon]+=.3;need[natSun]+=.2;
+return{ok:true,pls,hs,pts,nat:nat.slice(0,8),tr:tr.slice(0,6),moonToday:msg,need:norm(need),score:clamp(R(55+6*sum),20,92),noTime:bp.noTime}}
+const NAK=['아슈위니','바라니','크리티카','로히니','므리가시라','아르드라','푸나르바수','푸시야','아슐레샤','마가','푸르바팔구니','웃타라팔구니','하스타','치트라','스바티','비샤카','아누라다','제슈타','물라','푸르바아샤다','웃타라아샤다','슈라바나','다니슈타','샤타비샤','푸르바바드라파다','웃타라바드라파다','레바티'];
+const DL=['케투','금성','태양','달','화성','라후','목성','토성','수성'];
+const DY=[7,20,6,10,7,18,16,19,17];
+const DEL=['火','金','火','水','火','水','木','土','木'];
+const TARA=['자냐','삼파트','비파트','크셰마','프라티아리','사다카','나이다나','미트라','파라마미트라'];
+const ayan=date=>23.85306+.013969*(date.getTime()-J2000)/31557600000;
+function calcVedic(bp){
+needLib(typeof Astronomy);
+const date=birthUTC(bp);
+const sid=mod(eclLon('Moon',date)-ayan(date),360);
+const seg=360/27,n=Math.floor(sid/seg),fr=(sid-n*seg)/seg,pada=Math.floor(fr*4)+1;
+const li=n%9,YM=365.25*864e5;
+const start=date.getTime()-fr*DY[li]*YM;
+const mahas=[];let t0=start;
+for(let i=0;i<9;i++){const L=(li+i)%9,e=t0+DY[L]*YM;mahas.push({L,s:t0,e});t0=e}
+const now=Date.now();
+let cur=mahas.find(m=>now>=m.s&&now<m.e);
+let ad=null;
+if(cur){let t1=cur.s;for(let i=0;i<9;i++){const L=(cur.L+i)%9,e=t1+DY[cur.L]*DY[L]/120*YM;if(now>=t1&&now<e){ad={L,s:t1,e};break}t1=e}}
+const nd=new Date(),tn=Math.floor(mod(eclLon('Moon',nd)-ayan(nd),360)/seg);
+const tara=mod(tn-n,27)%9;
+const good=[1,3,5,7,8].includes(tara),bad=[2,4,6].includes(tara);
+const score=clamp(50+(good?22:0)-(bad?22:0)-(tara===0?5:0),20,90);
+const need=zero();need[DEL[tn%9]]+=1;if(cur)need[DEL[cur.L]]+=.5;need[DEL[li]]+=.3;
+return{ok:true,n,pada,li,fr,mahas,cur,ad,tn,tara,good,bad,score,need:norm(need),sid}}
+function getFortune(){
+const b=S.profile.birth;if(!b.date)return null;
+const k=dstr()+JSON.stringify([b,S.prefs.zasi,S.prefs.tst,S.prefs.on,S.prefs.w]);
+if(FC&&FK===k)return FC;
+FK=k;
+const bp=birthParts();
+if(!bp){FC={ok:false,msg:'생년월일을 확인해 주세요.'};return FC}
+const fns={saju:calcSaju,ziwei:calcZiwei,west:calcWest,nine:calcNine,vedic:calcVedic},sys={};
+for(const key in fns){try{sys[key]=fns[key](bp)}catch(e){sys[key]={ok:false,msg:String(e&&e.message||e)}}}
+let tw=0,ts=0;const need=zero();
+for(const key in sys){const s=sys[key];if(!S.prefs.on[key]||!s.ok)continue;const w=+S.prefs.w[key]||0;if(!w)continue;tw+=w;ts+=s.score*w;const sm=ELS.reduce((a,e)=>a+s.need[e],0)||1;ELS.forEach(e=>need[e]+=w*s.need[e]/sm)}
+if(!tw){FC={ok:false,msg:'켜져 있는 운세 체계가 없거나 계산에 실패했어요.',sys};return FC}
+const nn=norm(need),top=[...ELS].sort((a,b)=>nn[b]-nn[a]);
+const score=R(ts/tw);
+const LINE={木:'푸른 기운이 필요한 날이에요',火:'따뜻한 기운이 필요한 날이에요',土:'든든한 기운이 필요한 날이에요',金:'맑은 기운이 필요한 날이에요',水:'차분한 기운이 필요한 날이에요'};
+FC={ok:true,sys,need:nn,top,score,line:LINE[top[0]],sub:score>=70?'흐름이 좋은 편이에요':score>=45?'무난한 하루예요':'조심스럽게 가요'};
+return FC}
+const IC={ref:'<svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.4 5.7"/><path d="M20 4v7h-7"/></svg>',chk:'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',plus:'<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',x:'<svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>'};
+const AU={木:'#8fd6b1',火:'#ff9a8f',土:'#f2c660',金:'#cfd6e2',水:'#7fa8ff'};
+const WDAY=['일','월','화','수','목','금','토'];
+const NSREL={gen:'오늘의 별이 본명성을 도와줘요',same:'오늘의 별이 본명성과 같은 결이에요',drain:'본명성의 기운이 조금 새는 날이에요',win:'본명성이 오늘의 별을 이기는 날이에요',hurt:'오늘의 별이 본명성을 누르는 날이에요'};
+function applyTheme(){const r=document.documentElement,t=S.prefs.theme;if(t==='auto')r.removeAttribute('data-theme');else r.setAttribute('data-theme',t);
+const f=getFortune(),s=r.style;
+if(f&&f.ok){s.setProperty('--a1',AU[f.top[0]]);s.setProperty('--a2',AU[f.top[1]]);s.setProperty('--a3','#f6b4d1')}else{s.setProperty('--a1','#a9c9ff');s.setProperty('--a2','#f6b4d1');s.setProperty('--a3','#d7f0e0')}}
+const btn=(a,attrs,inner,cls='')=>`<button class="${cls}" data-a="${a}" ${attrs||''}>${inner}</button>`;
+const bar=(label,val,max,col)=>`<div><span class="sm">${label}</span><div class="track"><i style="width:${clamp(val/max*100,0,100)}%;${col?'background:'+col:''}"></i></div><span class="xs" style="text-align:right">${R(val)}</span></div>`;
+const empty=(t,b)=>`<div class="slab empty"><p class="sm">${t}</p>${b||''}</div>`;
+const goMe=`<button class="pillbtn" data-a="tab" data-v="me">나 탭에서 입력하기</button>`;
+function mac(it,n=1){const o=sc(it,n);return `<div class="well mac"><div><b>${o.c}</b><span>탄수</span></div><div><b>${o.p}</b><span>단백질</span></div><div><b>${o.f}</b><span>지방</span></div><div><b>${o.fi}</b><span>섬유</span></div></div>`}
+function vToday(){
+const c=ctx(),f=c.f,now=new Date(),hr=now.getHours();
+const lead=hr<10?'b':hr<15?'l':'d',order=[lead,...['b','l','d'].filter(s=>s!==lead)];
+const done=dayLog(dstr());
+let hero;
+if(f&&f.ok)hero=`<p class="tx">${f.line}</p><div class="sc"><span class="d d2">${f.score}</span><span class="sm">${f.sub}</span></div><p class="sm go">${EH[f.top[0]]} 음식, ${EF[f.top[0]]}</p>`;
+else if(f)hero=`<p class="tx">운세를 계산하지 못했어요</p><p class="sm go">${esc(f.msg)}</p>`;
+else hero=`<p class="tx">생년월일을 넣으면 오늘의 운세로 메뉴를 골라요</p><div class="go">${goMe}</div>`;
+const T=c.T,e=c.eat,pct=clamp(e.k/T.k*100,0,100);
+let h=`<section class="hero"><div class="aura"><i></i><i></i><i></i></div><div class="top"><span class="sm">${now.getMonth()+1}월 ${now.getDate()}일 ${WDAY[now.getDay()]}요일</span><button class="sm" data-a="wx">${curTemp()!=null?R(curTemp())+'° 날씨':'날씨 선택'}</button></div>${hero}</section>`;
+h+=`<div class="slab bud"><div class="t"><span class="d d3">${R(e.k)}</span><span class="sm">/ ${T.k} kcal</span></div><div class="track"><i style="width:${pct}%"></i></div><div class="m"><span class="xs">탄수 ${R(e.c)}/${T.c}g</span><span class="xs">단백질 ${R(e.p)}/${T.p}g</span><span class="xs">지방 ${R(e.f)}/${T.f}g</span></div></div>`;
+order.forEach((s,i)=>{
+const it=pickFor(s,c);
+if(!it){h+=empty('이 끼니에 맞는 메뉴가 없어요. 나 탭에서 방식 필터를 확인해 주세요.');return}
+const ate=done.some(x=>x.sl===s);
+if(i===0){
+h+=`<article class="slab lead${ate?' done':''}" data-a="open" data-id="${it.id}" data-sl="${s}"><div class="tp"><span class="sm">${SL[s]}</span><span class="xs">${SLT[s]}</span></div><h2 class="nm">${esc(it.name)}</h2><p class="sm">${esc(it.d)}</p><div class="kc"><span class="d d1">${it.k}</span><span class="sm">kcal</span></div>${mac(it)}<div class="why">${why(it,s,c).map(w=>`<span class="chip">${esc(w)}</span>`).join('')}</div><div class="ctl">${btn('refresh',`data-sl="${s}"`,IC.ref,'rnd')}${btn('eat',`data-id="${it.id}" data-sl="${s}"`,IC.chk,'rnd'+(ate?' on':''))}</div></article>`}
+else h+=`<article class="rowc mrow${ate?' done':''}" data-a="open" data-id="${it.id}" data-sl="${s}"><div class="nm"><span class="xs">${SL[s]} ${SLT[s]}</span><b>${esc(it.name)}</b></div><span class="d d4">${it.k}</span><span class="xs">kcal</span>${btn('eat',`data-id="${it.id}" data-sl="${s}"`,IC.chk,'rnd sm2'+(ate?' on':''))}</article>`});
+if(T.est)h+=`<p class="note">신체 정보를 입력하면 칼로리 목표가 정확해져요. 지금은 평균값으로 계산 중이에요.</p>`;
+return h}
+function fTabs(){return `<div class="pills">${[['all','종합'],['saju','사주'],['ziwei','자미두수'],['west','서양 점성술'],['nine','구성기학'],['vedic','베딕']].map(([k,l])=>btn('ftab',`data-v="${k}"`,l,'pill'+(ftab===k?' on':''))).join('')}</div>`}
+const SYN={saju:'사주',ziwei:'자미두수',west:'서양 점성술',nine:'구성기학',vedic:'베딕'};
+function fAll(f){
+let h=`<div class="slab cards" style="text-align:center;position:relative;overflow:hidden"><div class="aura" style="opacity:.8"><i></i><i></i><i></i></div><div style="position:relative"><div class="d d1">${f.score}</div><p class="sm" style="margin-top:10px">${f.line}</p></div></div>`;
+h+=`<h3 class="sec">오늘 필요한 오행</h3><div class="bars">${[...ELS].sort((a,b)=>f.need[b]-f.need[a]).map(e=>`<div><span class="sm">${EK[e]}</span><div class="track"><i style="width:${R(f.need[e]*100)}%;background:${EC[e]}"></i></div><span class="xs" style="text-align:right">${R(f.need[e]*100)}</span></div>`).join('')}</div>`;
+h+=`<h3 class="sec">체계별 점수</h3><div class="bars">${Object.keys(SYN).map(k=>{const s=f.sys[k];if(!s||!s.ok)return `<div class="kv" style="grid-column:1/-1"><span>${SYN[k]}</span><span class="xs">${esc(s?s.msg:'')}</span></div>`;return `<div style="${S.prefs.on[k]?'':'opacity:.4'}"><span class="xs" style="white-space:nowrap">${SYN[k].slice(0,3)}</span><div class="track"><i style="width:${s.score}%"></i></div><span class="xs" style="text-align:right">${s.score}</span></div>`}).join('')}</div>`;
+h+=`<p class="note">운세는 전통 규칙으로 계산한 참고용이에요. 반영 비율은 나 탭에서 바꿀 수 있어요.</p>`;
+return h}
+function pilCol(p,i,bp){const names=['년주','월주','일주','시주'];
+if(i===3&&bp)return `<div class="well"><span class="k">${names[i]}</span><div class="h" style="color:var(--ink3)">모름</div></div>`;
+return `<div class="rowc"><span class="k">${p.ss}</span><div class="h">${p.s[0]}</div><div class="h">${p.s[1]}</div><span class="k"><i class="dot" style="background:${EC[GE[p.g]]}"></i>${GANK[p.g]}</span><span class="k"><i class="dot" style="background:${EC[ZE[p.z]]}"></i>${ZHIK[p.z]}</span><span class="k" style="display:block;margin-top:4px">${names[i]}</span></div>`}
+function fSaju(r){
+if(!r.ok)return `<div class="slab err">${esc(r.msg)}</div>`;
+const bp=birthParts(),nt=bp&&bp.noTime;
+let h=`<div class="pil">${[3,2,1,0].map(i=>pilCol(r.pil[i],i,nt&&i===3)).join('')}</div>`;
+h+=`<h3 class="sec">오행 분포</h3><div class="bars">${ELS.map(e=>`<div><span class="sm">${EK[e]}</span><div class="track"><i style="width:${clamp(r.cnt[e]/r.total*250,0,100)}%;background:${EC[e]}"></i></div><span class="xs" style="text-align:right">${fmt(r.cnt[e])}</span></div>`).join('')}</div>`;
+const lack=ELS.filter(e=>r.cnt[e]===0).map(e=>EK[e]).join(', ')||'없음';
+h+=`<div class="well" style="padding:8px 18px;margin-top:18px"><div class="kv"><span>오늘 들어온 기운</span><span>${r.today.inEl.map(e=>EK[e]).join('·')}</span></div><div class="kv"><span>오늘 더 필요한 기운</span><span>${[...ELS].sort((a,b)=>r.need[b]-r.need[a]).slice(0,2).map(e=>EK[e]).join('·')}</span></div><div class="kv"><span>일간</span><span>${GAN[r.dm]} ${GANK[r.dm]}${EK[r.de]}</span></div><div class="kv"><span>강약</span><span>${r.strong?'신강 쪽':'신약 쪽'}</span></div><div class="kv"><span>없는 오행</span><span>${lack}</span></div>${r.dy?`<div class="kv"><span>현재 대운</span><span>${r.dy.gz} (${r.dy.a}~${r.dy.b}세)</span></div>`:''}<div class="kv"><span>오늘 일진</span><span>${r.today.gz} ${r.today.ss}</span></div></div>`;
+return h}
+const HUA=['록','권','과','기'];
+function fZiwei(r){
+if(!r.ok)return `<div class="slab err">${esc(r.msg)}</div>`;
+const hm={};r.sh.forEach((o,i)=>{hm[o.s]=HUA[i]});
+const cell=b=>{const ps=(r.st[b]||[]).slice();const main=ps.filter(n=>STAR_EL[n]&&!['좌보','우필','문창','문곡'].includes(n)),aux=ps.filter(n=>!main.includes(n));
+const on=b===r.dh.b?' class="on2"':'';
+return `<div${on}><span class="pn">${r.palAt(b)} ${ZHIK[b]}</span>${main.map(n=>`<span class="st">${n}${hm[n]?`<small style="color:var(--pink)"> ${hm[n]}</small>`:''}</span>`).join('')}${aux.map(n=>`<span class="st s">${n}${hm[n]?` ${hm[n]}`:''}</span>`).join('')}${b===r.ming?'<i class="me"></i>':''}${b===r.shen?'<span class="xs" style="position:absolute;right:6px;bottom:4px">신</span>':''}</div>`};
+const ctr=`<div class="c"><span class="d d5" style="font-size:15px">${r.juN}</span><span class="xs">음력 ${esc(r.lunarTxt)}</span><span class="xs">명궁 ${ZHIK[r.ming]}궁</span><span class="xs">대한 ${r.dh.pal} ${r.dh.a}~${r.dh.e}세</span><span class="xs">올해 유년 ${r.lnPal}</span></div>`;
+let h=`<div class="zw">${[5,6,7,8,4].map(cell).join('')}${ctr}${[9,3,10,2,1,0,11].map(cell).join('')}</div>`;
+h+=`<h3 class="sec">올해 사화</h3><div class="well" style="padding:8px 18px">${r.sh.map(o=>`<div class="kv"><span>화${o.h.slice(1)}</span><span>${o.s} · ${o.pal}</span></div>`).join('')}</div>`;
+h+=`<p class="note">분홍 점은 명궁, 회색 칸은 현재 대한이에요. 윤달은 15일을 기준으로 나눠 계산해요.</p>`;
+return h}
+function wheel(r){
+const C=160,r0=150,r1=124,r2=96,a0=r.hs?r.hs.asc:0;
+const ang=l=>rad(180+(l-a0)),pt=(l,q)=>[C+q*Math.cos(ang(l)),C-q*Math.sin(ang(l))];
+let s=`<svg class="wheel" viewBox="0 0 320 320"><circle cx="${C}" cy="${C}" r="${r0}" fill="none" stroke="var(--line)" stroke-width="1.5"/><circle cx="${C}" cy="${C}" r="${r1}" fill="none" stroke="var(--line)"/><circle cx="${C}" cy="${C}" r="${r2}" fill="var(--well)" stroke="var(--line)"/>`;
+for(let i=0;i<12;i++){const a=pt(i*30,r1),b=pt(i*30,r0),m=pt(i*30+15,(r0+r1)/2);s+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="var(--line)"/><text x="${m[0]}" y="${m[1]}" font-size="14" fill="var(--ink2)" text-anchor="middle" dominant-baseline="central">${SG[i]}</text>`}
+if(r.hs)r.hs.cusps.forEach((l,i)=>{const a=pt(l,r2),b=pt(l,r1);s+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${i===0||i===6||i===9||i===3?'var(--ink2)':'var(--line)'}" stroke-width="${i===0||i===6||i===9||i===3?1.4:1}"/>`});
+const col={0:'#f46a9f',60:'#6fbf94',90:'#f0766e',120:'#6f9bf2',180:'#e5b94f'};
+for(let i=0;i<r.pls.length;i++)for(let j=i+1;j<r.pls.length;j++){const x=aspectOf(r.pls[i].l,r.pls[j].l);if(!x||x.a.a===0)continue;const a=pt(r.pls[i].l,r2-2),b=pt(r.pls[j].l,r2-2);s+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="${col[x.a.a]}" stroke-width="1" opacity=".55"/>`}
+const srt=r.pls.slice().sort((a,b)=>a.l-b.l);let prev=-99;
+srt.forEach(p=>{let l=p.l;if(l<prev+8)l=prev+8;prev=l;const q=pt(l,110),t=pt(p.l,r1);s+=`<text x="${q[0]}" y="${q[1]}" font-size="15" fill="var(--ink)" text-anchor="middle" dominant-baseline="central">${PG[p.i]}</text>`});
+return s+'</svg>'}
+function dm(d){const x=Math.floor(d),m=R((d-x)*60);return x+'°'+P2(m)+'′'}
+function fWest(r){
+if(!r.ok)return `<div class="slab err">${esc(r.msg)}</div>`;
+let h=`<div class="slab cards" style="padding:14px">${wheel(r)}</div>`;
+if(r.noTime)h+=`<p class="note">태어난 시간이 없어 상승점과 하우스는 빠졌고, 달 위치는 오차가 있을 수 있어요.</p>`;
+h+=`<h3 class="sec">출생 차트</h3><div class="lst">${r.pls.map(p=>`<div class="li"><span class="d d4" style="width:30px;font-family:inherit">${PG[p.i]}</span><div class="nm"><b>${PLK[p.i]}</b></div><span class="sm">${SIGN[p.sg]} ${dm(p.dg)}${p.h?` · ${p.h}하우스`:''}</span></div>`).join('')}${r.hs?`<div class="li"><span class="d d4" style="width:30px;font-family:inherit">AC</span><div class="nm"><b>상승점</b></div><span class="sm">${SIGN[Math.floor(r.hs.asc/30)]} ${dm(r.hs.asc%30)}</span></div><div class="li"><span class="d d4" style="width:30px;font-family:inherit">MC</span><div class="nm"><b>MC</b></div><span class="sm">${SIGN[Math.floor(r.hs.mc/30)]} ${dm(r.hs.mc%30)}</span></div>`:''}</div>`;
+h+=`<h3 class="sec">오늘의 트랜짓</h3>`;
+h+=r.tr.length?`<div class="lst">${r.tr.map(t=>`<div class="li"><div class="nm"><b>${t.p} ${t.a.g} ${t.q}</b></div><span class="sm">${t.a.n} · 오차 ${fmt(t.o)}°</span></div>`).join('')}</div>`:`<p class="sm">3° 안에 들어온 각도가 없는 조용한 날이에요.</p>`;
+h+=`<h3 class="sec">출생 차트의 주요 각도</h3><div class="lst">${r.nat.map(t=>`<div class="li"><div class="nm"><b>${t.a} ${ASP.find(a=>a.a===t.a.a).g} ${t.b}</b></div><span class="sm">${t.a.n} · ${fmt(t.o)}°</span></div>`).join('')}</div>`;
+h+=`<p class="note">트로피컬 황도, 플라시더스 하우스 기준이에요.</p>`;
+return h}
+function fNine(r){
+if(!r.ok)return `<div class="slab err">${esc(r.msg)}</div>`;
+const sq=(l,n)=>`<div class="rowc"><span class="xs">${l}</span><div class="d d2" style="margin:10px 0 6px;color:${EC[NSEL[n]]}">${n}</div><span class="xs">${NSN[n]}</span></div>`;
+return `<div class="ns">${sq('본명성',r.bs)}${sq('월명성',r.ms)}${sq('오늘의 별',r.ds)}</div><div class="well" style="padding:16px 18px;margin-top:18px"><p>${NSREL[r.rel]}</p><p class="sm" style="margin-top:6px">본명성 ${EK[r.be]} · 오늘의 별 ${EK[r.de]}</p></div><p class="note">입춘과 절기를 기준으로 계산해요.</p>`}
+const ym=t=>{const d=new Date(t);return d.getFullYear()+'.'+P2(d.getMonth()+1)};
+function fVedic(r){
+if(!r.ok)return `<div class="slab err">${esc(r.msg)}</div>`;
+let h=`<div class="slab cards" style="text-align:center"><span class="xs">출생 달의 낙샤트라</span><div class="d d3" style="margin:12px 0 6px;font-family:inherit;font-weight:300;letter-spacing:-.04em;line-height:1.15">${NAK[r.n]}</div><p class="sm">${r.pada}파다 · 지배성 ${DL[r.li]}</p></div>`;
+h+=`<div class="well" style="padding:8px 18px;margin-top:18px">${r.cur?`<div class="kv"><span>마하다샤</span><span>${DL[r.cur.L]} (${ym(r.cur.s)}~${ym(r.cur.e)})</span></div>`:''}${r.ad?`<div class="kv"><span>안타르다샤</span><span>${DL[r.ad.L]} (~${ym(r.ad.e)})</span></div>`:''}<div class="kv"><span>오늘의 달</span><span>${NAK[r.tn]}</span></div><div class="kv"><span>타라</span><span>${TARA[r.tara]} ${r.good?'길':r.bad?'흉':'보통'}</span></div></div>`;
+h+=`<h3 class="sec">비묘타리 다샤</h3><div class="lst">${r.mahas.map(m=>`<div class="li" style="${r.cur&&m.s===r.cur.s?'font-weight:500':'opacity:.7'}"><div class="nm"><b style="font-weight:inherit">${DL[m.L]}</b></div><span class="sm">${ym(m.s)} ~ ${ym(m.e)}</span></div>`).join('')}</div><p class="note">라히리 항성 황도 기준이에요. 낙샤트라와 다샤 중심으로 가볍게 계산해요.</p>`;
+return h}
+function vFortune(){
+const f=getFortune();let h=`<h1 class="ttl">운세</h1>`;
+if(!f)return h+empty('생년월일을 입력하면 사주, 자미두수, 점성술이 계산돼요.',goMe);
+if(!f.ok)return h+empty(esc(f.msg),goMe);
+h+=fTabs();
+if(ftab==='all')return h+fAll(f);
+const r=f.sys[ftab];
+return h+({saju:fSaju,ziwei:fZiwei,west:fWest,nine:fNine,vedic:fVedic}[ftab])(r)}
+function weekSvg(T){
+const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return d}),vals=days.map(d=>sumLog(dayLog(dstr(d))).k),mx=Math.max(T.k*1.15,...vals);
+let s=`<svg class="wk" viewBox="0 0 320 150">`;
+const ty=110-T.k/mx*96;
+s+=`<line x1="0" x2="320" y1="${ty}" y2="${ty}" stroke="var(--ink3)" stroke-dasharray="3 4" opacity=".6"/>`;
+vals.forEach((v,i)=>{const h=v/mx*96,x=8+i*45;s+=`<rect x="${x}" y="${110-h}" width="30" height="${Math.max(h,3)}" rx="15" fill="${v>T.k*1.05?'var(--pink)':'var(--ink)'}" opacity="${v?1:.15}"/><text x="${x+15}" y="136" font-size="11" fill="var(--ink3)" text-anchor="middle">${WDAY[days[i].getDay()]}</text>`});
+return s+'</svg>'}
+function vLog(){
+const T=targets(),day=dstr(),lg=dayLog(day),e=sumLog(lg);
+let h=`<h1 class="ttl">기록</h1>`;
+h+=`<div class="slab cards"><div class="t" style="display:flex;align-items:baseline;gap:8px"><span class="d d2">${R(e.k)}</span><span class="sm">/ ${T.k} kcal</span></div><div class="bars" style="margin-top:14px">${bar('탄수',e.c,T.c)}${bar('단백',e.p,T.p)}${bar('지방',e.f,T.f)}${bar('섬유',e.fi,T.fi,'#6fbf94')}${bar('당',e.su,T.su,'#e5b94f')}${bar('나트',e.na/10,T.na/10,'#6f9bf2')}</div><p class="note">나트륨은 ${R(e.na)}/${T.na}mg, 당은 ${R(e.su)}g 기준이에요. 아래로 갈수록 한도예요.</p></div>`;
+['b','l','d','s'].forEach(s=>{const l=lg.filter(x=>x.sl===s);
+h+=`<div style="display:flex;justify-content:space-between;align-items:center;margin:28px 0 4px"><h3 style="font-size:15px;font-weight:500">${SL[s]}</h3>${btn('add',`data-sl="${s}"`,IC.plus,'rnd sm2')}</div><div class="lst">${l.length?l.map(x=>`<div class="li"><div class="nm"><b>${esc(x.n)}</b><span class="xs">탄 ${x.c} 단 ${x.p} 지 ${x.f}${x.s!==1?` · ${x.s}인분`:''}</span></div><span class="d d5">${x.k}</span>${btn('logdel',`data-id="${x.id}"`,IC.x,'rnd sm2')}</div>`).join(''):'<p class="xs" style="padding:10px 0">아직 비어 있어요</p>'}</div>`});
+h+=`<h3 class="sec">최근 7일</h3><div class="slab cards" style="padding:16px">${weekSvg(T)}</div>`;
+h+=`<div class="well" style="padding:8px 18px;margin-top:18px"><div class="kv"><span>기초대사량</span><span>${T.bmr} kcal</span></div><div class="kv"><span>활동 포함 소비</span><span>${T.tdee} kcal</span></div><div class="kv"><span>목표 (${GOALS[S.profile.goal]})</span><span>${T.k} kcal</span></div></div>`;
+if(T.est)h+=`<p class="note">키와 몸무게를 입력하지 않아 평균값으로 계산했어요.</p>`;
+return h}
+function mList(){
+const q=mq.trim(),l=allMenu().filter(m=>(!q||m.name.includes(q))&&(!mslot||m.slots.includes(mslot))&&(!mmeth||m.meth.includes(mmeth)));
+return l.length?l.map(m=>`<div class="li" data-a="open" data-id="${m.id}" data-sl="${mslot||m.slots[0]}"><div class="nm"><b>${esc(m.name)}</b><div class="mt">${[...m.meth].map(x=>`<span class="tg">${METH[x]}</span>`).join('')}<span class="tg">${elTxt(m.el,'·')}</span></div></div><div style="text-align:right"><span class="d d5">${m.k}</span><div class="xs">단백질 ${m.p}g</div></div></div>`).join(''):'<p class="sm" style="padding:20px 0">찾는 메뉴가 없어요.</p>'}
+function vMenu(){
+return `<h1 class="ttl">메뉴</h1><div class="srch"><input class="in" id="mq" placeholder="메뉴 검색" value="${esc(mq)}"></div><div class="pills">${btn('mslot','data-v=""','전체','pill'+(!mslot?' on':''))}${['b','l','d'].map(s=>btn('mslot',`data-v="${s}"`,SL[s],'pill'+(mslot===s?' on':''))).join('')}</div><div class="pills" style="margin-top:-8px">${btn('mmeth','data-v=""','모든 방식','pill'+(!mmeth?' on':''))}${['h','c','o'].map(s=>btn('mmeth',`data-v="${s}"`,METH[s],'pill'+(mmeth===s?' on':''))).join('')}</div><div id="mlist" class="lst">${mList()}</div><div style="margin-top:22px">${btn('addcustom','','내 음식 추가','pillbtn ghost')}</div><p class="note">영양 수치는 1인분 기준 대표값이에요. 제품이나 가게에 따라 차이가 있어요.</p>`}
+const sel=(p,v,opts)=>`<div class="seg well">${opts.map(([k,l])=>btn('set',`data-p="${p}" data-v="${k}"`,l,v===k?'on':'')).join('')}</div>`;
+const get=p=>p.split('.').reduce((o,k)=>o&&o[k],S);
+const inp=(p,type,ph,extra)=>`<input class="in" type="${type}" data-f="${p}" value="${esc(get(p))}" ${ph?`placeholder="${ph}"`:''} ${extra||''}>`;
+function vMe(){
+const b=S.profile.birth,bd=S.profile.body,T=targets(),pr=S.prefs;
+let h=`<h1 class="ttl">나</h1>`;
+h+=`<h3 class="sec" style="margin-top:6px">생년월일시</h3><div class="slab cards"><div class="fld" style="margin-top:0"><span>달력</span>${sel('profile.birth.cal',b.cal,[['solar','양력'],['lunar','음력']])}</div><label class="fld"><span>생년월일</span>${inp('profile.birth.date','date')}</label>${b.cal==='lunar'?`<label class="sw"><span>윤달이에요</span><input type="checkbox" data-f="profile.birth.leap" ${b.leap?'checked':''}></label>`:''}<label class="fld"><span>태어난 시각</span>${inp('profile.birth.time','time','',b.noTime?'disabled':'')}</label><label class="sw"><span>태어난 시간을 몰라요</span><input type="checkbox" data-f="profile.birth.noTime" ${b.noTime?'checked':''}></label><div class="fld"><span>성별</span>${sel('profile.birth.gender',b.gender,[['M','남'],['F','여']])}</div><label class="fld"><span>태어난 곳</span><select class="in" data-f="profile.birth.place"><optgroup label="한국">${PLACES.slice(0,31).map(p=>`<option value="${p.id}" ${b.place===p.id?'selected':''}>${p.name}</option>`).join('')}</optgroup><optgroup label="해외">${PLACES.slice(31).map(p=>`<option value="${p.id}" ${b.place===p.id?'selected':''}>${p.name}</option>`).join('')}</optgroup></select></label></div>`;
+h+=`<h3 class="sec">식단 목표</h3><div class="pills" style="margin-bottom:0">${Object.keys(GOALS).map(k=>btn('set',`data-p="profile.goal" data-v="${k}"`,GOALS[k],'pill'+(S.profile.goal===k?' on':''))).join('')}</div><div class="slab cards" style="margin-top:6px"><div class="fld" style="margin-top:0"><span>성별</span>${sel('profile.body.sex',bd.sex,[['M','남'],['F','여']])}</div><div class="g2"><label class="fld"><span>키 (cm)</span>${inp('profile.body.h','number','172','inputmode="decimal"')}</label><label class="fld"><span>몸무게 (kg)</span>${inp('profile.body.w','number','68','inputmode="decimal"')}</label></div><label class="fld"><span>활동량</span><select class="in" data-f="profile.body.act">${ACTS.map(a=>`<option value="${a[0]}" ${+bd.act===a[0]?'selected':''}>${a[1]}</option>`).join('')}</select></label></div>`;
+h+=`<div class="well" style="padding:8px 18px;margin-top:18px"><div class="kv"><span>하루 목표</span><span>${T.k} kcal</span></div><div class="kv"><span>탄수화물</span><span>${T.c}g</span></div><div class="kv"><span>단백질</span><span>${T.p}g</span></div><div class="kv"><span>지방</span><span>${T.f}g</span></div><div class="kv"><span>식이섬유</span><span>${T.fi}g 이상</span></div></div>`;
+h+=`<details style="margin-top:14px"><summary class="sm" style="padding:8px 0;cursor:pointer">목표 직접 정하기</summary><div class="g2">${[['k','칼로리'],['c','탄수 g'],['p','단백질 g'],['f','지방 g'],['fi','섬유 g']].map(([k,l])=>`<label class="fld"><span>${l}</span>${inp('profile.manual.'+k,'number','자동','inputmode="decimal"')}</label>`).join('')}</div></details>`;
+h+=`<h3 class="sec">추천에 쓸 방식</h3><div class="pills" style="margin-bottom:0">${['h','c','o'].map(k=>btn('meth',`data-v="${k}"`,METH[k],'pill'+(pr.methods.includes(k)?' on':''))).join('')}</div>`;
+h+=`<h3 class="sec">운세 체계</h3><div class="slab cards">${Object.keys(SYN).map(k=>`<div style="padding:6px 0"><label class="sw" style="padding:6px 0"><span>${SYN[k]}</span><input type="checkbox" data-f="prefs.on.${k}" ${pr.on[k]?'checked':''}></label><div style="display:flex;align-items:center;gap:12px"><input class="rng" type="range" min="0" max="100" step="5" data-f="prefs.w.${k}" value="${pr.w[k]}"><span class="xs" style="width:30px;text-align:right">${pr.w[k]}</span></div></div>`).join('')}<label class="sw"><span>진태양시 보정</span><input type="checkbox" data-f="prefs.tst" ${pr.tst?'checked':''}></label><div class="fld"><span>자시 기준</span>${sel('prefs.zasi',pr.zasi,[[2,'야자시'],[1,'조자시']])}</div></div>`;
+h+=`<h3 class="sec">위치와 화면</h3><div class="slab cards"><div class="kv" style="padding-top:0"><span>오늘 날씨</span><span>${curTemp()!=null?R(curTemp())+'°':'선택 안 함'}</span></div><div style="display:flex;gap:10px;flex-wrap:wrap">${btn('wx','','날씨 직접 고르기','pillbtn ghost')}${btn('geo','','위치로 자동 반영','pillbtn ghost')}</div><div class="fld"><span>화면</span>${sel('prefs.theme',pr.theme,[['auto','자동'],['light','밝게'],['dark','어둡게']])}</div></div>`;
+h+=`<h3 class="sec">데이터</h3><div style="display:flex;gap:10px">${btn('copy','','복사','pillbtn ghost')}${btn('reset','','초기화','pillbtn ghost')}</div><p class="note">모든 정보는 이 기기의 브라우저에만 저장돼요. 홈 화면에 추가해서 쓰면 오래 유지돼요.</p>`;
+return h}
+const VIEWS={today:vToday,fortune:vFortune,log:vLog,menu:vMenu,me:vMe};
+function render(){
+applyTheme();
+$('#view').innerHTML=VIEWS[tab]();
+$('#dock').innerHTML=[['today','오늘'],['fortune','운세'],['log','기록'],['menu','메뉴'],['me','나']].map(([k,l])=>btn('tab',`data-v="${k}"`,l,tab===k?'on':'')).join('')}
+function sheetOpen(html){const s=$('#sheet');s.innerHTML=`<div class="grab"></div>`+html;s.classList.add('on');$('#veil').classList.add('on')}
+function sheetClose(){SH=null;$('#sheet').classList.remove('on');$('#veil').classList.remove('on')}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),1800)}
+function links(it){
+const q=encodeURIComponent(it.name),ms=S.prefs.methods.filter(m=>it.meth.includes(m)),o=[];
+if(ms.includes('h')||!ms.length&&it.meth.includes('h'))o.push(`<a class="pillbtn ghost" href="https://www.youtube.com/results?search_query=${q}%20레시피" target="_blank" rel="noopener">레시피 보기</a>`);
+if(it.meth.includes('c')&&(ms.includes('c')||!ms.length))o.push(`<a class="pillbtn ghost" href="https://map.naver.com/p/search/%ED%8E%B8%EC%9D%98%EC%A0%90" target="_blank" rel="noopener">근처 편의점</a>`);
+if(it.meth.includes('o')&&(ms.includes('o')||!ms.length))o.push(`<a class="pillbtn ghost" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">근처에서 찾기</a>`);
+return o.join('')}
+function sheetMenu(){
+const it=findMenu(SH.id);if(!it)return sheetClose();
+const c=ctx(),n=SH.n,o=sc(it,n),ws=why(it,SH.sl,c);
+const alt=rank(SH.sl,c).filter(r=>r.it.id!==it.id).slice(0,4);
+sheetOpen(`<p class="xs">${SL[SH.sl]}</p><h2 style="font-size:28px;font-weight:300;line-height:1.25;letter-spacing:-.045em;margin:4px 0 4px">${esc(it.name)}</h2><p class="sm">${esc(it.d)}</p><div class="kc"><span class="d d1" style="font-size:84px">${o.k}</span><span class="sm">kcal</span></div><div class="well" style="padding:6px 18px">${[['탄수화물',o.c+'g'],['단백질',o.p+'g'],['지방',o.f+'g'],['식이섬유',o.fi+'g'],['당',o.su+'g'],['나트륨',o.na+'mg'],['오행',elTxt(it.el,'·')]].map(a=>`<div class="kv"><span>${a[0]}</span><span>${a[1]}</span></div>`).join('')}</div>${ws.length?`<div class="why">${ws.map(w=>`<span class="chip">${esc(w)}</span>`).join('')}</div>`:''}<div class="step" style="margin:22px 0 8px;justify-content:space-between"><span class="sm">양</span><div class="step">${btn('sv','data-d="-0.5"','−','rnd sm2')}<span class="d d4">${n}</span>${btn('sv','data-d="0.5"','+','rnd sm2')}</div></div><div class="fld"><span>끼니</span>${`<div class="seg well">${['b','l','d','s'].map(s=>btn('slot',`data-v="${s}"`,SL[s],SH.sl===s?'on':'')).join('')}</div>`}</div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">${btn('logit','','기록하기','pillbtn')}${links(it)}</div>${alt.length?`<h3 class="sec">다른 후보</h3><div class="lst">${alt.map(r=>`<div class="li" data-a="swap" data-id="${r.it.id}"><div class="nm"><b>${esc(r.it.name)}</b></div><span class="d d5">${r.it.k}</span></div>`).join('')}</div>`:''}`)}
+function sheetAdd(){
+sheetOpen(`<p class="xs">${SL[SH.sl]}</p><h2 style="font-size:26px;font-weight:300;letter-spacing:-.04em;margin:4px 0 14px">먹은 음식 추가</h2><div class="srch"><input class="in" id="aq" placeholder="메뉴 검색"></div><div class="lst" id="alist">${addList('')}</div><div style="margin-top:20px">${btn('addcustom','','목록에 없으면 직접 입력','pillbtn ghost')}</div>`)}
+function addList(q){return allMenu().filter(m=>!q||m.name.includes(q)).slice(0,30).map(m=>`<div class="li" data-a="open" data-id="${m.id}" data-sl="${SH.sl}"><div class="nm"><b>${esc(m.name)}</b></div><span class="d d5">${m.k}</span></div>`).join('')}
+function sheetCustom(){
+const f=(id,l,t,ph)=>`<label class="fld"><span>${l}</span><input class="in" id="${id}" type="${t}" ${t==='number'?'inputmode="decimal"':''} placeholder="${ph||''}"></label>`;
+sheetOpen(`<h2 style="font-size:26px;font-weight:300;letter-spacing:-.04em;margin:4px 0 6px">직접 입력</h2>${f('cf-n','이름','text','예: 편의점 샐러드')}<div class="g2">${f('cf-k','칼로리 kcal','number')}${f('cf-c','탄수화물 g','number')}${f('cf-p','단백질 g','number')}${f('cf-f','지방 g','number')}${f('cf-fi','식이섬유 g','number')}${f('cf-su','당 g','number')}</div>${f('cf-na','나트륨 mg','number')}<div class="g2"><label class="fld"><span>끼니</span><select class="in" id="cf-s">${['b','l','d','s'].map(s=>`<option value="${s}" ${SH&&SH.sl===s?'selected':''}>${SL[s]}</option>`).join('')}</select></label><label class="fld"><span>오행</span><select class="in" id="cf-e">${ELS.map(e=>`<option value="${e}" ${e==='土'?'selected':''}>${EK[e]}</option>`).join('')}</select></label></div><label class="sw"><span>내 메뉴로도 저장</span><input type="checkbox" id="cf-save"></label><div style="margin-top:12px">${btn('cfsave','','기록하기','pillbtn')}</div>`)}
+function sheetReset(){sheetOpen(`<h2 style="font-size:26px;font-weight:300;letter-spacing:-.04em;margin:4px 0 8px">모든 데이터를 지울까요</h2><p class="sm">생년월일, 기록, 내 메뉴가 모두 삭제돼요. 되돌릴 수 없어요.</p><div style="display:flex;gap:10px;margin-top:22px">${btn('reset2','','지우기','pillbtn')}${btn('close','','취소','pillbtn ghost')}</div>`)}
+
+function sheetWx(){sheetOpen(`<h2 style="font-size:26px;font-weight:300;letter-spacing:-.04em;margin:4px 0 6px">오늘 날씨</h2><p class="sm">기온에 맞춰 따뜻한 음식과 시원한 음식을 골라요.</p><div class="lst" style="margin-top:10px">${[['추워요',3],['쌀쌀해요',10],['선선해요',17],['따뜻해요',23],['더워요',29]].map(a=>`<div class="li" data-a="wxset" data-t="${a[1]}"><div class="nm"><b>${a[0]}</b></div><span class="sm">${a[1]}° 안팎</span></div>`).join('')}</div><div style="margin-top:18px">${btn('geo','','위치로 자동 반영','pillbtn ghost')}</div>`)}
+function setPath(p,v){const ks=p.split('.');let o=S;for(let i=0;i<ks.length-1;i++)o=o[ks[i]];const k=ks[ks.length-1];o[k]=v}
+function refresh(keep){const y=window.scrollY;render();if(keep)window.scrollTo(0,y)}
+function dirty(){S.picks={};FC=null;FK=''}
+function logAdd(o){S.log.push(Object.assign({id:'e'+Date.now()+Math.floor(Math.random()*999),d:dstr(),s:1},o))}
+const ACT={
+tab(d){tab=d.v;window.scrollTo(0,0);render()},
+ftab(d){ftab=d.v;render()},
+set(d){let v=d.v;if(d.p==='prefs.zasi')v=+v;if(d.p==='profile.body.act')v=+v;setPath(d.p,v);dirty();save();refresh(true)},
+meth(d){const m=S.prefs.methods,i=m.indexOf(d.v);if(i>=0){if(m.length>1)m.splice(i,1)}else m.push(d.v);S.picks={};save();refresh(true)},
+open(d){SH={id:d.id,sl:d.sl||'l',n:1};sheetMenu()},
+close(){sheetClose()},
+sv(d){SH.n=Math.max(.5,Math.round((SH.n+ +d.d)*2)/2);sheetMenu()},
+slot(d){SH.sl=d.v;sheetMenu()},
+swap(d){S.picks[dstr()+SH.sl]={id:d.id,skip:[]};save();sheetClose();render()},
+refresh(d){const k=dstr()+d.sl,pk=S.picks[k];const skip=(pk&&pk.skip||[]).concat(pk?[pk.id]:[]);const rk=rank(d.sl,ctx()),n=rk.find(r=>!skip.includes(r.it.id))||rk[0];S.picks[k]={id:n?n.it.id:'',skip:n&&rk.length>skip.length?skip:[]};save();refresh(true)},
+eat(d){const ex=S.log.find(e=>e.d===dstr()&&e.sl===d.sl&&e.mid===d.id);if(ex){S.log=S.log.filter(e=>e!==ex);toast('기록을 취소했어요')}else{const it=findMenu(d.id);if(!it)return;logAdd(Object.assign({sl:d.sl,n:it.name,mid:it.id},sc(it,1)));toast('기록했어요')}save();refresh(true)},
+logit(){const it=findMenu(SH.id);if(!it)return;logAdd(Object.assign({sl:SH.sl,n:it.name,mid:it.id,s:SH.n},sc(it,SH.n)));save();sheetClose();toast('기록했어요');render()},
+logdel(d){S.log=S.log.filter(e=>e.id!==d.id);save();refresh(true)},
+add(d){SH={sl:d.sl,n:1};sheetAdd()},
+addcustom(){SH=SH||{sl:'l',n:1};sheetCustom()},
+cfsave(){
+const v=id=>+($('#'+id).value)||0,n=$('#cf-n').value.trim();
+if(!n||!v('cf-k')){toast('이름과 칼로리를 입력해 주세요');return}
+const o={k:v('cf-k'),c:v('cf-c'),p:v('cf-p'),f:v('cf-f'),fi:v('cf-fi'),su:v('cf-su'),na:v('cf-na')},sl=$('#cf-s').value,el=$('#cf-e').value;
+let mid;
+if($('#cf-save').checked){mid='u'+Date.now();S.custom.push(Object.assign({id:mid,name:n,slots:sl==='s'?'bld':sl,meth:'hco',el,t:'',d:'내가 추가한 음식'},o))}
+logAdd(Object.assign({sl,n,mid},o));save();sheetClose();toast('기록했어요');render()},
+mslot(d){mslot=d.v;render()},
+mmeth(d){mmeth=d.v;render()},
+wx(){sheetWx()},
+wxset(d){S.wx={t:+d.t,d:dstr()};S.picks={};save();sheetClose();render()},
+geo(){
+if(!navigator.geolocation){toast('위치를 쓸 수 없는 환경이에요');sheetWx();return}
+navigator.geolocation.getCurrentPosition(async p=>{S.geo={lat:p.coords.latitude,lon:p.coords.longitude};await weather();save();S.picks={};sheetClose();if(S.geo.temp==null){toast('날씨를 불러오지 못했어요');sheetWx()}refresh(true)},()=>{toast('이 환경에서는 위치를 쓸 수 없어요');sheetWx()},{timeout:9000})},
+copy(){const t=JSON.stringify(S);if(navigator.clipboard)navigator.clipboard.writeText(t).then(()=>toast('복사했어요'),()=>toast('복사하지 못했어요'));else toast('복사하지 못했어요')},
+reset(){sheetReset()},
+reset2(){try{localStorage.removeItem(KEY)}catch(e){}S=defaults();dirty();sheetClose();render()}
+};
+async function weather(){
+const g=S.geo;if(!g)return;
+try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+g.lat.toFixed(2)+'&longitude='+g.lon.toFixed(2)+'&current=temperature_2m&timezone=auto');const j=await r.json();g.temp=j.current.temperature_2m}catch(e){}}
+document.addEventListener('click',e=>{
+const a=e.target.closest('[data-a]');
+if(!a)return;
+const f=ACT[a.dataset.a];
+if(f){e.preventDefault();f(a.dataset,a)}
+});
+document.addEventListener('change',e=>{
+const t=e.target,p=t.dataset&&t.dataset.f;
+if(!p)return;
+let v=t.type==='checkbox'?t.checked:t.type==='range'?+t.value:t.value;
+if(p==='profile.body.act')v=+v;
+setPath(p,v);dirty();save();refresh(true)});
+document.addEventListener('input',e=>{
+const t=e.target;
+if(t.id==='mq'){mq=t.value;$('#mlist').innerHTML=mList()}
+else if(t.id==='aq'){$('#alist').innerHTML=addList(t.value.trim())}
+else if(t.type==='range'&&t.dataset.f){const s=t.parentNode.querySelector('span');if(s)s.textContent=t.value}});
+$('#veil').addEventListener('click',sheetClose);
+(function icon(){try{const c=document.createElement('canvas');c.width=c.height=180;const x=c.getContext('2d');x.fillStyle='#e9eaed';x.fillRect(0,0,180,180);const g=x.createRadialGradient(62,52,8,92,92,110);g.addColorStop(0,'#f6b4d1');g.addColorStop(.55,'#bcd0ff');g.addColorStop(1,'#8fd6b1');x.fillStyle=g;x.beginPath();x.arc(90,90,64,0,7);x.fill();x.fillStyle='#121315';x.font='600 56px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText('食',90,95);const l=document.createElement('link');l.rel='apple-touch-icon';l.href=c.toDataURL('image/png');document.head.appendChild(l)}catch(e){}})();
+render();
+if(S.geo&&S.geo.lat!=null){weather().then(()=>{save();if(tab==='today')refresh(true)})}
+</script>
+</body>
+</html>
