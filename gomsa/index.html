@@ -139,12 +139,14 @@ header{
   word-break:keep-all;overflow-wrap:anywhere;
 }
 .txt b,.qt b,.qq b{
-  font-weight:700;
-  background:linear-gradient(180deg,transparent 60%,rgba(29,155,240,.17) 60%,rgba(29,155,240,.17) 94%,transparent 94%);
+  font-weight:700;color:var(--txt);
+  background:rgba(29,155,240,.10);
+  padding:0 2px;border-radius:3px;
   -webkit-box-decoration-break:clone;box-decoration-break:clone;
 }
 [data-theme="dark"] .txt b,[data-theme="dark"] .qt b,[data-theme="dark"] .qq b{
-  background:linear-gradient(180deg,transparent 60%,rgba(29,155,240,.26) 60%,rgba(29,155,240,.26) 94%,transparent 94%);
+  color:#dceefb;
+  background:rgba(29,155,240,.20);
 }
 .num{color:var(--muted);font-size:12.5px;margin-right:6px;font-weight:400}
 .quote{
