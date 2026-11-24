@@ -214,7 +214,7 @@ main{padding:0 0 56px}
 <header>
   <div class="hd">
     <h1>한국고중세사 산책</h1>
-    <p>기말 직전 정리 · 이정훈 교수님 · 9~13주차</p>
+    <p>기말 범위 9~14주차 · 정리 9~13주차</p>
   </div>
   <div class="dd" id="dd">D-14</div>
   <button class="icon" id="th" aria-label="화면 모드 바꾸기">
@@ -444,7 +444,7 @@ function termHTML(x,id){
   h+='<div class="tt">';
   if(x.s) h+='<span class="st">★</span>';
   h+='<span class="tn">'+fmt(x.n)+'</span>';
-  h+='<span class="bd '+(x.b==="cls"?"cls":"ppt")+'">'+(x.b==="cls"?"🎙 수업함정":"PPT")+'</span>';
+  h+='<span class="bd '+(x.b==="cls"?"cls":"ppt")+'">'+(x.b==="cls"?"🎙 함정":"PPT")+'</span>';
   h+='<span class="tp">눌러서 확인</span>';
   h+='</div>';
   h+='<div class="td">'+fmt(x.d)+'</div>';
@@ -454,12 +454,13 @@ function termHTML(x,id){
 function tab1(){
   const total=WEEKS.reduce((a,w)=>a+w.items.length,0);
   const core=WEEKS.reduce((a,w)=>a+w.items.filter(x=>x.s).length,0);
+  const hiddenCnt=WEEKS.reduce(function(a,w,wi){return a+w.items.filter(function(x,i){return S.mem&&!S.open[wi+"-"+i];}).length;},0);
   let h='<div class="bar">'+
     '<span class="cnt"><b>'+total+'</b>개 · ★핵심 <b>'+core+'</b></span>'+
     '<button class="sw'+(S.mem?' on':'')+'" id="mem"><b>'+(S.mem?'암기 모드 ON':'암기 모드 OFF')+'</b></button>'+
-    '<button class="sw" id="allw">'+(S.mem?'★뜻 모두 펼치기':'★뜻 모두 가리기')+'</button>'+
+    '<button class="sw" id="allw">'+(S.mem&&hiddenCnt===0?'모두 가리기':'모두 펼치기')+'</button>'+
     '</div>';
-  h+='<div class="note">약술 5문제는 <b>용어 + 핵심 기능 한 줄</b>로 채점됨. ★만 먼저 훑고, <b>🎙 수업함정</b>은 교안에 없거나 교수님이 말로만 짚은 것 — 에브리타임 족보 기준 5개 중 1개가 여기서 나옴.</div>';
+  h+='<div class="note">약술 5문제는 <b>용어 + 핵심 기능 한 줄</b>로 채점됨. ★만 먼저 훑고, <b>🎙 함정</b>은 교안에서 놓치기 쉬운 디테일이나 교수님이 말로 짚어낸 것 — 에브리타임 족보 기준 5개 중 1개가 여기서 나옴.</div>';
   WEEKS.forEach(function(w,wi){
     h+='<section class="wk"><div class="wkh"><span class="wn">'+w.w+'주차</span><span class="wt">'+w.title+'</span><span class="wc">'+w.items.length+'</span></div>';
     w.items.forEach(function(x,i){
@@ -563,8 +564,13 @@ document.getElementById("app").addEventListener("click",function(e){
   if(mem){S.mem=!S.mem;save();render();return;}
   const allw=e.target.closest("#allw");
   if(allw){
-    if(S.mem){WEEKS.forEach(function(w,wi){w.items.forEach(function(x,i){S.open[wi+"-"+i]=true;});});}
-    else{S.open={};}
+    if(!S.mem){S.mem=true;S.open={};}
+    else{
+      let hidden=false;
+      WEEKS.forEach(function(w,wi){w.items.forEach(function(x,i){if(!S.open[wi+"-"+i]) hidden=true;});});
+      if(hidden){WEEKS.forEach(function(w,wi){w.items.forEach(function(x,i){S.open[wi+"-"+i]=true;});});}
+      else{S.open={};}
+    }
     save();render();return;
   }
   const q=e.target.closest(".q");
@@ -578,6 +584,11 @@ document.getElementById("app").addEventListener("click",function(e){
     if(btn) btn.textContent=S.ans[id]?"채점 기준 접기":"채점 기준 보기";
     return;
   }
+});
+document.getElementById("app").addEventListener("keydown",function(e){
+  const trm=e.target.closest(".trm");
+  if(!trm) return;
+  if(e.key==="Enter"||e.key===" "){e.preventDefault();trm.click();}
 });
 document.getElementById("th").addEventListener("click",function(){
   const cur=document.documentElement.getAttribute("data-theme")==="dark"?"dark":"light";
