@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>한국고중세사 산책 · X 노트</title>
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-soft:var(--bg);
+  --txt:#0f1419;
+  --muted:#536471;
+  --line:#eff3f4;
+  --line2:#cfd9de;
+  --chip:#f4f6f7;
+  --hover:#f7f9f9;
+  --accent:#1d9bf0;
+  --like:#f91880;
+  --repost:#00ba7c;
+  --ok:#00ba7c;
+  --no:#f4212e;
+}
+[data-theme="dark"]{
+  --bg:#000000;
+  --bg-soft:var(--bg);
+  --txt:#e7e9ea;
+  --muted:#71767b;
+  --line:#2f3336;
+  --line2:#3a3f44;
+  --chip:#16181c;
+  --hover:#0d0f11;
+  --accent:#1d9bf0;
+  --like:#f91880;
+  --repost:#00ba7c;
+  --ok:#00ba7c;
+  --no:#f4212e;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic",system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.45;
+  letter-spacing:-0.01em;
+  transition:background .2s ease,color .2s ease;
+}
+button{font-family:inherit;font-size:inherit;color:inherit}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+b{font-weight:700}
+.wrap{max-width:600px;margin:0 auto;min-height:100vh;background:var(--bg)}
+@media (min-width:700px){
+  body{background:var(--chip)}
+  [data-theme="dark"] body{background:#05070a}
+  .wrap{border-left:1px solid var(--line);border-right:1px solid var(--line)}
+}
+header{
+  position:sticky;top:0;z-index:20;
+  height:53px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px 0 16px;
+  background:var(--bg-soft);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  backdrop-filter:saturate(180%) blur(14px);
+}
+.htitle{display:flex;align-items:baseline;gap:7px;min-width:0}
+.htitle h1{font-size:16px;font-weight:800;margin:0;letter-spacing:-0.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.htitle span{font-size:12px;color:var(--muted);white-space:nowrap}
+.iconbtn{
+  width:36px;height:36px;border:0;border-radius:50%;background:transparent;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  color:var(--txt);transition:background .15s ease;
+}
+.iconbtn:hover{background:var(--chip)}
+.iconbtn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ic-sun{display:none}
+[data-theme="dark"] .ic-sun{display:block}
+[data-theme="dark"] .ic-moon{display:none}
+.tabs{
+  position:sticky;top:53px;z-index:19;
+  display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  padding:0 8px;background:var(--bg-soft);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  position:relative;flex:0 0 auto;border:0;background:none;cursor:pointer;
+  padding:13px 9px 12px;font-size:13.5px;color:var(--muted);
+  transition:color .15s ease;
+}
+.tab.on{color:var(--txt);font-weight:700}
+.tab.on::after{
+  content:"";position:absolute;left:9px;right:9px;bottom:0;height:3px;
+  border-radius:3px;background:var(--accent);
+}
+.statbar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:11px 16px 10px;font-size:12px;color:var(--muted);
+  border-bottom:1px solid var(--line);
+}
+.statbar b{color:var(--txt);font-weight:700}
+.wk{
+  padding:20px 16px 6px;font-size:12px;font-weight:700;color:var(--muted);
+  letter-spacing:0.01em;
+}
+.wk em{font-style:normal;font-weight:500}
+.feed{padding-bottom:40px}
+.tw{display:flex;padding:10px 16px 3px;transition:background .15s ease;position:relative;border-bottom:1px solid var(--line)}
+.tw:hover{background:var(--hover)}
+.tw.last{border-bottom:none}
+.avwrap{position:relative;flex:0 0 40px;width:40px}
+.avwrap::after{
+  content:"";position:absolute;left:19px;top:44px;bottom:-13px;width:2px;
+  background:var(--line2);border-radius:2px;
+}
+.tw.last .avwrap::after{display:none}
+.av{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;line-height:1;
+  background:var(--av,#f2f4f5);
+  box-shadow:inset 0 0 0 1px rgba(127,127,127,.13);
+}
+[data-theme="dark"] .av{background:var(--avd,#232629)}
+.tb{flex:1;min-width:0;padding-left:10px;padding-bottom:9px}
+.hd{display:flex;align-items:center;gap:4px;font-size:14px;line-height:1.25;flex-wrap:wrap}
+.hd2{display:flex;align-items:center;gap:4px;font-size:14px;line-height:1.25;flex-wrap:wrap;margin-top:12px}
+.nm{font-weight:700;letter-spacing:-0.015em}
+.badge{width:15px;height:15px;flex:0 0 15px;margin-top:1px}
+.hn{color:var(--muted);font-weight:400}
+.sep{color:var(--muted)}
+.mt{color:var(--muted);font-weight:400;font-size:13.5px}
+.txt{margin-top:3px;font-size:15px;line-height:1.5;word-break:keep-all;overflow-wrap:anywhere}
+.num{color:var(--muted);font-size:13px;margin-right:5px;font-weight:400}
+.quote{
+  margin-top:10px;padding:10px 12px 11px;border:1px solid var(--line2);
+  border-radius:16px;background:transparent;
+}
+.qh{display:flex;align-items:center;gap:5px;font-size:13px;line-height:1.2}
+.qh .av{width:20px;height:20px;flex:0 0 20px;font-size:11px;box-shadow:inset 0 0 0 1px rgba(127,127,127,.13)}
+.qh .nm{font-size:13px}
+.qh .hn{font-size:13px}
+.qt{margin-top:5px;font-size:14px;line-height:1.48;word-break:keep-all;overflow-wrap:anywhere}
+.quiz{
+  margin-top:10px;padding:12px;border:1px solid var(--line2);border-radius:16px;
+}
+.qtag{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.02em;
+  color:var(--accent);background:rgba(29,155,240,.1);
+  padding:3px 8px;border-radius:999px;
+}
+.qq{margin-top:8px;font-size:14.5px;font-weight:600;line-height:1.45;word-break:keep-all}
+.opts{margin-top:9px;display:flex;flex-direction:column;gap:6px}
+.opt{
+  display:flex;gap:8px;align-items:flex-start;width:100%;text-align:left;
+  border:1px solid var(--line2);background:transparent;border-radius:12px;
+  padding:9px 11px;font-size:14px;line-height:1.42;cursor:pointer;
+  transition:border-color .15s ease,background .15s ease;
+  word-break:keep-all;
+}
+.opt .ol{flex:0 0 auto;color:var(--muted);font-size:13px;line-height:1.5}
+.opt:hover{border-color:var(--muted)}
+.quiz.done .opt{cursor:default}
+.quiz.done .opt:hover{border-color:var(--line2)}
+.opt.ok{border-color:var(--ok);background:rgba(0,186,124,.09)}
+.opt.ok .ol{color:var(--ok)}
+.opt.no{border-color:var(--no);background:rgba(244,33,46,.08)}
+.opt.no .ol{color:var(--no)}
+.qa{display:none;margin-top:11px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;line-height:1.55;color:var(--muted);word-break:keep-all}
+.qa b{color:var(--txt)}
+.quiz.done .qa{display:block}
+.acts{
+  display:flex;align-items:center;gap:2px;
+  margin:9px 0 4px;padding-right:4px;
+  max-width:460px;
+}
+.act{
+  display:flex;align-items:center;gap:4px;background:none;border:0;cursor:pointer;
+  color:var(--muted);padding:7px 6px;margin:-7px 0;border-radius:999px;
+  font-size:13px;line-height:1;transition:color .15s ease;
+}
+.act:first-child{margin-left:-6px}
+.act svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.act .lb{font-size:12.5px;letter-spacing:-0.01em}
+.act:hover{color:var(--accent)}
+.act.on.like{color:var(--like)}
+.act.on.like svg{fill:var(--like);stroke:var(--like)}
+.act.on.repost{color:var(--repost)}
+.act.on.bm{color:var(--accent)}
+.act.on.bm svg{fill:rgba(29,155,240,.14)}
+.act.on.done{color:var(--ok)}
+.act.on.done svg{fill:rgba(0,186,124,.14)}
+.empty{padding:64px 32px;text-align:center;color:var(--muted);font-size:14px;line-height:1.6}
+.empty svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.5;margin-bottom:12px;opacity:.6}
+.foot{padding:22px 20px 40px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="htitle">
+    <h1>한국고중세사 산책</h1>
+    <span>1~4주차</span>
+  </div>
+  <button class="iconbtn" id="themeBtn" aria-label="화면 모드 바꾸기">
+    <svg class="ic-moon" viewBox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    <svg class="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.1"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>
+  </button>
+</header>
+<nav class="tabs" id="tabs">
+  <button class="tab on" data-f="all">전체</button>
+  <button class="tab" data-f="1">1주차</button>
+  <button class="tab" data-f="2">2주차</button>
+  <button class="tab" data-f="3">3주차</button>
+  <button class="tab" data-f="4">4주차</button>
+  <button class="tab" data-f="bm">북마크만 보기</button>
+</nav>
+<div class="statbar">
+  <span id="cnt">13개 스레드</span>
+  <span id="prog">암기 0/13 · 퀴즈 0/13</span>
+</div>
+<main class="feed" id="feed"></main>
+<div class="foot">강의안 1~4주차 정리 · 시험 전날엔 ‘북마크만 보기’로<br>퀴즈는 다시 눌러도 정답이 바뀌지 않아요</div>
+</div>
+<script>
+const AC = {
+  gomsa:{n:"고중세사 산책",h:"@gomsa_walk",e:"📜",bg:"#eef2f7",dk:"#1e2833",v:1},
+  period:{n:"시대구분 연구소",h:"@period_lab",e:"🕰",bg:"#f6f1e7",dk:"#2b261d",v:1},
+  myth:{n:"신화 읽는 밤",h:"@myth_night",e:"🌙",bg:"#eae8f5",dk:"#241f33",v:0},
+  gojo:{n:"고조선 아카이브",h:"@gojoseon_arc",e:"🏺",bg:"#f3ece3",dk:"#2b241d",v:0},
+  samguk:{n:"삼국사 기록관",h:"@samguk_log",e:"🏯",bg:"#ebeef1",dk:"#23272b",v:1},
+  buddha:{n:"불교 전래 노트",h:"@buddha_note",e:"🪷",bg:"#f8eef0",dk:"#2f2226",v:0},
+  north:{n:"남북국 관측소",h:"@two_states",e:"🗺",bg:"#e9f1ee",dk:"#1e2b28",v:0},
+  exam:{n:"시험 포인트",h:"@exam_point",e:"🎯",bg:"#fff2e2",dk:"#2f2519",v:0}
+};
+
+const WEEK_TITLE = {
+  1:"강좌 운영 안내와 고중세사",
+  2:"고대국가의 형성과 단군신화",
+  3:"고대국가의 발전과 불교 수용",
+  4:"삼국통일과 남북국시대"
+};
+
+const THREADS = [
+{id:"t1",w:1,a:"gomsa",min:4,r:4,rt:31,lk:128,ts:[
+  {t:"**고중세사 = 고대사 + 중세사.** 범위는 고조선 건국부터 1876년 이전까지. 한 줄로 잡으면 ‘지금의 한국을 만든 시대’다."},
+  {t:"이 시대에 한국이 다른 나라와 구별되는 특색이 만들어졌다. 그래서 사건 암기보다 **무엇이 남았는지**를 보는 과목."},
+  {t:"수업 목표 네 개.\n① 한국사의 시대구분 이해\n② 고중세의 역사적 사건 설명\n③ 고중세의 특징과 한국사에서의 비중 이해\n④ 다양한 삶과 역사 발전의 원동력 설명"},
+  {t:"평가는 **시험 70 + 보고서 10 + 출석 20**. 시험은 8주차 중간·15주차 기말 두 번, **서술형 주관식**. 결석 1시간당 1점 감점.",
+   q:{a:"exam",t:"70점이 서술형이라는 뜻. 키워드 나열로는 안 되고 ‘왜’가 붙어야 점수가 된다."}},
+  {t:"참고문헌: 한영우 《다시 찾는 우리 역사》 / 여호규·임기환 《한국 고대사》 / 고동환·한상권 《조선시대사》 / 박종기 《새로 쓴 오백년 고려사》 / 한국역사연구회 《시민의 한국사(전근대편)》."},
+  {t:"15주 지도. 1~4주 고대(시대구분·단군신화·고대국가 발전·삼국통일), 5~9주 고려, 10~14주 조선. **1~4주가 고대 파트의 뼈대.**"},
+  {quiz:{q:"고중세사의 범위로 맞는 것은?",o:["고조선 건국부터 1876년 이전까지","삼국 성립부터 고려 건국까지","고조선 건국부터 1392년까지","신석기 시대부터 철기 시대까지"],c:0,w:"강의안 1주차: 고중세사는 고대사와 중세사를 합친 용어이고, 구체적 시기는 고조선 건국부터 1876년 이전까지다."}}
+]},
+
+{id:"t2",w:2,a:"period",min:6,r:12,rt:88,lk:342,ts:[
+  {t:"**시대구분은 선 긋기가 아니라 해석이다.** 시간의 축적이 일정 단계에 이르면 질적 전환이 일어나고, 그 전환점을 포착해 의미를 규명하는 일."},
+  {t:"가장 보편적인 건 3시대 구분법. 서양은 르네상스 인문주의자들이 기독교 사관을 비판하면서 그리스·로마를 고대, 그 사이를 중세, 자신들을 근대로 나눴다. 17세기 켈라리우스가 역사에 본격 적용."},
+  {t:"한국사에도 있었다. 《삼국사기》는 신라를 상대·중대·하대로, 《삼국유사》는 상고·중고·하고로 구분."},
+  {t:"마르크스는 생산양식을 기준으로 잘랐다. 고대 노예제 → 중세 봉건제 → 근대 자본주의. 아시아는 유럽과 다르게 발전했다며 **아시아적 생산양식**으로 따로 규정."},
+  {t:"1930년대에 **역사발전 5단계설**로 확정된다. 원시공동체 → 고대 노예제 → 중세 봉건제 → 근대 자본주의 → 현대 사회주의. 비서구 지역까지 영향이 막대했다."},
+  {t:"일본은 이 5단계설을 한국사에 적용해 **정체성론**을 만들었다. ‘근대가 되려면 중세를 거쳐야 하는데 한국은 고대에서 정체됐다, 그러니 지배가 필요하다’는 논리.",
+   q:{a:"exam",t:"정체성론은 이론이 아니라 식민지 지배의 논리. 5단계설 자체와 분리해서 서술해야 감점이 없다."}},
+  {t:"백남운 등 사회경제사학자는 **같은 5단계설로 반대로 싸웠다.** 한국사에 중세가 있었음을 증명해 식민사관을 극복하려 했다. 이론은 같고 목적은 정반대."},
+  {t:"그 밖의 구분법. 왕조별(고려·조선), 정치세력별(무인집권기·원간섭기), 도구별(구석기·신석기·청동기·철기)."},
+  {t:"남북한 논쟁. 북한은 1950년대 사회주의 건설의 당위성을 역사발전 과정으로 확인하려 활발했다. 남한은 1967~68년 한국사회경제학회 토론회를 기점으로 기준이 다양해졌고, **지금은 왕조별 + 5단계설을 함께 쓰는 방식**이 일반적."},
+  {quiz:{q:"정체성론에 대한 설명으로 옳은 것은?",o:["5단계설을 부정해 한국사의 독자성을 세운 이론이다","한국이 고대에서 정체되었다고 보아 식민 지배를 정당화했다","백남운이 식민사관을 극복하려 주장한 이론이다","한국에 중세 사회가 존재했음을 증명하려는 이론이다"],c:1,w:"정체성론은 일본이 5단계설을 한국사에 적용해 ‘고대에서 정체됐다 → 지배가 필요하다’고 주장한 식민 지배의 논리다. 백남운은 반대로 중세의 존재를 증명하려 했다."}}
+]},
+
+{id:"t3",w:2,a:"gomsa",min:2,r:3,rt:24,lk:96,ts:[
+  {t:"**국가는 계급에서 시작된다.** 신석기 후기 농경 발달 → 안정적 식량 생산 → 잉여생산물 → 사적 소유 → 빈부 격차 → 계급."},
+  {t:"잉여가 생기자 물물교환이 생기고, 인구가 늘어 생활권이 넓어지고, 이웃 집단과 부딪히고, 씨족 통합이 필요해졌다."},
+  {t:"집단 밖에서도 변화가 있었다. 농경으로 약탈이 늘고, 청동기 사용으로 전쟁의 규모와 양상이 바뀌었다. 전쟁이 잦아졌다."},
+  {t:"내부를 통합하고 외부와 대결하려면 지도자가 필요해졌다. 지배자에게는 권위와 군대, 행정관료가 붙는다. 여기서 **권력과 국가**가 나온다."},
+  {t:"고인돌은 그 권력자의 출현을 알려주는 물증이다.",
+   q:{a:"exam",t:"잉여생산물 → 사유재산 → 계급 → 국가. 이 사슬을 순서대로 쓰면 서술형 두 줄이 그대로 나온다."}},
+  {quiz:{q:"국가 성립 과정의 순서로 옳은 것은?",o:["계급 발생 → 잉여생산물 → 사적 소유 → 지배자 출현","잉여생산물 → 사적 소유 → 계급 발생 → 지배자 출현","청동기 사용 → 계급 발생 → 잉여생산물 → 지배자 출현","씨족 통합 → 계급 발생 → 잉여생산물 → 지배자 출현"],c:1,w:"농경 발달로 잉여생산물이 생기고, 그것이 사적 소유로 이어져 빈부 격차와 계급이 생겼으며, 계급과 전쟁을 배경으로 지배자가 등장했다."}}
+]},
+
+{id:"t4",w:2,a:"myth",min:7,r:18,rt:152,lk:604,ts:[
+  {t:"**신화는 사료다.** 어떤 집단이 과학·종교·문화·사상적 체험을 역사적 상황에서 겪은 것을 이야기로 만든 것. 그래서 생성 당시의 상황을 알려준다."},
+  {t:"단군신화는 고조선의 건국 과정을 담고 있어 한국의 국가 형성 과정을 이해하는 핵심 자료. 일본 식민 학자는 부정해 역사를 축소했고, 한국은 역사적 사실로 인정한다."},
+  {t:"기록은 세 갈래. 중국 산둥성 무씨사당(147년 설립) 석실벽화의 환웅 하강 그림, 고구려 각저총 벽화, 그리고 《삼국유사》·《제왕운기》의 문자 기록."},
+  {t:"**환인** = 석제환인의 준말. ‘하늘’을 뜻하고 태양신이다. 인간을 지배할 권리를 가진 존재."},
+  {t:"**환웅** = 환인의 아들로 권리를 이어받은 존재. 태양신·천신·남자신. 새를 토템으로 믿는 집단이고, 다른 지역에서 만주와 한반도로 이동한 **이주집단**이다."},
+  {t:"**홍익인간** = ‘널리 인간을 이롭게 한다’. 단군부족이 다른 부족을 통합하는 방법. 국가 출현 이전에 이미 정치이데올로기가 있었다는 뜻."},
+  {t:"**천부인 3개** = 하늘이 통치자임을 증명하려 준 증표. 정치권력자의 등장을 보여준다."},
+  {t:"**태백산 신단수** = 성스러운 나무이자 그 지역 집단의 정치·종교적 중심지. 환웅이 내려왔다는 건 제사장으로서 그 중심지를 장악했다는 의미."},
+  {t:"**풍백·우사·운사** = 바람·비·구름. 이것을 중시한 농경사회이고 다신교 사회. 환웅집단이 여러 소집단으로 이루어졌다는 것까지 읽힌다."},
+  {t:"**곰과 호랑이** = 토템이자 그 지역의 토착집단. 곰→인간은 포섭, 호랑이→인간 X는 포섭 실패. 곰과 환웅의 결혼은 씨족의 결합, 새 집단의 탄생."},
+  {t:"**단군왕검** = 단군(제사장) + 왕검(임금) → 제정일치. 환인→환웅→단군왕검의 계승은 남성 중심 가부장 사회와 지배의 정당성을 강조한다."},
+  {t:"**1500년 통치** = 영혼불멸 사상의 투영, 세습 통치의 정당성 확보, 고조선이 오랫동안 존속했음을 의미."},
+  {t:"정리하면 네 가지. 정치지도자의 출현과 종교 중심지 장악 / 농경 기반의 가부장 사회 / 집단 간 정복과 결합 / 제정일치 사회.",
+   q:{a:"exam",t:"단군왕검은 제정일치. 선지에서 ‘제정분리’로 바꿔 놓으면 그게 오답이다."}},
+  {quiz:{q:"단군신화 해석으로 틀린 것은?",o:["환웅과 곰의 결혼 — 토착 집단과의 연합","천부인 3개 — 통치자의 권위를 증명하는 증표","태백산 신단수 — 지역의 정치·종교적 중심지","단군왕검 — 정치와 종교가 분리된 사회"],c:3,w:"단군은 제사장, 왕검은 임금으로 제정일치를 뜻한다. 정치와 종교가 분리된 사회라는 서술이 틀렸다."}}
+]},
+
+{id:"t5",w:2,a:"myth",min:2,r:6,rt:41,lk:173,ts:[
+  {t:"**배경부터.** BC 12세기 전부터 중국 동북 지역에 예족과 맥족이 있었다. 춘추시대 초에 산융이 연과 제를 공격하자, 제가 세력을 결합해 산융을 정복했다."},
+  {t:"제 중심의 거대세력에 맞서려고 예와 맥이 결합해 **예맥족**이 탄생했다. 그 안에서 우세한 집단이 주변을 통합해 고조선을 세웠다. 이 과정을 이야기로 만든 것이 단군신화."},
+  {t:"**만든 이유 셋.** ① 건국 이후 고조선 사람들이 만들었다 ② 국왕은 하늘의 손자라는 신성함으로 지배의 정당성을 확보했다 ③ 1500년 통치는 고조선이 오래 존재하길 바랐다는 뜻."},
+  {t:"순서를 조심할 것. 신화가 먼저 있고 나라가 선 게 아니라, **나라가 선 뒤에 정치적으로 필요해서 신화가 만들어진 것**.",
+   q:{a:"exam",t:"‘왜 만들었나’는 결국 지배 정당성으로 수렴한다. 이 한 줄이면 서술형 답이 바로 나온다."}},
+  {quiz:{q:"단군신화를 만든 이유로 보기 어려운 것은?",o:["건국자의 지배 정당성을 확보하려고","고조선의 장기 존속을 기원하려고","건국 이후 지배 집단이 필요해서","예맥족의 결합을 막으려고"],c:3,w:"예맥족은 제의 압박에 맞서 결합한 집단이다. 신화는 그 결합 이후 건국을 정당화하려 만들어진 것이지 결합을 막으려 만든 것이 아니다."}}
+]},
+
+{id:"t6",w:2,a:"gojo",min:5,r:9,rt:67,lk:258,ts:[
+  {t:"**국호는 조선.** ‘아침의 신선함’, ‘고요한 아침의 나라’를 뜻한다. BC 10세기 전후 건국해 BC 108년 멸망. 1392년 이성계의 조선과 구분해 고조선이라 부른다."},
+  {t:"시대구분은 **통치집단** 기준. 단군 → 기자 → 위만. 단군조선은 인정되고, 연나라 사람 위만이 준왕을 내쫓고 왕이 된 것이 위만조선."},
+  {t:"**기자조선**은 조심. 《상서대전》에 기자가 동쪽으로 가 조선의 왕이 되었다는 기록(BC 1122, 기자동래설)이 처음 나온다. 선진 문헌에는 없고 BC 2세기 《상서대전》이 최초."},
+  {t:"이후 유학자들이 확대 재생산해 기정사실이 됐다. 《사기색은》에는 기자 묘가 하남성에 있다고도 한다. **현재 기자동래설은 부정된다.**",
+   q:{a:"exam",t:"선진 문헌에 없다 + 《상서대전》에 처음 등장. 이 두 사실이 ‘부정’의 근거다."}},
+  {t:"위치·강역은 세 설. 요동중심설 / 평양중심설 / 이동설(요동→평양). 북한 학계는 요동중심설에서 평양중심설로 갔다가 최근 평양중심설만 인정한다."},
+  {t:"대표 유물은 **비파형동검, 탁자식 고인돌, 미송리식 토기**."},
+  {t:"**8조 범금.** 살인은 사형(생명과 노동력 중시) / 상해는 곡물 배상(노동력을 경제적 가치와 동일시) / 절도는 노비(사적 소유 인정, 계급사회, 인간을 소유물로 취급). cf) 순장."},
+  {quiz:{q:"8조 범금에서 읽을 수 있는 사회상으로 가장 거리가 먼 것은?",o:["사유 재산을 보호했다","인간의 생명과 노동력을 중시했다","계급이 없는 평등한 사회였다","상해를 경제적 가치로 환산했다"],c:2,w:"절도범을 노비로 삼는다는 조항 자체가 노비와 주인이 있는 계급사회임을 보여준다. 순장이 있었다는 점도 계급사회의 근거다."}}
+]},
+
+{id:"t7",w:3,a:"samguk",min:6,r:11,rt:74,lk:291,ts:[
+  {t:"**발전 3단계: 부족국가 → 부족연맹체 → 왕조국가.** 단, 한국의 청동기·철기는 외부에서 수용돼 북부에서 남부로 이동했다. 그래서 같은 시기라도 국가마다 단계가 다르다."},
+  {t:"**부족국가**는 모든 국가의 초기 형태(사로국, 목지국). 청동기 기반, 신분계급과 정치계급 발생, 정치이데올로기 출현, 제정일치, ‘소국’."},
+  {t:"**부족연맹체**는 각 부족의 독자성이 유지된다. 부여 4부족, 고구려 5부족. 회의로 정치를 운영한다 — 고구려 제가회의, 백제 정사암회의, 신라 화백회의. **왕은 선출.**"},
+  {t:"정치와 종교도 분리된다. 왕은 정치만, 종교의식 담당자는 따로(삼한의 왕과 천군). 부족장이 각 부족을 통치하고 국왕은 대표 역할. 행정기구도 이원화(고구려 고추가·대가 / 사자·조의·선인). 각 부족이 독자 군대를 가진다."},
+  {t:"경제는 철기를 쓰지만 **철제 농기구는 아직 없다.** 부족(읍락)이 독자적 생활권·경제권을 가진다 — 책화. 약탈경제와 공납제, 부경."},
+  {t:"사회는 호민·민·하호·노예. 《삼국지》 위서 동이전 부여전: ‘읍락에는 호민이 있는데, 민과 하호를 노예로 삼았다.’ 부족민은 검수, 노예는 창두·적각."},
+  {t:"혼인제도가 나라마다 다르다. 부여 형사취수제, 고구려 데릴사위제, 동옥저 민며느리제. 조상 숭배, 제천행사(부여 영고·고구려 동맹·동예 무천·삼한 10월제), 계세 사상 → 큰 무덤과 부장품."},
+  {quiz:{q:"부족연맹체 단계의 모습으로 옳지 않은 것은?",o:["회의로 정치를 운영하고 왕을 선출했다","정치와 종교가 분리되어 천군이 따로 있었다","왕권이 세습되고 관등제가 정비되었다","각 부족이 독자적인 군대를 가졌다"],c:2,w:"왕위 세습과 관등제 정비는 왕조국가 단계의 특징이다. 부족연맹체에서는 왕이 선출되고 부족의 독자성이 유지되었다."}}
+]},
+
+{id:"t8",w:3,a:"samguk",min:4,r:7,rt:52,lk:204,ts:[
+  {t:"**왕조국가로 넘어가는 이유.** 전쟁 규모가 커져 부족의 독자성이 부정되고, 철기가 보편화돼 개별 가호가 자립하면서 부족장의 인신적 지배를 거부했다. 그래서 일원적 통치가 필요해졌다."},
+  {t:"정치: 왕권 강화, 왕위 세습, 왕명 통치. 부족장은 관료로 전환되고 신분은 귀족. 이들을 편제하려고 관등제와 신분제를 만들었다."},
+  {t:"관등은 고구려 10여 관등, 백제 16관등, 신라 17관등. 신분제는 신라 골품제. 지방관 파견, 행정기구와 군대의 일원화, 율령 반포(고구려 소수림왕, 신라 법흥왕)."},
+  {t:"경제: 철제 농기구 일반화와 쟁기, **우경** → **심경** 농법 → 생산력 증대. 도시마다 장시가 생겨 상업이 성행."},
+  {t:"부족민이 공민이 되면서 세금을 낸다. 고구려 인두세(1년에 베 5필·곡식 5석), 호세(가호 경제력에 따라 상·중·하 3등급), 군역·역역(15세 이상 남자)."},
+  {t:"사회는 귀족·평민·천민. 귀족이 경제적·신분적 특권을 쥔 귀족 중심 사회. 노동력 수요가 커지면서 **순장이 폐지**되고 불교를 수용한다."},
+  {t:"역사서도 편찬한다. 고구려 《유기》100권·《신집》5권, 백제 《서기》, 신라 《국사》, 가야 《개황력》.",
+   q:{a:"exam",t:"관등 숫자 10·16·17, 율령 반포 왕 소수림왕·법흥왕. 단답형 단골이라 그대로 외우면 된다."}},
+  {quiz:{q:"부족연맹체에서 왕조국가로 넘어가며 나타난 변화가 아닌 것은?",o:["철제 농기구와 우경이 일반화되었다","순장이 점차 폐지되었다","부족의 독자성을 지키기 위해 책화가 강화되었다","부족장이 관료·귀족으로 전환되고 관등제가 정비되었다"],c:2,w:"책화는 부족연맹체의 독자적 경제권을 보여주는 사례다. 왕조국가로 가면 부족의 독자성은 오히려 부정된다."}}
+]},
+
+{id:"t9",w:3,a:"buddha",min:6,r:14,rt:96,lk:377,ts:[
+  {t:"**불교는 BC 6세기 카필라국 정반왕의 태자 석가가 창시.** 브라만교의 형식주의와 인간 차별주의를 비판하고 ‘누구나 불성을 갖고 있다’는 절대적 평등을 강조했다."},
+  {t:"**전륜성왕** = 하늘로부터 인간을 지배할 권리를 부여받은 왕. 불교의 이상세계는 전륜성왕의 통치 + 미륵불의 교화. 여러 나라로 갈라진 상황에서 이 논리는 **타국 침략의 정당성**이 된다. 크샤트리아가 수용해 인도 전역으로, 다시 중국을 거쳐 한국으로."},
+  {t:"전래 연표. 고구려 소수림왕 2년(372) 전진의 순도 / 백제 침류왕 원년(384) 동진의 마라난타 / 신라 눌지왕 때 아도(수용 실패) → 법흥왕 8년 양의 원표. **왕실이 먼저 받고 민간으로 퍼진다.**"},
+  {t:"수용 목적 ① **사상 통합**: 부족마다 따로 있던 사상을 하나로 묶어 일원적 사고를 가능하게."},
+  {t:"② 체계적이고 합리적인 지배이념이 필요했다. ③ **왕권 강화**: 수용 후 삼국의 왕들은 왕즉불, ‘왕이 곧 부처’를 강조했다. 부처의 권위로 왕의 권위를 올렸다."},
+  {t:"④ 민의 성장에 대응할 논리. 노동력의 가치가 높아지며 민들이 귀족을 비판하고 대우를 요구했다. **윤회설**로 받아냈다. 전생·현생·내세가 인과응보로 이어지니 노력이 필요하다는 설명."},
+  {t:"⑤ 정복의 정당화. 전륜성왕 논리로 전쟁을 합리화했다."},
+  {t:"귀족의 반발도 있었다. 왕권 강화로 지위가 흔들리고 무속 신앙이 배제되며 반발했다 — 이차돈의 순교. 타협은 **윤회설로 신분적 특권, 미륵신앙으로 정치적 지위**를 인정하는 방식. 이렇게 완전히 수용된다.",
+   q:{a:"exam",t:"반발은 이차돈, 타협은 윤회설·미륵신앙. 짝으로 묶어 두면 헷갈리지 않는다."}},
+  {t:"결과: 정복 이념·왕권 강화·사상 통합·새로운 사회 원리. 원광의 세속 5계(사군이충·사친이효·교우이신·임전무퇴·살생유택), 새로운 지식의 전래, 사유방식이 자연·신 중심에서 **인간 중심**으로."},
+  {quiz:{q:"불교 수용의 목적으로 보기 어려운 것은?",o:["부족별 사상을 통합하기 위해","왕즉불로 왕권을 강화하기 위해","윤회설로 민의 성장에 대응하기 위해","귀족의 무속 신앙을 강화하기 위해"],c:3,w:"불교 수용으로 오히려 무속 신앙이 배제되어 귀족이 반발했다. 무속 신앙 강화는 수용 목적과 정반대다."}}
+]},
+
+{id:"t10",w:4,a:"gomsa",min:5,r:10,rt:88,lk:319,ts:[
+  {t:"**삼국은 문화적으로 닮았는데도 계속 싸웠다.** 전쟁은 토지와 노동력을 주지만 사회를 파괴한다. 그래서 전쟁을 대신할 생산체제가 필요했다."},
+  {t:"신라가 가장 먼저 체제를 바꿨다. **포로를 양인으로 전환** → 자율적 농업 생산 → 생산력 발전."},
+  {t:"영토가 넓어지자 지배체제를 정비. 진흥왕 때 사정부(관리 감찰)·품주(국가 재정), 진평왕 때 위화부(관리 인사)·조부(공부)·예부(의례와 교육)."},
+  {t:"외적 상황. 수가 위진남북조를 통일(589)하며 동아시아 질서가 바뀌었다. 수·당이 고구려를 공격했고, 고구려는 돌궐과 동맹해 막았다 — 살수대첩, 안시성 전투."},
+  {t:"신라가 성장하자 백제와 고구려가 손을 잡았다. 신라는 반대로 **당과 연합**했다.",
+   q:{a:"exam",t:"품주는 재정, 사정부는 감찰. 방향을 뒤집은 선지가 매번 나온다."}},
+  {t:"전개: 당의 고구려 공격이 ‘혼자’에서 ‘신라와 공조’로 바뀌었다. 나당연합군이 백제를 멸망시키고(660), 이어 고구려를 멸망시켰다(668)."},
+  {t:"그런데 당이 돌아선다. 백제 멸망 후 경주에 **계림도독부**를 두고 신라를 지배하려 했다. 고구려 정복 후 야욕을 드러내자 신라가 당과 전쟁을 벌인다."},
+  {t:"신라는 백제·고구려 부흥군과 연합해 매골성 전투 등 한강 유역 전투에서 이겼다. 당군을 몰아내고 한반도 중부 이남을 장악(676)."},
+  {t:"그 사이 고구려 유민 대조영이 말갈족과 함께 발해를 세운다. 여기서 **남북국시대**가 열린다."},
+  {quiz:{q:"신라의 삼국통일에 대한 설명으로 옳지 않은 것은?",o:["포로를 양인으로 전환해 생산력을 높였다","당과 연합해 백제와 고구려를 멸망시켰다","백제 멸망 후 당이 계림도독부를 설치했다","당과 끝까지 동맹을 유지해 한반도 전부를 차지했다"],c:3,w:"당이 계림도독부를 두고 지배하려 하자 신라는 당과 전쟁을 벌여 당군을 몰아냈다. 한반도 전체가 아니라 중부 이남을 장악했다."}}
+]},
+
+{id:"t11",w:4,a:"north",min:7,r:16,rt:131,lk:512,ts:[
+  {t:"**발해는 누구의 역사인가.** 중국은 발해 주민을 말갈족, 그 후예를 만주족이라 하여 중국사로 본다. 러시아는 말갈 후예가 연해주 소수민족이라며 러시아사로. 일본은 자기 역사라 하진 않지만 교류를 강조. 한국은 고구려인 후예가 세운 나라로 본다."},
+  {t:"**동북공정**은 동북변강역사여현상계열연구공정의 줄임말. 2002년 시작해 동북 3성의 역사와 문화를 중국의 것으로 만든 프로젝트. 고조선사·고구려사·발해사가 주요 과제다. cf) 문화공정."},
+  {t:"건국: 고구려 유민 일부는 장안, 일부는 영주(營州)에 정착. 거란의 반발로 대조영이 고구려 유민을 이끌고 동모산으로 이동 → 진(震) 건국(698). 영토를 넓히자 당 현종이 발해군왕으로 책봉(713)."},
+  {t:"**무왕**: 돌궐·거란과 제휴하며 당에 강경. 주변 종족을 병합하고 고구려 옛 영토를 차지하려 신라를 공격. 당과 흑수말갈이 결합해 견제하자 해군으로 등주를 공격했다."},
+  {t:"**문왕**: 당의 침입이 이어지자 국교를 수립하고 당 문화를 받아들였다. 유신을 단행해 국왕 중심 지배체제를 세우고 전륜성왕을 표방. 안사의 난으로 요하까지 영토를 넓히고 수도를 상경으로 옮겼다. 고구려 계승의 의미로 ‘고려국’을 표방."},
+  {t:"**선왕**: 3성 6부 9시, 5경 15부 62주, 10위와 지방군으로 제도를 정비. 돌궐과 연합해 당을 견제하고 일본과 통교, 신라와는 대립. 이때 **해동성국**이라 불렸다."},
+  {t:"문화: 정혜공주(문왕의 둘째 딸) 무덤은 **석실봉토분** — 고구려 문화가 강고하게 남았다. 정효공주(넷째 딸) 무덤은 벽돌과 모줄임, 벽화로 **고구려 + 당 = 발해 독자 문화**."},
+  {t:"정효공주 묘비명의 ‘황상’은 황제를 뜻한다. 발해인들이 자기 나라를 **황제국으로 인식**했다는 증거. 실제로 인안·대흥·보덕·건흥 같은 독자 연호를 썼다."},
+  {quiz:{q:"발해 문화에 대한 설명으로 옳은 것은?",o:["정혜공주 무덤은 벽돌무덤으로 당 양식만 반영했다","정효공주 무덤은 석실봉토분으로 고구려 양식만 남았다","묘비명의 ‘황상’ 표현은 발해가 자국을 황제국으로 인식했음을 보여준다","발해는 독자 연호를 쓰지 않았다"],c:2,w:"정혜공주 무덤은 석실봉토분(고구려 양식), 정효공주 무덤은 벽돌·모줄임·벽화(고구려+당)다. ‘황상’은 황제국 인식의 근거이고 독자 연호도 사용했다."}}
+]},
+
+{id:"t12",w:4,a:"samguk",min:5,r:8,rt:57,lk:226,ts:[
+  {t:"**태종 무열왕**: 진골 출신으로 김유신 세력과 연합. 유교를 바탕으로 정치해 귀족합의체를 극복하고 중앙집권적 관료체제를 지향했다."},
+  {t:"**문무왕**은 당과 연합해 백제와 고구려를 멸망시키고 통일했다. **신문왕**은 통일에 맞춰 체제를 다시 짠다."},
+  {t:"신문왕의 정비: 귀족 세력 숙청 / 국학 설치로 유교 교육 강화 / 위화부 장관 2명 증원으로 인사권 장악 / 9주 5소경 / 9서당 10정 / 만파식적 설화로 왕권 강화."},
+  {t:"경제: 대부분의 토지는 **지주전호제**로 운영. 지주가 전호에게 경작의 대가로 생산량의 1/2을 지대로 받는다."},
+  {t:"성덕왕 722년 **정전** 지급은 민이 경작하던 토지의 소유권을 인정한 것. 자영농을 육성해 조세를 안정적으로 거두려는 조치. 신문왕 687년에는 녹읍을 폐지하고 문무관료전을 지급했다."},
+  {t:"**전주전객제**와 헷갈리지 말 것. 지주가 국가에 조세를 내고, 국가가 수조권을 관료에게 주고, 전주가 전객에게 생산량의 **1/10**을 받는다.",
+   q:{a:"exam",t:"지주전호제 1/2, 전주전객제 1/10. 숫자 하나로 두 제도가 갈린다."}},
+  {t:"부세는 세 가지. 조세(토지 소유자에게, 수조권) / 공부(지역 특산물) / 역역(노동력, 요역과 군역). 수취는 군현 단위로 총액을 부과하는 **총액제(군총제)**."},
+  {quiz:{q:"통일신라의 경제제도 설명으로 옳은 것은?",o:["정전 지급은 토지 소유권을 부정한 조치다","지주전호제에서 지주는 생산량의 1/10을 받았다","신문왕은 녹읍을 폐지하고 문무관료전을 지급했다","총액제는 개인별로 세액을 직접 부과하는 방식이다"],c:2,w:"신문왕 687년 녹읍을 폐지하고 문무관료전을 지급했다. 정전은 소유권을 인정한 조치이고, 지주전호제의 지대는 1/2이며, 총액제는 군현 단위로 총액을 부과한다."}}
+]},
+
+{id:"t13",w:4,a:"buddha",min:4,r:5,rt:44,lk:189,ts:[
+  {t:"7세기 이전 신라 불교는 사상 통일과 왕권 강화, 즉 국가와 왕실의 입장을 대변했다. 대중을 구원한다는 종교 본연의 기능과는 거리가 있었다."},
+  {t:"7세기 중반부터 달라진다. 통일 후 고구려·백제 불교까지 더해져 신라 불교가 발달. 비진골·비유학·비특권 가문이 왕실 중심 불교를 비판. 무열왕 이후 유교 정치로 불교의 입지가 불안. 중국에서는 신역 경전으로 새 교학이 정립됐다."},
+  {t:"**원효(617~686)**: 2차 유학 시도 중 해골물 사건으로 큰 깨달음, ‘일체유심조’. 유학을 포기하고 경주에서 교리를 연구했고, 깨우침을 전하려 환속해 ‘소성거사’로 전국을 돌며 대중 눈높이로 설명했다."},
+  {t:"**의상(625~702)**: 37세에 유학, 당 종남산 지상사 지엄 문하에서 화엄학 10년. 인간의 존엄과 평등을 강조해 제자에 평민·노비 출신이 많았다. 귀국 후 교단을 조직해 화엄종이 번성했다."},
+  {t:"**선종**은 자신의 불성을 깨닫고 참선으로 해탈을 지향해 일반민이 접근하기 쉬웠다. 유학 승려들이 도입했고, 지방을 돌며 포교해 기층민까지 불교가 퍼졌다. 생활 속에서 가르침을 실천하며 **한국 사회에 불교가 완전히 정착**했다.",
+   q:{a:"exam",t:"원효는 대중화, 의상은 교단과 화엄, 선종은 지방과 기층. 셋의 담당 구역이 다르다."}},
+  {t:"보충: 해탈의 범주로 소승(개인)과 대승(중생, 보살), 해탈 방식으로 교종(경전)과 선종(참선)을 나눈다. 5교 9산."},
+  {quiz:{q:"원효와 의상에 대한 설명으로 옳은 것은?",o:["원효는 화엄학을 10년 공부하고 화엄종을 번성시켰다","의상은 해골물 사건 뒤 환속해 소성거사라 불렸다","원효는 일체유심조를 깨닫고 대중 눈높이로 불교를 전했다","두 사람은 선종을 도입해 참선을 보급했다"],c:2,w:"원효는 해골물 사건 뒤 일체유심조를 깨닫고 환속해 대중화에 힘썼다. 화엄학 10년과 화엄종 번성은 의상의 일이다."}}
+]}
+];
+
+const KEY = "xstudy.history.v1";
+let S = {theme:"",like:{},repost:{},bookmark:{},done:{},quiz:{}};
+let F = "all";
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const p = JSON.parse(raw);
+      if(p && typeof p === "object"){
+        S.theme = p.theme || "";
+        S.like = p.like || {};
+        S.repost = p.repost || {};
+        S.bookmark = p.bookmark || {};
+        S.done = p.done || {};
+        S.quiz = p.quiz || {};
+      }
+    }
+  }catch(err){}
+}
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(err){}
+}
+
+function esc(s){
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+function fmt(s){
+  const parts = esc(s).split("**");
+  let out = "";
+  for(let i = 0; i < parts.length; i++){
+    out += (i % 2 === 1) ? "<b>" + parts[i] + "</b>" : parts[i];
+  }
+  return out.split("\n").join("<br>");
+}
+
+function av(key, cls){
+  const a = AC[key];
+  return '<div class="av' + (cls ? " " + cls : "") + '" style="--av:' + a.bg + ';--avd:' + a.dk + '">' + a.e + '</div>';
+}
+function badge(){
+  return '<svg class="badge" viewBox="0 0 24 24" aria-label="인증"><circle cx="12" cy="12" r="11" fill="#1d9bf0"/><path d="m7.4 12.3 3 3 6.2-6.4" fill="none" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+function quote(q){
+  const a = AC[q.a];
+  return '<div class="quote"><div class="qh">' +
+    '<div class="av" style="--av:' + a.bg + ';--avd:' + a.dk + '">' + a.e + '</div>' +
+    '<span class="nm">' + a.n + '</span><span class="hn">' + a.h + '</span>' +
+    '</div><div class="qt">' + fmt(q.t) + '</div></div>';
+}
+function quizZZ(t, z){
+  const letters = ["①","②","③","④"];
+  const chosen = S.quiz[t.id];
+  const answered = typeof chosen === "number";
+  let h = '<div class="quiz' + (answered ? ' done' : '') + '" data-t="' + t.id + '">';
+  h += '<span class="qtag">복습 퀴즈</span>';
+  h += '<div class="qq">' + fmt(z.q) + '</div><div class="opts">';
+  for(let i = 0; i < z.o.length; i++){
+    let c = "";
+    if(answered){
+      if(i === z.c) c = " ok";
+      else if(i === chosen) c = " no";
+    }
+    h += '<button class="opt' + c + '" data-t="' + t.id + '" data-i="' + i + '">' +
+         '<span class="ol">' + letters[i] + '</span><span>' + fmt(z.o[i]) + '</span></button>';
+  }
+  h += '</div><div class="qa"><b>정답 ' + letters[z.c] + '.</b> ' + fmt(z.w) + '</div></div>';
+  return h;
+}
+function actBtn(t, kind, label, icon, isCount){
+  const on = S[kind] && S[kind][t.id] ? " on " + kind : "";
+  let c = "";
+  if(isCount){
+    c = '<span class="c">' + (countBase(t, kind) + (S[kind] && S[kind][t.id] ? 1 : 0)) + '</span>';
+  }else{
+    c = '<span class="lb">' + label + '</span>';
+  }
+  return '<button class="act ' + kind + on + '" data-t="' + t.id + '" data-a="' + kind + '" aria-label="' + label + '" aria-pressed="' + (on ? "true" : "false") + '">' + icon + c + '</button>';
+}
+
+const I = {
+  reply:'<svg viewBox="0 0 24 24"><path d="M20.5 11.6a8.4 8.4 0 0 1-8.4 8.4c-1.3 0-2.5-.3-3.6-.8L3.5 20.5l1.4-4.7a8.4 8.4 0 1 1 15.6-4.2Z"/></svg>',
+  rt:'<svg viewBox="0 0 24 24"><path d="M4 9.5V8.7A3.2 3.2 0 0 1 7.2 5.5H18"/><path d="m15 2.6 2.9 2.9L15 8.4"/><path d="M20 14.5v.8a3.2 3.2 0 0 1-3.2 3.2H6"/><path d="m9 21.4-2.9-2.9L9 15.6"/></svg>',
+  like:'<svg viewBox="0 0 24 24"><path d="M12 20.4C8.7 18.1 3.6 14.2 3.6 9.7a4.6 4.6 0 0 1 8.4-2.6 4.6 4.6 0 0 1 8.4 2.6c0 4.5-5.1 8.4-8.4 10.7Z"/></svg>',
+  bm:'<svg viewBox="0 0 24 24"><path d="M6.2 4.4h11.6v16l-5.8-3.9-5.8 3.9v-16Z"/></svg>',
+  check:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="m8.2 12.4 2.6 2.5 5-5.2"/></svg>'
+};
+
+function threadHTML(t, last){
+  const a = AC[t.a];
+  const total = t.ts.filter(function(x){ return !!x.t; }).length;
+  let h = '<article class="tw' + (last ? " last" : "") + '" data-tw="' + t.id + '">';
+  h += '<div class="avwrap">' + av(t.a) + '</div><div class="tb">';
+  h += '<div class="hd"><span class="nm">' + a.n + '</span>' + (a.v ? badge() : "") +
+    '<span class="hn">' + a.h + '</span><span class="sep">·</span>' +
+    '<span class="mt">' + t.w + '주차 · ' + t.min + '분</span></div>';
+  let n = 0;
+  t.ts.forEach(function(item, i){
+    if(item.t){
+      n++;
+      if(i > 0){
+        h += '<div class="hd2"><span class="nm">' + a.n + '</span>' + (a.v ? badge() : "") +
+          '<span class="hn">' + a.h + '</span><span class="sep">·</span>' +
+          '<span class="mt">' + t.w + '주차</span></div>';
+      }
+      h += '<div class="txt"><span class="num">' + n + '/' + total + '</span>' + fmt(item.t) + '</div>';
+    }
+    if(item.q) h += quote(item.q);
+    if(item.quiz) h += quizZZ(t, item.quiz);
+  });
+  h += '<div class="acts">' +
+    actBtn(t, "reply", "답글", I.reply, true) +
+    actBtn(t, "repost", "리포스트", I.rt, true) +
+    actBtn(t, "like", "좋아요", I.like, true) +
+    actBtn(t, "bookmark", "다시 볼 것", I.bm, false) +
+    actBtn(t, "done", "암기", I.check, false) +
+    '</div>';
+  h += '</div></article>';
+  return h;
+}
+
+function render(){
+  const list = THREADS.filter(function(t){
+    if(F === "all") return true;
+    if(F === "bm") return !!S.bookmark[t.id];
+    return String(t.w) === F;
+  });
+  const feed = document.getElementById("feed");
+  if(!list.length){
+    feed.innerHTML = '<div class="empty"><svg viewBox="0 0 24 24"><path d="M6.2 4.4h11.6v16l-5.8-3.9-5.8 3.9v-16Z"/></svg><br>아직 북마크한 스레드가 없어요.<br>카드 아래 북마크를 누르면 여기에 모입니다.</div>';
+  }else{
+    let h = "";
+    let cur = 0;
+    list.forEach(function(t, idx){
+      if(t.w !== cur){
+        cur = t.w;
+        h += '<div class="wk">' + t.w + '주차 <em>· ' + WEEK_TITLE[t.w] + '</em></div>';
+      }
+      h += threadHTML(t, idx === list.length - 1);
+    });
+    feed.innerHTML = h;
+  }
+  updateStat();
+}
+
+function countBase(t, kind){
+  if(kind === "like") return t.lk;
+  if(kind === "repost") return t.rt;
+  if(kind === "reply") return t.r;
+  return 0;
+}
+
+function updateStat(){
+  const total = THREADS.length;
+  let d = 0, q = 0;
+  THREADS.forEach(function(t){
+    if(S.done[t.id]) d++;
+    const z = t.ts.find(function(x){ return x.quiz; });
+    if(z && S.quiz[t.id] === z.quiz.c) q++;
+  });
+  const shown = THREADS.filter(function(t){
+    if(F === "all") return true;
+    if(F === "bm") return !!S.bookmark[t.id];
+    return String(t.w) === F;
+  }).length;
+  const label = F === "all" ? "<b>" + total + "</b>개 스레드" : "<b>" + shown + "</b> / " + total + "개 스레드";
+  document.getElementById("cnt").innerHTML = label;
+  document.getElementById("prog").innerHTML = "암기 <b>" + d + "/" + total + "</b> · 퀴즈 <b>" + q + "/" + total + "</b>";
+}
+
+function onAct(btn){
+  const id = btn.getAttribute("data-t");
+  const kind = btn.getAttribute("data-a");
+  if(kind === "reply") return;
+  const now = !S[kind][id];
+  if(now) S[kind][id] = true; else delete S[kind][id];
+  btn.classList.toggle("on", now);
+  btn.classList.toggle(kind, now);
+  btn.setAttribute("aria-pressed", now ? "true" : "false");
+  const c = btn.querySelector(".c");
+  if(c){
+    const t = THREADS.find(function(x){ return x.id === id; });
+    c.textContent = countBase(t, kind) + (now ? 1 : 0);
+  }
+  save();
+  updateStat();
+  if(kind === "bookmark" && F === "bm" && !now) render();
+}
+
+function onOpt(btn){
+  const id = btn.getAttribute("data-t");
+  if(typeof S.quiz[id] === "number") return;
+  const i = parseInt(btn.getAttribute("data-i"), 10);
+  S.quiz[id] = i;
+  save();
+  const box = btn.closest(".quiz");
+  box.classList.add("done");
+  const t = THREADS.find(function(x){ return x.id === id; });
+  const z = t.ts.find(function(x){ return x.quiz; }).quiz;
+  box.querySelectorAll(".opt").forEach(function(b){
+    const bi = parseInt(b.getAttribute("data-i"), 10);
+    if(bi === z.c) b.classList.add("ok");
+    else if(bi === i) b.classList.add("no");
+  });
+  updateStat();
+}
+
+document.getElementById("feed").addEventListener("click", function(e){
+  const a = e.target.closest(".act");
+  if(a){ onAct(a); return; }
+  const o = e.target.closest(".opt");
+  if(o){ onOpt(o); return; }
+});
+
+document.getElementById("tabs").addEventListener("click", function(e){
+  const b = e.target.closest(".tab");
+  if(!b) return;
+  F = b.getAttribute("data-f");
+  document.querySelectorAll(".tab").forEach(function(x){ x.classList.toggle("on", x === b); });
+  render();
+  b.scrollIntoView({block:"nearest", inline:"center", behavior:"smooth"});
+  const top = document.querySelector(".statbar").getBoundingClientRect().top;
+  if(top < 40) window.scrollTo({top:0, behavior:"smooth"});
+});
+
+function applyTheme(t){
+  document.documentElement.setAttribute("data-theme", t);
+  const m = document.querySelector('meta[name="theme-color"]');
+  if(m) m.setAttribute("content", t === "dark" ? "#000000" : "#ffffff");
+}
+document.getElementById("themeBtn").addEventListener("click", function(){
+  const cur = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  const next = cur === "dark" ? "light" : "dark";
+  S.theme = next;
+  applyTheme(next);
+  save();
+});
+
+load();
+let theme = S.theme;
+if(!theme){
+  theme = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+}
+applyTheme(theme);
+render();
+</script>
+</body>
+</html>
