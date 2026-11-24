@@ -144,10 +144,10 @@ main{padding:0 0 56px}
 .bd.ppt{color:var(--ppt);background:var(--pptbg)}
 .bd.cls{color:var(--cl);background:var(--clbg)}
 .trm .td{margin-top:5px;font-size:13.5px;line-height:1.62;color:var(--ink);word-break:keep-all;overflow-wrap:anywhere}
-.trm .tp{display:none;margin-top:4px;font-size:12px;color:var(--mut);opacity:.85}
+.trm .tp{display:none;margin-left:auto;font-size:11px;color:var(--mut);opacity:.8}
 .trm.hid{border-style:dashed;background:var(--chip)}
 .trm.hid .td{display:none}
-.trm.hid .tp{display:block}
+.trm.hid .tp{display:inline}
 .more{
   display:block;width:calc(100% - 24px);margin:2px 12px 8px;padding:10px;
   border:1px dashed var(--line2);border-radius:12px;background:transparent;
@@ -445,9 +445,9 @@ function termHTML(x,id){
   if(x.s) h+='<span class="st">★</span>';
   h+='<span class="tn">'+fmt(x.n)+'</span>';
   h+='<span class="bd '+(x.b==="cls"?"cls":"ppt")+'">'+(x.b==="cls"?"🎙 수업함정":"PPT")+'</span>';
+  h+='<span class="tp">눌러서 확인</span>';
   h+='</div>';
   h+='<div class="td">'+fmt(x.d)+'</div>';
-  h+='<div class="tp">탭해서 뜻 확인</div>';
   h+='</div>';
   return h;
 }
@@ -548,7 +548,6 @@ document.getElementById("app").addEventListener("click",function(e){
     else S.open[id]=true;
     save();
     trm.classList.toggle("hid",!S.open[id]);
-    trm.querySelector(".tp").textContent="탭해서 뜻 확인";
     return;
   }
   const more=e.target.closest(".more");
