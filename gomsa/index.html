@@ -124,7 +124,7 @@ main{padding:0 0 56px}
 .wk{padding:6px 0 2px}
 .wkh{
   display:flex;align-items:baseline;gap:7px;padding:14px 16px 7px;
-  position:sticky;top:112px;background:var(--bg);z-index:5;
+  position:sticky;top:var(--stick,137px);background:var(--bg);z-index:5;
 }
 .wkh .wn{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:0.02em}
 .wkh .wt{font-size:12.5px;color:var(--mut);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -513,11 +513,18 @@ function tab3(){
   });
   return h;
 }
+function stickTop(){
+  const t=document.querySelector(".tabs");
+  if(!t) return;
+  const b=Math.round(t.getBoundingClientRect().bottom);
+  document.documentElement.style.setProperty("--stick",b+"px");
+}
 function render(){
   const app=document.getElementById("app");
   if(TAB===1) app.innerHTML=tab1();
   else if(TAB===2) app.innerHTML=tab2();
   else app.innerHTML=tab3();
+  stickTop();
 }
 function dday(){
   const exam=new Date("2026-12-08T12:00:00+09:00").getTime();
@@ -603,6 +610,7 @@ if(!th) th=(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)")
 applyTheme(th);
 document.getElementById("dd").textContent=dday();
 render();
+window.addEventListener("resize",stickTop);
 </script>
 </body>
 </html>
