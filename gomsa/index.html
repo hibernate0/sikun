@@ -22,6 +22,11 @@
   --ppt:#2c5f8a;
   --pptbg:rgba(44,95,138,.09);
   --warnbg:rgba(194,118,27,.10);
+  --e9:#0f766e;
+  --e10:#b45309;
+  --e11:#2c5f8a;
+  --e12:#6b4a9e;
+  --e13:#b03e63;
 }
 [data-theme="dark"]{
   --bg:#0b0d0f;
@@ -39,7 +44,11 @@
   --ppt:#8db8de;
   --pptbg:rgba(141,184,222,.12);
   --warnbg:rgba(224,164,92,.12);
-  --bg-soft:#0b0d0f;
+  --e9:#63d6c9;
+  --e10:#f0b37e;
+  --e11:#8db8de;
+  --e12:#c1a9e6;
+  --e13:#ef9db6;
 }
 [data-theme="dark"]{--bg-soft:rgba(11,13,15,.86)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -96,12 +105,12 @@ header{
   border-bottom:1px solid var(--line);
 }
 .tab{
-  flex:1;border:0;background:none;padding:13px 2px 11px;
-  font-size:13px;color:var(--mut);position:relative;white-space:nowrap;
-  letter-spacing:-0.03em;
+  flex:1;border:0;background:none;padding:13px 1px 11px;
+  font-size:12.5px;color:var(--mut);position:relative;white-space:nowrap;
+  letter-spacing:-0.04em;
 }
 .tab.on{color:var(--ink);font-weight:800}
-.tab.on::after{content:"";position:absolute;left:8px;right:8px;bottom:0;height:3px;border-radius:3px;background:var(--acc)}
+.tab.on::after{content:"";position:absolute;left:6px;right:6px;bottom:0;height:3px;border-radius:3px;background:var(--acc)}
 main{padding:0 0 56px}
 .bar{
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;
@@ -121,6 +130,62 @@ main{padding:0 0 56px}
   background:var(--chip);font-size:12.5px;line-height:1.65;color:var(--mut);
 }
 .note b{color:var(--ink)}
+.flow{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:12px 16px 4px}
+.flow::-webkit-scrollbar{display:none}
+.fch{
+  flex:0 0 auto;display:flex;align-items:center;gap:6px;
+  border:1px solid var(--line2);background:var(--card);border-radius:12px;
+  padding:7px 10px 7px 8px;font-size:12px;color:var(--ink);line-height:1.25;white-space:nowrap;
+}
+.fch .fnn{
+  font-size:10.5px;font-weight:800;color:#fff;background:var(--acc);
+  width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.fch.c10 .fnn{background:var(--e10)}
+.fch.c11 .fnn{background:var(--e11)}
+.fch.c12 .fnn{background:var(--e12)}
+.fch.c13 .fnn{background:var(--e13)}
+.far{flex:0 0 auto;align-self:center;color:var(--line2);font-size:11px}
+.mapbar{display:flex;align-items:center;gap:5px;padding:10px 16px 6px;font-size:11.5px;color:var(--mut)}
+.mapbar .hint{margin-right:auto;line-height:1.45;padding-right:6px}
+.zbtn{
+  flex:0 0 auto;border:1px solid var(--line2);background:var(--card);border-radius:8px;
+  min-width:30px;height:27px;font-size:12px;color:var(--mut);line-height:1;padding:0 7px;
+}
+.zbtn:active{border-color:var(--acc);color:var(--acc)}
+.mapw{padding:2px 8px 0;overflow-x:auto;overflow-y:hidden}
+.map{width:100%;height:auto;display:block}
+.map .mn{cursor:pointer}
+.map .er{fill:var(--chip)}
+.map .eb{opacity:.95}
+.map .et{font-size:10px;font-weight:800;text-anchor:middle;fill:var(--mut);letter-spacing:0.02em}
+.map .eh{font-size:14.5px;font-weight:800;text-anchor:middle;fill:var(--ink);letter-spacing:-0.045em}
+.map .nr{fill:var(--card);stroke:var(--line2);stroke-width:1}
+.map .nl{font-size:11px;text-anchor:middle;fill:var(--ink);letter-spacing:-0.03em}
+.map .cn{stroke:var(--line2);stroke-width:1.1;fill:none}
+.map .sp{stroke:var(--line2);stroke-width:1.3;fill:none}
+.map .dot{fill:var(--line2)}
+.map .mn:active .nr{stroke:var(--acc);stroke-width:1.6}
+.map .e9 .eb{fill:var(--e9)}.map .e9 .et{fill:var(--e9)}
+.map .e10 .eb{fill:var(--e10)}.map .e10 .et{fill:var(--e10)}
+.map .e11 .eb{fill:var(--e11)}.map .e11 .et{fill:var(--e11)}
+.map .e12 .eb{fill:var(--e12)}.map .e12 .et{fill:var(--e12)}
+.map .e13 .eb{fill:var(--e13)}.map .e13 .et{fill:var(--e13)}
+.sec{padding:20px 16px 2px}
+.sec h2{margin:0;font-size:15px;font-weight:800;letter-spacing:-0.03em}
+.sec .sub{margin:5px 0 0;font-size:12px;color:var(--mut);line-height:1.6;word-break:keep-all}
+.chain{margin:10px 12px 12px;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:14px 15px 4px}
+.chain .ct{font-size:14px;font-weight:800;letter-spacing:-0.03em}
+.chain .cq{font-size:11.5px;color:var(--mut);margin-top:3px;line-height:1.55}
+.cs{display:flex;gap:9px;padding:12px 0 0;position:relative}
+.cs .n{
+  flex:0 0 19px;height:19px;border-radius:50%;background:var(--accsoft);color:var(--acc);
+  font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;
+}
+.cs .b{flex:1;min-width:0}
+.cs .b b{font-size:12.5px;display:block;letter-spacing:-0.025em;line-height:1.5}
+.cs .b i{font-style:normal;display:block;font-size:11.5px;color:var(--mut);line-height:1.55;margin-top:2px;word-break:keep-all}
+.cs:not(:last-child)::before{content:"";position:absolute;left:9px;top:33px;bottom:-10px;width:1px;background:var(--line2)}
 .wk{padding:6px 0 2px}
 .wkh{
   display:flex;align-items:baseline;gap:7px;padding:14px 16px 7px;
@@ -144,9 +209,12 @@ main{padding:0 0 56px}
 .bd.ppt{color:var(--ppt);background:var(--pptbg)}
 .bd.cls{color:var(--cl);background:var(--clbg)}
 .trm .td{margin-top:5px;font-size:13.5px;line-height:1.62;color:var(--ink);word-break:keep-all;overflow-wrap:anywhere}
+.trm .ez{margin-top:7px;padding:7px 10px;border-radius:10px;background:var(--chip);font-size:12.5px;line-height:1.6;color:var(--mut);word-break:keep-all}
+.trm .ez em{font-style:normal;font-weight:800;color:var(--acc);margin-right:5px;font-size:10.5px}
 .trm .tp{display:none;margin-left:auto;font-size:11px;color:var(--mut);opacity:.8}
 .trm.hid{border-style:dashed;background:var(--chip)}
 .trm.hid .td{display:none}
+.trm.hid .ez{display:none}
 .trm.hid .tp{display:inline}
 .more{
   display:block;width:calc(100% - 24px);margin:2px 12px 8px;padding:10px;
@@ -159,6 +227,9 @@ main{padding:0 0 56px}
 .stag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--acc);background:var(--accsoft);padding:3px 8px;border-radius:999px}
 .shead h2{margin:8px 0 0;font-size:17.5px;line-height:1.38;letter-spacing:-0.035em;font-weight:800;word-break:keep-all}
 .shead .hook{margin:7px 0 0;font-size:13px;line-height:1.65;color:var(--mut);word-break:keep-all}
+.sflow{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:11px 15px 0}
+.sflow .f{font-size:11.5px;font-weight:700;color:var(--acc);background:var(--accsoft);padding:3px 8px;border-radius:7px;letter-spacing:-0.03em}
+.sflow .a{color:var(--mut);font-size:10px;opacity:.7}
 .steps{padding:12px 15px 4px}
 .step{display:flex;gap:10px;padding:9px 0}
 .step .lb{
@@ -202,9 +273,31 @@ main{padding:0 0 56px}
 .q.on .ans{display:block}
 .ans .hint{display:block;margin-top:6px;font-size:12px;color:var(--cl)}
 .ans b{background:var(--accsoft);padding:0 2px;border-radius:3px}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;max-width:620px;margin:0 auto;
+  background:var(--card);border-top:1px solid var(--line2);
+  border-radius:20px 20px 0 0;box-shadow:0 -10px 36px rgba(0,0,0,.16);
+  padding:14px 18px calc(16px + env(safe-area-inset-bottom));
+  transform:translateY(110%);transition:transform .24s cubic-bezier(.3,.9,.3,1);
+  max-height:74vh;overflow-y:auto;visibility:hidden;
+}
+.sheet.on{transform:translateY(0);visibility:visible}
+.shtop{display:flex;align-items:center;gap:8px}
+.sheet h3{margin:9px 0 0;font-size:18px;letter-spacing:-0.04em;line-height:1.35;word-break:keep-all}
+.sheet .sq{margin:5px 0 0;font-size:12.5px;color:var(--mut);line-height:1.55;word-break:keep-all}
+.sheet .r{display:flex;gap:9px;margin-top:11px}
+.sheet .r .lb{flex:0 0 34px;font-size:11px;font-weight:800;color:var(--acc);padding-top:3px;letter-spacing:-0.03em}
+.sheet .r p{margin:0;flex:1;font-size:13.5px;line-height:1.66;word-break:keep-all}
+.sheet .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.sheet .chips span{font-size:11.5px;background:var(--warnbg);color:var(--star);padding:3px 9px;border-radius:999px;font-weight:700;letter-spacing:-0.02em}
+.sheet .go{
+  width:100%;margin-top:14px;border:1px solid var(--acc);background:var(--accsoft);color:var(--acc);
+  border-radius:11px;padding:10px;font-size:13px;font-weight:800;
+}
+.sheet .x{margin-left:auto;border:0;background:var(--chip);width:29px;height:29px;border-radius:50%;color:var(--mut);font-size:13px;line-height:1}
 .foot{padding:22px 20px 40px;text-align:center;font-size:11.5px;line-height:1.8;color:var(--mut)}
 @media (max-width:360px){
-  .tab{font-size:12px}
+  .tab{font-size:11.5px}
   .step .lb{flex:0 0 50px;font-size:10.5px}
 }
 </style>
@@ -230,107 +323,253 @@ main{padding:0 0 56px}
   <span>약술 5 + 서술 2</span>
 </div>
 <nav class="tabs" id="tabs">
-  <button class="tab on" data-t="1">⚡ 약술 암기장</button>
-  <button class="tab" data-t="2">🧠 빅스토리</button>
-  <button class="tab" data-t="3">✍️ 미니 체크</button>
+  <button class="tab on" data-t="1">🗺️ 지도</button>
+  <button class="tab" data-t="2">⚡ 약술</button>
+  <button class="tab" data-t="3">🧠 스토리</button>
+  <button class="tab" data-t="4">✍️ 체크</button>
 </nav>
 <main id="app"></main>
 <div class="foot">강의안 9~13주차 + 13주차 수업 녹음 반영 · 14주차 자료 나오면 추가<br>암기 모드는 기기에 저장돼서 다시 열어도 유지됩니다</div>
 </div>
+<div class="sheet" id="sheet" aria-hidden="true"></div>
 <script>
+const MAP=[
+{w:9,tag:"대외무역",chip:"바다로 연결",title:"고려, 바다로 세계와 연결되다",
+q:"고려는 무엇을 팔아 무엇을 벌었나?",
+one:"세금으로 걷은 곡식과 베가 예성항에 쌓이고, 송·원·일본·아랍 상인이 개경까지 올라온 200년짜리 교역망.",
+why:"고려가 내수만으로 돌지 않았다는 걸 보여줌. 조세·공부로 걷은 물건이 어디로 갔는지가 이 단원의 출발점.",
+keys:["예성항","원 교역","노걸대"],
+nodes:[
+{id:"n9a",side:"L",l1:"예성항 · 벽란도",w:9,one:"개경 옆 국제무역항. 외국 상인은 원칙적으로 여기서만 교역했다.",
+why:"조세·공물 실은 배가 닿는 항구라 물건이 모였고, 개경을 지키려고 교역 장소를 한 곳으로 묶었음. 벽란도는 같은 곳의 다른 이름.",
+keys:["예성항=국제무역항","외국 상인은 여기서만","벽란도=다른 이름"]},
+{id:"n9b",side:"L",l1:"팔관회",w:9,one:"개경 11월 15일(서경 10월) 열린 불교 행사. 각국 사신·상인이 몰리는 교역의 장.",
+why:"사람이 다 모이는 자리라 국가가 외교·교역 창구로 씀. 대회일에 외국 사신의 조하를 받고, 상인들은 객관에서 교역.",
+keys:["개경 11/15","대회일 조하","객관에서 교역"]},
+{id:"n9c",side:"L",l1:"원(院)",w:9,one:"사원이 갈림길·나루·고개에 세운 숙식·유통 시설.",
+why:"도적 때문에 사람과 화물을 보호할 곳이 필요했는데, 국가가 아니라 사원이 세웠음. 승려·관리·상인이 묵고 사원 물품도 여기서 팔림.",
+keys:["건립 주체=사원","숙식+유통","국가 시설 아님"]},
+{id:"n9d",side:"R",l1:"문인 · 보초",w:9,one:"문인=원 국경 통과 허가증, 보초=원의 화폐.",
+why:"원이 유라시아 교통망을 깔자 고려 상인이 압록강을 넘어 대도로 갔고, 판 대금을 원 화폐로 받았음.",
+keys:["문인=허가받은 상인","보초=원 화폐","대금 결제"]},
+{id:"n9e",side:"R",l1:"노걸대",w:9,one:"원대 중기 고려에서 만든 중국어 회화 교재(106개 상황).",
+why:"교역이 일상이 되니 장사용 중국어 책이 필요했음. 이 책이 있다는 것 자체가 원 교역의 발달 증거.",
+keys:["고려에서 제작","106개 상황","교역 발달 증거"]},
+{id:"n9f",side:"R",l1:"남선 · 북선 항로",w:9,one:"교역은 남선항로로, 사신 왕래는 북선항로로.",
+why:"거란 1차 전쟁(993) 뒤 송과 외교가 끊기자 가까운 북선항로 대신 먼 남선항로로 돌아갔음.",
+keys:["993 전후로 갈림","교역=남선","사신=북선"]}
+]},
+{w:10,tag:"고려 말",chip:"고려 멸망",title:"고려 최후: 나라가 몇 집안 농장이 되다",
+q:"500년 왕조가 왜 두 세력의 갈등으로 갈라졌나?",
+one:"땅과 사람이 권문세족에게 묶이자 세금 낼 땅도, 관료에게 줄 땅도 사라졌다. 새 세력이 판을 새로 짤 수밖에 없었다.",
+why:"고려 말의 토지·신분 문제를 잡아야 조선 건국과 과전법, 나중의 신분제 동요까지 한 줄로 꿰진다.",
+keys:["농장","일전일주 vs 과전법","위화도 회군"],
+nodes:[
+{id:"n10a",side:"L",l1:"사패 · 모수사패",w:10,one:"사패=개간과 전시과를 합쳐 준 토지, 모수사패=그걸 함부로 받아내는 것.",
+why:"몽골과의 전쟁으로 땅이 황폐해져 전시과를 줄 땅이 없자 사패로 대신 줬는데, 이게 남발되며 농장(대토지)이 생김.",
+keys:["사패=개간+전시과","모수사패=冒受","농장 형성"]},
+{id:"n10b",side:"L",l1:"압량위천 · 기탁",w:10,one:"양인을 노비로 만드는 압량위천, 농민이 스스로 농장에 붙는 기탁.",
+why:"농장에서 일할 사람이 필요했고, 세금·토지를 잃기 싫은 농민 쪽 이해와 맞아떨어졌음.",
+keys:["양인→천인 방향","기탁=자발적 부속","농장 인력"]},
+{id:"n10c",side:"L",l1:"농장의 악순환",l2:"↓ 재정 파탄",w:10,one:"농장은 세금을 안 냄 → 농민 부담 증가 → 유망 → 국가 재정 파탄 → 관료끼리 갈등.",
+why:"국가 수입의 뿌리인 토지가 사적으로 묶였기 때문. 개혁 논의가 터진 바로 그 지점.",
+keys:["세금 면제","재정 파탄","개혁 논의"]},
+{id:"n10d",side:"R",l1:"신진사대부",w:10,one:"향리 자제이면서 중소지주. 성리학을 공부하고 과거로 중앙에 진출.",
+why:"지방에서 경제력을 쌓은 층이 현 체제에 불만을 품고, 성리학이라는 개혁 논리를 손에 쥐었음.",
+keys:["향리 자제","중소지주","성리학·과거"]},
+{id:"n10e",side:"R",l1:"일전일주",l2:"↔ 과전법",w:10,one:"온건=제도는 두고 폐단만 제거(일전일주), 급진=제도 자체를 새로(과전법).",
+why:"갈린 건 결국 고려 왕조를 지키느냐였음. 정몽주가 온건으로 돌아서자 이방원이 제거했음.",
+keys:["온건=일전일주","급진=과전법","정몽주 제거"]},
+{id:"n10f",side:"R",l1:"위화도 회군",l2:"→ 1392 건국",w:10,one:"1388년 회군으로 이성계가 권력을 잡고, 1392년 건국과 과전법으로 이어짐.",
+why:"명이 철령 이북을 요구하자 최영이 요동정벌을 밀었고, 반대하던 이성계가 발길을 돌려 정권을 뒤집었음.",
+keys:["1388 회군","1392 건국","과전법 실시"]}
+]},
+{w:11,tag:"세종",chip:"세종 체제",title:"세종: 태종이 판을 깔고 살을 세우다",
+q:"세종은 왜 그렇게 제도에 집착했나?",
+one:"목표는 성리학 기반 중앙집권체제. 태종이 골격을 만들고, 세종이 예악·공론·문자로 살을 붙였다.",
+why:"세종 업적은 왜 했는지가 채점 포인트. 태종의 정비 → 예악·공론 → 훈민정음 순서로 기억.",
+keys:["예악","집현전","훈민정음"],
+nodes:[
+{id:"n11a",side:"L",l1:"왕권 주도론",w:11,one:"국왕이 국가 경영의 주도권을 갖자는 입장. 1차 왕자의 난 승리로 확정.",
+why:"개국공신은 재상권 주도론을 밀었음. 왕실과 공신이 부딪혔고 이방원이 이기면서 방향이 정해짐.",
+keys:["재상권 vs 왕권","1차 왕자의 난"]},
+{id:"n11b",side:"L",l1:"예악 · 삼강오륜",w:11,one:"예=질서의 형식화, 악=조화. 삼강=상하 질서, 오륜=관계 조화.",
+why:"성리학은 자연의 상하 질서가 인간사회에도 그대로 있다고 봄. 그래서 예로 질서를 새기고 명분·직분을 강조.",
+keys:["삼강=상하 질서","오륜=관계 조화","명분론·직분론"]},
+{id:"n11c",side:"R",l1:"집현전",w:11,one:"고제를 연구해 제도를 만들고, 유교 정치를 맡을 유학자군을 양성.",
+why:"왕도정치·민본정치는 왕과 신하가 유교적 소양을 갖추고 의례를 정비해야 가능하다고 봤기 때문.",
+keys:["고제 연구","유학자 양성"]},
+{id:"n11d",side:"R",l1:"공법 17년",w:11,one:"17년 토론 끝에 시행한 세제 개혁. 세종 공론정치의 대표 사례.",
+why:"오래 쓸 제도를 만들려면 반대자까지 설득해야 한다고 봄. 농사직설도 농부 경험을 채록해 만들었음.",
+keys:["17년 토론","공론정치","농사직설"]},
+{id:"n11e",side:"R",l1:"훈민정음",l2:"1443 → 1446",w:11,one:"1443년 창제(자음 17·모음 11), 용비어천가로 시험, 1446년 9월 반포.",
+why:"한자는 지배층 문자라 백성에겐 문자가 없었음. 이유 셋은 백성이 익힐 문자, 교화, 효율적 국가 운영.",
+keys:["1443→1446","자음17·모음11","목적 3개"]}
+]},
+{w:12,tag:"양반사회",chip:"성리학 확산",title:"성리학이 조선의 동네까지 장악하다",
+q:"성리학은 어떻게 사람들의 일상을 지배했나?",
+one:"철학으로 끝나지 않고 학교·명부·규약이 되어 향촌을 관리했다. 16세기 사족지배체제로 완성.",
+why:"성리학이 제도로 굳어지는 과정이 핵심. 그 동력이 훈구와 사림의 갈등이다.",
+keys:["일읍일교","사화","향안·향약·서원"],
+nodes:[
+{id:"n12a",side:"L",l1:"일읍일교",w:12,one:"전국 군현마다 학교를 세워 성리학을 국가 교학으로 정착시키는 원칙.",
+why:"조선은 성리학을 나라 공부로 삼았음. 다만 실제 완전 정착은 16세기.",
+keys:["군현마다 학교","국가 교학","16세기 정착"]},
+{id:"n12b",side:"L",l1:"훈구 vs 사림",l2:"→ 4대 사화",w:12,one:"훈구=15세기 중앙집권, 사림=16세기 수기치인. 충돌의 결과가 사화.",
+why:"사림이 훈구의 실정을 비판했고, 사화를 겪으며 향약·서원으로 향촌을 장악해 살아남았음.",
+keys:["수기치인","무오·갑자·기묘·을사","향약·서원"]},
+{id:"n12c",side:"R",l1:"향안 · 아관",w:12,one:"향안=양반 명부, 아관=향안에 올라 지방행정에 힘을 쓴 양반(버금 관료).",
+why:"양반이 스스로를 걸러 상하 질서를 지키려 했음. 거족이라도 3족 중 하나라도 하자면 거부.",
+keys:["향안=명부","아관=버금 관료","3족 심사"]},
+{id:"n12d",side:"R",l1:"향약 4덕목",w:12,one:"덕업상권·과실상규·예속상교·환난상휼.",
+why:"도덕질서와 상호부조가 필요했음. 명분은 교화지만 실제로는 양반의 향촌 통제 수단.",
+keys:["4덕목","교화 명분","향촌 통제"]},
+{id:"n12e",side:"R",l1:"서원",w:12,one:"문묘 제향에서 시작. 향교를 능가하는 교육 기능과 향촌 여론 결집 거점.",
+why:"사림이 학문적 우위와 정치적 입장을 굳히려 선배 도학자를 제향했음. 이후 붕당정치의 기반.",
+keys:["문묘 제향","향교 능가","여론 결집"]}
+]},
+{w:13,tag:"조선 후기",chip:"두 기둥 붕괴",title:"조선 후기: 두 기둥이 같이 흔들리다",
+q:"조선은 왜 스스로 중세를 끝냈나?",
+one:"지배체제의 두 축은 신분제와 지주제. 농업 기술이 바뀌면서 둘이 동시에 흔들렸다.",
+why:"신분제와 지주제 두 축이 함께 무너지는 그림. 서술형 15점 단골 주제.",
+keys:["이앙법","도조법","신분제 동요"],
+nodes:[
+{id:"n13a",side:"L",l1:"이앙법",w:13,one:"모내기. 쌀·보리 이모작이 가능해지고 노동력이 줄어 경영이 확대.",
+why:"농업 생산력이 먼저 터졌음. 견종법·시비법이 더해져 단위면적 소출이 늘었음.",
+keys:["이모작","노동력 절감","경영 확대"]},
+{id:"n13b",side:"L",l1:"항조",l2:"→ 도조법",w:13,one:"지대를 미루거나 볏단을 빼돌리는 저항 때문에 2분의 1 정률지대가 정액지대로 바뀜.",
+why:"농민이 늘어난 소출을 지주에게 다 줄 이유가 없어졌기 때문.",
+keys:["2분의1→정액","항조","지대 전환"]},
+{id:"n13c",side:"R",l1:"납속첩 · 공명첩",l2:"+ 족보 사기",w:13,one:"돈으로 신분을 올리는 합법적 문서와, 족보에 이름 끼워 넣기.",
+why:"모든 역이 평민에게 몰리자 벗어나려 했고, 국가와 가문은 돈이 필요했음.",
+keys:["합법적 신분 상승","족보 사기=빈 칸에 이름","양인·노비↓ 양반↑"]},
+{id:"n13d",side:"R",l1:"수령권 강화",l2:"신향 · 향전",w:13,one:"사족지배체제가 약해지자 정부가 수령권을 강화. 신향과 구향이 향전.",
+why:"양반=지주라는 통념이 깨져 재지양반을 매개로 한 지방 통치가 어려워졌음.",
+keys:["수령권 강화","신향 vs 구향","향전"]},
+{id:"n13e",side:"R",l1:"실학",w:13,one:"실사구시. 신분제 폐지·권력 평등·성장 계층의 참여를 지향.",
+why:"정치에서 밀린 지식인이 현실 모순을 비판하며 새 사회를 모색. 중농(유형원·이익·정약용), 중상·북학(유수원·박제가·홍대용·박지원).",
+keys:["실사구시","중농 vs 중상","신분제 폐지"]}
+]}
+];
+
+const CHAINS=[
+{ct:"땅의 흐름 — 농장이 나라를 먹다",cq:"고려 말 붕괴에서 조선 후기 신분제 동요까지 이어지는 한 줄기",
+steps:[["사패 남발","전쟁으로 전시과를 줄 땅이 없어 개간+전시과를 합친 사패로 대신 줌"],
+["모수사패·겸병","받아내기와 탈점으로 땅이 몇 집안 농장으로 묶임"],
+["농장은 세금 면제","세금 낼 땅이 줄어 재정 파탄, 관료끼리 갈등"],
+["과전법 1392","급진파가 제도 자체를 새로 짬. 새 왕조의 출발점"],
+["직전법 → 관수관급제","수조권이 줄다가 결국 사라짐"],
+["양반도 권력이 필요","경제 특권 대신 정치 참여가 신분 유지 수단이 됨"]]},
+{ct:"사람의 흐름 — 양인과 노비가 사라진다",cq:"압량위천에서 시작해 신분제 동요로 끝나는 줄기",
+steps:[["압량위천","농장 인력을 만들려고 양인을 노비로 내림"],
+["이앙법·견종법","노동력은 덜고 소출은 늘림"],
+["고공 vs 경영형 부농","농민이 머슴과 부농으로 갈라짐"],
+["항조 → 도조법","농민이 버티자 지주가 정액지대로 물러섬"],
+["납속첩·공명첩·족보","돈으로 신분을 올리는 길이 열림"],
+["양인·노비↓ 양반↑","단성 양반호 1.9%→32.2%. 중세 해체"]]},
+{ct:"생각의 흐름 — 성리학이 조선을 설계하다",cq:"원 간섭기 수용에서 실학 등장까지",
+steps:[["안향이 소개","원 간섭기에 성리학이 들어옴"],
+["신진사대부의 무기","현실을 고쳐야 한다는 개혁 논리"],
+["국가 교학·일읍일교","조선이 나라 공부로 밀어붙임"],
+["예악·삼강오륜","상하 질서를 정당화하는 장치"],
+["향안·향약·서원","사림이 향촌을 장악한 3종 세트"],
+["사족지배체제 → 실학","16세기 완성, 조선 후기 붕괴 뒤 새 사회 모색"]]}
+];
+
 const WEEKS=[
 {w:9,title:"고려의 대외무역과 원 교역",items:[
-{n:"각장무역",b:"ppt",s:1,d:"국경을 맞댄 나라·민끼리, 합의해 정한 장소에서 하는 무역."},
-{n:"부대무역",b:"ppt",d:"사신이 데려간 상인의 개인 무역. 국가 무역 칸에 넣으면 오답."},
-{n:"원(院)",b:"cls",s:1,d:"사원이 도적을 막으려 갈림길·나루·고개에 세운 숙식·유통 시설. 관리·상인도 묵었다."},
-{n:"예성항",b:"ppt",s:1,d:"개경에 인접한 국제무역항. 외국 상인은 원칙적으로 이곳에서만 교역."},
-{n:"벽란도",b:"ppt",d:"예성항을 달리 부르는 이름."},
-{n:"팔관회",b:"ppt",d:"개경 11월 15일·서경 10월. 각국 사신·상인이 몰리는 교역의 장이고, 대회일에 외국 사신의 조하를 받았다."},
-{n:"공빙",b:"ppt",d:"송 시박사가 송상에게 발급한 무역 허가서."},
-{n:"아인",b:"ppt",d:"송 시박사 소속. 물품 평가·가격 책정·중개를 맡았다."},
-{n:"상세",b:"ppt",d:"물품이 팔린 뒤 시박사가 고려 상인에게 걷는 세금."},
-{n:"도강",b:"ppt",d:"송상이 타고 오는 큰 무역선의 선주. 고려 상인도 이 배로 송에 갔다."},
-{n:"남선항로·북선항로",b:"ppt",s:1,d:"교역은 남선항로, 사신 왕래는 북선항로. 993년 거란 1차 전쟁 전후로 갈린다."},
-{n:"문인",b:"ppt",d:"고려 상인이 원 국경을 넘을 때 소지한 허가증."},
-{n:"보초",b:"ppt",d:"원의 화폐. 판 대금으로 받아 원 상인과 교환하거나 원에서 썼다."},
-{n:"노걸대",b:"ppt",s:1,d:"원대 중기 고려에서 만든 중국어 회화 교재(106개 상황). 원 교역의 발달을 증명."},
-{n:"고려장",b:"ppt",d:"원 대도 통지 완평현에 있던 고려인 집단 거주지."},
-{n:"수역",b:"ppt",d:"제주도와 압록강 사이에 설치한 뱃길 역참."}
+{n:"각장무역",b:"ppt",s:1,d:"국경을 맞댄 나라·민끼리, 합의해 정한 장소에서 하는 무역.",e:"국경에 차린 '합의된 시장' 무역."},
+{n:"부대무역",b:"ppt",d:"사신이 데려간 상인의 개인 무역. 국가 무역 칸에 넣으면 오답.",e:"사신 따라간 상인이 사적으로 하는 장사. 국가 무역 아님."},
+{n:"원(院)",b:"cls",s:1,d:"사원이 도적을 막으려 갈림길·나루·고개에 세운 숙식·유통 시설. 관리·상인도 묵었다.",e:"사원이 길목에 세운 숙박소 겸 장터."},
+{n:"예성항",b:"ppt",s:1,d:"개경에 인접한 국제무역항. 외국 상인은 원칙적으로 이곳에서만 교역.",e:"개경 바로 옆, 외국 배가 드나드는 유일한 창구."},
+{n:"벽란도",b:"ppt",d:"예성항을 달리 부르는 이름.",e:"예성항의 또 다른 이름. 같은 곳."},
+{n:"팔관회",b:"ppt",d:"개경 11월 15일·서경 10월. 각국 사신·상인이 몰리는 교역의 장이고, 대회일에 외국 사신의 조하를 받았다.",e:"11월 15일 개경 축제. 사람이 다 모이니 장사도 여기서."},
+{n:"공빙",b:"ppt",d:"송 시박사가 송상에게 발급한 무역 허가서.",e:"송이 자기 상인에게 끊어 준 무역 허가증."},
+{n:"아인",b:"ppt",d:"송 시박사 소속. 물품 평가·가격 책정·중개를 맡았다.",e:"송의 감정사 겸 중개인."},
+{n:"상세",b:"ppt",d:"물품이 팔린 뒤 시박사가 고려 상인에게 걷는 세금.",e:"물건 팔린 뒤 시박사가 고려 상인에게서 떼는 세금."},
+{n:"도강",b:"ppt",d:"송상이 타고 오는 큰 무역선의 선주. 고려 상인도 이 배로 송에 갔다.",e:"송의 큰 배 주인. 고려 상인도 이 배를 빌려 탔다."},
+{n:"남선항로·북선항로",b:"ppt",s:1,d:"교역은 남선항로, 사신 왕래는 북선항로. 993년 거란 1차 전쟁 전후로 갈린다.",e:"교역은 먼 남쪽 길, 사신은 가까운 북쪽 길. 993년이 갈림길."},
+{n:"문인",b:"ppt",d:"고려 상인이 원 국경을 넘을 때 소지한 허가증.",e:"원 국경 넘을 때 내미는 통행·무역 허가증."},
+{n:"보초",b:"ppt",d:"원의 화폐. 판 대금으로 받아 원 상인과 교환하거나 원에서 썼다.",e:"원의 지폐. 물건 판 대금으로 받은 돈."},
+{n:"노걸대",b:"ppt",s:1,d:"원대 중기 고려에서 만든 중국어 회화 교재(106개 상황). 원 교역의 발달을 증명.",e:"고려 상인용 중국어 회화책. 있다는 것 자체가 교역 증거."},
+{n:"고려장",b:"ppt",d:"원 대도 통지 완평현에 있던 고려인 집단 거주지.",e:"원 대도 근처에 고려인들이 모여 산 마을."},
+{n:"수역",b:"ppt",d:"제주도와 압록강 사이에 설치한 뱃길 역참.",e:"제주~압록강 바닷길에 둔 역참. 말 대신 배가 쉬는 곳."}
 ]},
 {w:10,title:"신진사대부의 등장과 조선 건국",items:[
-{n:"신진사대부",b:"ppt",s:1,d:"향리 자제이면서 중소지주. 성리학을 공부해 과거로 중앙에 진출."},
-{n:"사패",b:"ppt",s:1,d:"원 간섭기, 전쟁으로 땅이 없자 개간과 전시과 지급을 합쳐 분급한 토지."},
-{n:"모수사패",b:"cls",s:1,d:"사패를 함부로 받아내는 것(冒受). 사패 남발로 농장(대토지)이 형성됐다."},
-{n:"산천위표·과이주군",b:"ppt",d:"산천을 경계로 삼고 주군을 넘어서까지 토지를 겸병한 것."},
-{n:"압량위천",b:"ppt",s:1,d:"양인을 천인(노비)으로 만드는 것. 방향을 반대로 쓰면 오답."},
-{n:"기탁",b:"ppt",d:"세금·토지 문제를 피해 농민이 권문세족 농장에 스스로 붙는 것."},
-{n:"일전일주",b:"ppt",s:1,d:"온건파. 한 토지에 주인 하나만 인정하고, 제도는 두고 폐단만 제거."},
-{n:"과전법",b:"ppt",s:1,d:"급진파. 전시과를 부정하고 새 토지제도를 실시하자."},
-{n:"중조",b:"ppt",d:"원이 국왕의 즉위와 폐위를 반복시킨 것(重祚)."},
-{n:"친조",b:"ppt",d:"국왕이 직접 원에 가서 조회하는 것(親朝)."},
-{n:"정동행성",b:"ppt",d:"원이 고려 내정에 간섭하기 위해 둔 기구."},
-{n:"좌주문생제",b:"ppt",d:"온건파가 찬성한 사적 은혜와 의리 기반의 인재 등용."},
-{n:"양전",b:"cls",d:"토지를 측량해 소유주와 면적을 파악. 교안엔 ‘전국 토지 측량’으로만 나온다."},
-{n:"성균관 중영",b:"ppt",d:"공민왕 14년 신돈이 개혁 인재를 키우려 중영. 대사성에 이색."},
-{n:"위화도 회군",b:"ppt",s:1,d:"1388년 요동정벌에 반대해 이성계가 회군하고 권력을 장악."}
+{n:"신진사대부",b:"ppt",s:1,d:"향리 자제이면서 중소지주. 성리학을 공부해 과거로 중앙에 진출.",e:"지방 향리 집안 + 땅 좀 있는 중소지주. 성리학으로 무장한 새 세력."},
+{n:"사패",b:"ppt",s:1,d:"원 간섭기, 전쟁으로 땅이 없자 개간과 전시과 지급을 합쳐 분급한 토지.",e:"전쟁으로 땅이 없을 때 개간지+전시과를 합쳐 준 땅."},
+{n:"모수사패",b:"cls",s:1,d:"사패를 함부로 받아내는 것(冒受). 사패 남발로 농장(대토지)이 형성됐다.",e:"받을 자격도 없으면서 사패를 우겨 받아내는 것."},
+{n:"산천위표·과이주군",b:"ppt",d:"산천을 경계로 삼고 주군을 넘어서까지 토지를 겸병한 것.",e:"산·강을 금으로 삼고 남의 고을 땅까지 넘어가 차지한 것."},
+{n:"압량위천",b:"ppt",s:1,d:"양인을 천인(노비)으로 만드는 것. 방향을 반대로 쓰면 오답.",e:"양인을 노비로 굴리는 것. 방향 반대로 쓰면 0점."},
+{n:"기탁",b:"ppt",d:"세금·토지 문제를 피해 농민이 권문세족 농장에 스스로 붙는 것.",e:"세금 무서워 농민이 농장에 스스로 몸을 붙이는 것."},
+{n:"일전일주",b:"ppt",s:1,d:"온건파. 한 토지에 주인 하나만 인정하고, 제도는 두고 폐단만 제거.",e:"한 땅에 주인 하나만. 온건파의 처방."},
+{n:"과전법",b:"ppt",s:1,d:"급진파. 전시과를 부정하고 새 토지제도를 실시하자.",e:"기존 토지제도를 갈아엎고 새로 짜자. 급진파의 처방."},
+{n:"중조",b:"ppt",d:"원이 국왕의 즉위와 폐위를 반복시킨 것(重祚).",e:"원이 왕을 올렸다 내렸다 반복한 것."},
+{n:"친조",b:"ppt",d:"국왕이 직접 원에 가서 조회하는 것(親朝).",e:"왕이 직접 원에 가서 인사한 것."},
+{n:"정동행성",b:"ppt",d:"원이 고려 내정에 간섭하기 위해 둔 기구.",e:"원이 고려 내정에 간섭하려고 둔 창구."},
+{n:"좌주문생제",b:"ppt",d:"온건파가 찬성한 사적 은혜와 의리 기반의 인재 등용.",e:"합격생이 시험관을 스승으로 모시던 사적 관계. 온건파가 찬성."},
+{n:"양전",b:"cls",d:"토지를 측량해 소유주와 면적을 파악. 교안엔 ‘전국 토지 측량’으로만 나온다.",e:"토지를 재서 주인과 면적을 장부에 다시 적는 일."},
+{n:"성균관 중영",b:"ppt",d:"공민왕 14년 신돈이 개혁 인재를 키우려 중영. 대사성에 이색.",e:"신돈이 개혁 인재를 키우려 성균관을 다시 세운 것."},
+{n:"위화도 회군",b:"ppt",s:1,d:"1388년 요동정벌에 반대해 이성계가 회군하고 권력을 장악.",e:"요동정벌에 나섰던 이성계가 발길을 돌려 정권을 잡은 1388년 사건."}
 ]},
 {w:11,title:"세종대 문화융성과 민본정치",items:[
-{n:"재상권 주도론",b:"ppt",d:"개국공신(재상)이 국가 경영의 실질 주도권을 갖자는 입장."},
-{n:"왕권 주도론",b:"ppt",s:1,d:"국왕이 주도권을 갖자는 입장. 1차 왕자의 난 승리로 채택."},
-{n:"호학군주",b:"ppt",d:"책을 손에서 놓지 않은 세종. 좌전·초사 백 번, 구소수간 천백 번."},
-{n:"미소상해",b:"ppt",s:1,d:"‘조금도 게으르지 않았다’. 신하들이 세종의 근면을 평가한 말."},
-{n:"집현전",b:"ppt",s:1,d:"고제를 연구해 제도를 만들고, 유교 정치를 맡을 유학자군을 양성."},
-{n:"공법",b:"ppt",d:"17년 토론 끝에 시행. 세종 공론정치의 대표 사례."},
-{n:"황찬",b:"ppt",d:"요동에 귀양 온 명 한림학사. 음운을 13번 자문받았다."},
-{n:"언해청",b:"ppt",d:"훈민정음을 만들기 위해 설치한 기구."},
-{n:"삼강",b:"ppt",s:1,d:"군위신강·부위자강·부위부강. 상하 질서를 설명한다."},
-{n:"오륜",b:"ppt",s:1,d:"군신유의·부자유친·부부유별·장유유서·붕우유신. 관계를 조화시킨다."},
-{n:"예악",b:"ppt",d:"예는 인간관계 질서의 형식화, 악은 조화의 상징이자 교화 수단."},
-{n:"4군 6진",b:"ppt",d:"세종대 개척한 북방 영토."}
+{n:"재상권 주도론",b:"ppt",d:"개국공신(재상)이 국가 경영의 실질 주도권을 갖자는 입장.",e:"나라 운영은 고위 관료가 맡자."},
+{n:"왕권 주도론",b:"ppt",s:1,d:"국왕이 주도권을 갖자는 입장. 1차 왕자의 난 승리로 채택.",e:"나라 운영은 왕이 맡자. 1차 왕자의 난으로 이쪽 승리."},
+{n:"호학군주",b:"ppt",d:"책을 손에서 놓지 않은 세종. 좌전·초사 백 번, 구소수간 천백 번.",e:"책을 손에서 놓지 않은 왕. 좌전·초사 백 번, 구소수간 천백 번."},
+{n:"미소상해",b:"ppt",s:1,d:"‘조금도 게으르지 않았다’. 신하들이 세종의 근면을 평가한 말.",e:"신하들이 본 세종은 ‘조금도 게으르지 않았다’."},
+{n:"집현전",b:"ppt",s:1,d:"고제를 연구해 제도를 만들고, 유교 정치를 맡을 유학자군을 양성.",e:"제도 연구소 + 유학자 양성소."},
+{n:"공법",b:"ppt",d:"17년 토론 끝에 시행. 세종 공론정치의 대표 사례.",e:"세금 제도. 17년 토론 끝에 시행."},
+{n:"황찬",b:"ppt",d:"요동에 귀양 온 명 한림학사. 음운을 13번 자문받았다.",e:"명의 학자. 음운을 13번 물으러 갔다."},
+{n:"언해청",b:"ppt",d:"훈민정음을 만들기 위해 설치한 기구.",e:"훈민정음을 만들려고 둔 임시 기구."},
+{n:"삼강",b:"ppt",s:1,d:"군위신강·부위자강·부위부강. 상하 질서를 설명한다.",e:"군위신강·부위자강·부위부강 → 위아래 질서."},
+{n:"오륜",b:"ppt",s:1,d:"군신유의·부자유친·부부유별·장유유서·붕우유신. 관계를 조화시킨다.",e:"군신유의·부자유친·부부유별·장유유서·붕우유신 → 사이좋은 관계."},
+{n:"예악",b:"ppt",d:"예는 인간관계 질서의 형식화, 악은 조화의 상징이자 교화 수단.",e:"예=질서를 형식으로, 악=조화. 둘로 사람을 다스린다."},
+{n:"4군 6진",b:"ppt",d:"세종대 개척한 북방 영토.",e:"세종 때 북쪽으로 넓힌 땅."}
 ]},
 {w:12,title:"성리학과 양반사회",items:[
-{n:"일읍일교",b:"ppt",s:1,d:"전국 군현에 학교를 세워 성리학을 정착시킨 원칙. 완전 정착은 16세기."},
-{n:"유향소",b:"ppt",d:"건국 후 재지양반이 향촌을 지배하려 만든 기구. 혁파 뒤 중앙으로 진출."},
-{n:"수기치인",b:"ppt",d:"사림파가 강조한 ‘자기를 닦은 뒤 남을 다스림’."},
-{n:"사화",b:"ppt",s:1,d:"훈구와 사림의 갈등 결과. 무오·갑자·기묘·을사."},
-{n:"향안",b:"ppt",s:1,d:"양반 명부. 입회 심사를 거치고 향리·서얼은 제한, 3족 중 하나라도 하자면 거부."},
-{n:"아관",b:"ppt",d:"향안에 오른 양반. 지방행정에 영향을 행사해 ‘버금 관료’로 불렸다."},
-{n:"향약",b:"ppt",s:1,d:"도덕질서 유지와 상호부조 규약. 덕업상권·과실상규·예속상교·환난상휼."},
-{n:"서원",b:"ppt",s:1,d:"문묘 제향에서 시작. 향교를 능가하는 교육 기능과 향촌 여론 결집 거점."},
-{n:"서얼",b:"ppt",d:"서는 양인 첩의 자식, 얼은 천인 첩의 자식."},
-{n:"중인",b:"ppt",d:"향리·의사·역관을 법으로 묶어 양반이 될 가능성을 차단한 신분."},
-{n:"금양잡록",b:"ppt",d:"강희맹이 쓴 농서."},
-{n:"봉제사·접빈객",b:"ppt",d:"제사 받들고 손님 접대하기. 양반 지위가 사회적으로 인정받는 행위."},
-{n:"토지제도 변천",b:"ppt",d:"과전법에서 직전법, 다시 관수관급제로."}
+{n:"일읍일교",b:"ppt",s:1,d:"전국 군현에 학교를 세워 성리학을 정착시킨 원칙. 완전 정착은 16세기.",e:"고을마다 학교 하나씩. 성리학을 나라 공부로 못 박은 원칙."},
+{n:"유향소",b:"ppt",d:"건국 후 재지양반이 향촌을 지배하려 만든 기구. 혁파 뒤 중앙으로 진출.",e:"건국 후 지방 양반이 동네 일 보려고 만든 기구. 곧 혁파."},
+{n:"수기치인",b:"ppt",d:"사림파가 강조한 ‘자기를 닦은 뒤 남을 다스림’.",e:"내가 먼저 닦이고 남을 다스린다. 사림의 구호."},
+{n:"사화",b:"ppt",s:1,d:"훈구와 사림의 갈등 결과. 무오·갑자·기묘·을사.",e:"훈구가 사림을 친 네 번의 피바람."},
+{n:"향안",b:"ppt",s:1,d:"양반 명부. 입회 심사를 거치고 향리·서얼은 제한, 3족 중 하나라도 하자면 거부.",e:"동네 양반 명부. 심사 통과해야 이름을 올림."},
+{n:"아관",b:"ppt",d:"향안에 오른 양반. 지방행정에 영향을 행사해 ‘버금 관료’로 불렸다.",e:"향안에 이름 올린 양반 = ‘버금 관료’."},
+{n:"향약",b:"ppt",s:1,d:"도덕질서 유지와 상호부조 규약. 덕업상권·과실상규·예속상교·환난상휼.",e:"동네 규약. 권장·규제·예절·상부상조 네 가지."},
+{n:"서원",b:"ppt",s:1,d:"문묘 제향에서 시작. 향교를 능가하는 교육 기능과 향촌 여론 결집 거점.",e:"선배 학자 제사 지내던 곳이 학교 겸 여론 본부가 됨."},
+{n:"서얼",b:"ppt",d:"서는 양인 첩의 자식, 얼은 천인 첩의 자식.",e:"첩의 자식. 서=양인 첩, 얼=천인 첩."},
+{n:"중인",b:"ppt",d:"향리·의사·역관을 법으로 묶어 양반이 될 가능성을 차단한 신분.",e:"향리·의사·역관을 묶어 양반 못 되게 한 신분."},
+{n:"금양잡록",b:"ppt",d:"강희맹이 쓴 농서.",e:"강희맹이 쓴 농사책."},
+{n:"봉제사·접빈객",b:"ppt",d:"제사 받들고 손님 접대하기. 양반 지위가 사회적으로 인정받는 행위.",e:"제사 잘 지내고 손님 잘 접대하기 = 양반이라는 증명."},
+{n:"토지제도 변천",b:"ppt",d:"과전법에서 직전법, 다시 관수관급제로.",e:"과전법 → 직전법 → 관수관급제. 수조권이 점점 줄어 사라짐."}
 ]},
 {w:13,title:"조선후기 사회변화와 실학",items:[
-{n:"신분제·지주제",b:"ppt",s:1,d:"조선 지배체제의 두 축. 둘이 흔들리면 중세사회가 해체된다. 수조권은 경기도에 국한."},
-{n:"이앙법",b:"ppt",s:1,d:"모내기. 쌀·보리 이모작이 가능해지고 노동력이 줄어 경영이 확대됐다."},
-{n:"직파법",b:"ppt",d:"논밭에 바로 씨를 뿌리는 농법. 이앙법과 대비되는 말."},
-{n:"견종법",b:"ppt",d:"고랑에 줄지어 파종. 통풍과 배수가 좋아 단위면적 소출이 늘었다."},
-{n:"정지법·시비법",b:"ppt",d:"정지는 씨 뿌리기 전 땅 고르기, 시비는 거름 주기."},
-{n:"점심",b:"ppt",d:"조선 후기 한 끼 식사로 정착. 하루 세 끼가 된 것."},
-{n:"경영형 부농",b:"ppt",d:"고공을 고용해 규모 있게 농사를 지은 부농."},
-{n:"고공",b:"ppt",d:"토지에서 밀려난 몰락 농민이 전환한 머슴. 필요할 때 고용하고 부양 책임은 없다."},
-{n:"항조",b:"ppt",s:1,d:"지대를 늦게 내거나 볏단을 빼돌리는 농민의 저항."},
-{n:"도조법",b:"ppt",s:1,d:"항조 때문에 2분의 1 정률지대에서 정액지대로 바뀐 것."},
-{n:"납속첩·공명첩",b:"ppt",s:1,d:"돈을 주고 사서 합법적으로 신분을 올리는 문서."},
-{n:"속량",b:"ppt",d:"노비가 돈을 내고 양인이 되는 것."},
-{n:"잔반",b:"ppt",d:"경제 변화에 적응하지 못해 가난해진 양반."},
-{n:"신향·향전",b:"ppt",d:"부민층이 향안에 올라 신향을 만들며 구향과 대립한 것."},
-{n:"환국",b:"ppt",d:"숙종대 경신·기사·갑술처럼 정권이 자주 뒤집힌 것."},
-{n:"세도정치",b:"ppt",d:"정조 사후 몇 개 가문이 권력을 독점하고 매관매직까지 한 정치."},
-{n:"실사구시",b:"ppt",s:1,d:"실학의 표어. 사실에 근거해 옳음을 구함."},
-{n:"반계수록",b:"ppt",d:"유형원. 토지제도를 고쳐 소농도 땅을 갖게 하자고 했다."},
-{n:"열하일기",b:"ppt",d:"박지원. 수레와 유통을 중시한 북학파의 대표 저서."},
-{n:"전호",b:"cls",d:"남의 땅을 빌려 농사짓는 농민. 농장 경영 기록의 핵심."},
-{n:"족보 사기",b:"cls",d:"돈을 주고 족보의 빈 칸에 내 이름을 끼워 넣는 것. 족보책을 사는 게 아니다."}
+{n:"신분제·지주제",b:"ppt",s:1,d:"조선 지배체제의 두 축. 둘이 흔들리면 중세사회가 해체된다. 수조권은 경기도에 국한.",e:"조선 지배체제의 두 기둥. 둘 다 흔들리면 중세가 끝난다."},
+{n:"이앙법",b:"ppt",s:1,d:"모내기. 쌀·보리 이모작이 가능해지고 노동력이 줄어 경영이 확대됐다.",e:"모내기. 같은 땅에서 한 해 두 번 뽑아먹는 기술."},
+{n:"직파법",b:"ppt",d:"논밭에 바로 씨를 뿌리는 농법. 이앙법과 대비되는 말.",e:"논밭에 바로 씨 뿌리기. 이앙법의 반대말."},
+{n:"견종법",b:"ppt",d:"고랑에 줄지어 파종. 통풍과 배수가 좋아 단위면적 소출이 늘었다.",e:"고랑에 줄줄이 파종. 바람 잘 통하고 물 잘 빠져 소출이 는다."},
+{n:"정지법·시비법",b:"ppt",d:"정지는 씨 뿌리기 전 땅 고르기, 시비는 거름 주기.",e:"고르기(정지) + 거름 주기(시비). 모내기의 기본."},
+{n:"점심",b:"ppt",d:"조선 후기 한 끼 식사로 정착. 하루 세 끼가 된 것.",e:"하루 세 끼가 되면서 생긴 한 끼."},
+{n:"경영형 부농",b:"ppt",d:"고공을 고용해 규모 있게 농사를 지은 부농.",e:"머슴 사서 규모 있게 농사짓는 부농."},
+{n:"고공",b:"ppt",d:"토지에서 밀려난 몰락 농민이 전환한 머슴. 필요할 때 고용하고 부양 책임은 없다.",e:"땅 잃은 농민이 된 머슴. 필요할 때만 부르고 책임은 없음."},
+{n:"항조",b:"ppt",s:1,d:"지대를 늦게 내거나 볏단을 빼돌리는 농민의 저항.",e:"지대 안 내고 볏단 빼돌리는 농민의 저항."},
+{n:"도조법",b:"ppt",s:1,d:"항조 때문에 2분의 1 정률지대에서 정액지대로 바뀐 것.",e:"지대를 미리 정액으로 정하는 방식. 항조 때문에 바뀜."},
+{n:"납속첩·공명첩",b:"ppt",s:1,d:"돈을 주고 사서 합법적으로 신분을 올리는 문서.",e:"돈 주고 사는 신분 상승 증서."},
+{n:"속량",b:"ppt",d:"노비가 돈을 내고 양인이 되는 것.",e:"노비가 돈 내고 양인이 되는 것."},
+{n:"잔반",b:"ppt",d:"경제 변화에 적응하지 못해 가난해진 양반.",e:"경제 변화에 못 적응해 가난해진 양반."},
+{n:"신향·향전",b:"ppt",d:"부민층이 향안에 올라 신향을 만들며 구향과 대립한 것.",e:"돈 번 사람들이 향안에 올라 새 무리를 만들고 옛 무리와 싸운 것."},
+{n:"환국",b:"ppt",d:"숙종대 경신·기사·갑술처럼 정권이 자주 뒤집힌 것.",e:"정권이 통째로 뒤집히는 것. 숙종 때 세 번."},
+{n:"세도정치",b:"ppt",d:"정조 사후 몇 개 가문이 권력을 독점하고 매관매직까지 한 정치.",e:"몇 가문이 권력을 독점하고 수령 자리까지 판 정치."},
+{n:"실사구시",b:"ppt",s:1,d:"실학의 표어. 사실에 근거해 옳음을 구함.",e:"사실에서 옳음을 찾자. 실학의 표어."},
+{n:"반계수록",b:"ppt",d:"유형원. 토지제도를 고쳐 소농도 땅을 갖게 하자고 했다.",e:"유형원. 토지를 고쳐 소농도 땅을 갖게 하자."},
+{n:"열하일기",b:"ppt",d:"박지원. 수레와 유통을 중시한 북학파의 대표 저서.",e:"박지원. 수레와 유통을 중시한 북학파 대표 책."},
+{n:"전호",b:"cls",d:"남의 땅을 빌려 농사짓는 농민. 농장 경영 기록의 핵심.",e:"남의 땅 빌려 농사짓는 농민."},
+{n:"족보 사기",b:"cls",d:"돈을 주고 족보의 빈 칸에 내 이름을 끼워 넣는 것. 족보책을 사는 게 아니다.",e:"족보 빈칸에 돈 내고 이름 끼워 넣기. 책을 사는 게 아님."}
 ]}
 ];
 
 const STORIES=[
 {w:9,tag:"9주차 · 대외무역",title:"고려, 바다 건너 세계와 연결되다",
 hook:"고려가 조용한 왕국이었을 리 없음. 세금으로 걷은 곡식·베가 예성항에 쌓이고, 송·일본·아랍 상인이 개경까지 올라왔음.",
+flow:["농업 생산","조세·공부","예성항 집결","송·원 교역","노걸대"],
 steps:[
 ["왜 터짐","농업 생산물이 기본 교역품이고, 조세와 공부로 걷은 곡식·베·약재가 왕실과 관청으로 갔음. 사원도 토지·노비를 굴려 술·향·초까지 만들어 팔았음. 문제는 ‘누가 사가느냐’였음. 내수만으로는 안 돌아감."],
 ["어떻게","국가는 조공·관무역·공무역, 개인은 사무역·사신무역·부대무역. 답은 바다였음. 한 번에 많이 실으니까. 개경 옆 **예성항**에 조세·공물·상인이 전부 모이고, 외국 상인은 원칙적으로 여기서만 교역. **팔관회**(개경 11월 15일)엔 각국 사신·상인이 개경으로 몰려와 객관에서 교역했음."],
@@ -339,6 +578,7 @@ keys:["예성항 — 외국 상인은 원칙적으로 여기서만","993년 이�
 },
 {w:10,tag:"10주차 · 고려 말",title:"고려 최후: 나라가 몇 명 농장이 되어버린 날",
 hook:"고려가 망한 이유를 ‘왕이 어려서’로 쓰면 감점. 진짜 원인은 땅과 사람이 몇몇 집안에 묶여버린 것.",
+flow:["겸병·사패","농장","재정 파탄","신진사대부","과전법·건국"],
 steps:[
 ["왜 터짐","권문세족이 수조권을 자기 땅으로 착각하고 겸병·탈점. 원 간섭기엔 전쟁으로 땅이 없어 **사패**(개간+전시과 지급)를 뿌렸는데, 이걸 함부로 받아내는 **모수사패**까지. 일꾼은 **압량위천**으로 양인을 노비로 만들고, 농민은 **기탁**으로 농장에 붙음. 농장은 세금을 안 냄 → 농민 부담 증가 → 유망 → 국가 재정 파탄 → 관료에게 줄 땅도 없음 → 관료끼리 갈등. 교과서적인 악순환."],
 ["어떻게","성리학을 들고 온 **신진사대부**(향리 자제+중소지주)가 ‘이건 아니다’ 하고 등장. 온건은 **일전일주**로 폐단만 고치자, 급진은 **과전법**으로 판을 새로 짜자. 공민왕 때 신돈이 성균관을 중영하고 이색·정몽주·정도전이 같은 스승 밑에서 공부하며 뭉침. 우왕 때 이인임이 이들을 밀어내고, 1388년 명이 철령 이북을 요구하자 최영이 요동정벌을 밀고 이성계가 **위화도 회군**."],
@@ -347,6 +587,7 @@ keys:["사패·모수사패 → 대토지(농장) 형성","압량위천(양인�
 },
 {w:11,tag:"11주차 · 세종",title:"세종: 판은 태종이 깔고, 살은 세종이 세웠다",
 hook:"세종이 갑자기 천재라서 된 게 아님. 태종이 욕먹을 일 다 하고 넘겨준 다음에 시작된 일임.",
+flow:["왕권 주도론","태종의 골격","예악·삼강오륜","집현전·공론","훈민정음"],
 steps:[
 ["왜 터짐","건국 세력의 목표는 같음. 고려 말 문제를 고치고 성리학 기반 중앙집권체제를 세우는 것. 그런데 주도권 싸움. 개국공신은 **재상권 주도론**, 왕실은 **왕권 주도론**. 1차 왕자의 난에서 이방원이 이기며 왕권 주도로 확정."],
 ["어떻게","태종이 의정부+6조 중심 개편, 사병→공병, **양전**, 노비소송·사원 정리로 골격을 완성하고 ‘궂은 일은 내가 할게, 너는 탄탄대로 가라’ 하고 양위. 세종은 **예악**으로 질서와 조화를 세우고 **삼강**(상하 질서)·**오륜**(관계 조화), 명분·직분을 강조. **집현전**에서 고제를 연구시키고 인재도 키움. 공법은 **17년** 토론, 장영실·황희는 능력으로 기용."],
@@ -355,6 +596,7 @@ keys:["왕권 주도론 + 1차 왕자의 난 승리","예악·삼강오륜·명�
 },
 {w:12,tag:"12주차 · 양반사회",title:"성리학이 조선의 집안일까지 장악한 과정",
 hook:"성리학은 철학으로 끝난 게 아니라 동네 명부·규약·학교를 직접 만들었음. 그게 사족지배체제.",
+flow:["성리학 수용","국가 교학","사림 진출","사화","향안·향약·서원"],
 steps:[
 ["왜 터짐","고려 말 모순을 해결할 무기로 성리학이 들어옴(원 간섭기 **안향**이 소개). 조선은 이걸 국가 교학으로 밀어붙임. **일읍일교** 원칙으로 전국 군현에 학교를 세움."],
 ["어떻게","15세기 **훈구파**는 모든 군현에 지방관을 파견해 일원적으로 지배하고 재지양반의 향촌 지배는 부정. 16세기 **사림파**는 유향소에서 출발해 재지 기반을 넓히며 중앙으로 진출, **수기치인**을 내세워 훈구의 실정을 비판 → **사화**(무오·갑자·기묘·을사). 살아남으려고 향약과 서원을 깔고 향촌을 장악."],
@@ -363,10 +605,11 @@ keys:["일읍일교 — 국가 교학으로 정착","훈구 vs 사림 = 수기�
 },
 {w:13,tag:"13주차 · 조선 후기",title:"조선 후기: 두 기둥이 같이 무너진다",
 hook:"조선왕조 지배체제는 신분제와 지주제 두 기둥. 기출 15점이 딱 이거임.",
+flow:["이앙법","고공·부농 분화","항조→도조법","납속·족보","신분제 동요·실학"],
 steps:[
 ["왜 터짐","농업 기술이 먼저 터짐. **이앙법**으로 쌀·보리 이모작이 가능해지고 노동력이 줄어 경영이 확대. **견종법**과 시비법으로 소출이 늘고, 면화·담배·인삼 같은 **상품작물**이 퍼짐. 농사가 먹고사는 일에서 돈 버는 일이 됨."],
 ["어떻게","농민이 갈라짐. 토지에서 밀린 사람은 **고공**(머슴)으로, 잘 나간 사람은 **경영형 부농**으로. 지주는 2분의 1 지대를 받다가 **항조**에 맞고 **도조법**(정액지대)으로 전환. 돈 있는 양인·노비는 **납속첩·공명첩**을 사고 **족보**까지 사서 양반으로 올라가고, 못 버틴 양반은 **잔반**으로. 결과는 양인·노비 감소, 양반 증가(단성 양반호 1.9%에서 32.2%)."],
-["결국","지주제가 흔들리니 신분제도 같이 흔들림. 수조권이 사라져 양반도 권력 참여가 필수가 되고, 사족지배체제가 약화되며 **수령권 강화**, **신향**과 구향의 **향전**. 정치에서 밀린 지식인들이 **실학**으로: 신분제 폐지, 권력 평등, 경제 성장 계층의 참여. 중농학파(**반계수록** 유형원·이익·정약용)와 중상·북학파(**열하일기** 박지원·박제가). 중세사회 해체."]],
+["결국","지주제가 흔들리니 신분제도 같이 흔들림. 수조권이 사라져 양반도 권력 참여가 필수가 되고, 사족지배체제가 약화되며 **수령권 강화**, **신향**과 구향의 **향전**. 정치에서 밀린 지식인들이 **실학**으로: 신분제 폐지, 권력 평등, 경제 성장 계층의 참여. 중농학파(**반계수록** 유형원·이익·정약용)와 중상·북학파(**열하일기** 박지원·박제가·홍대용·유수원). 중세사회 해체."]],
 keys:["이앙법 → 이모작·노동력 절감·경영 확대","항조 → 도조법(정액지대)","납속첩·공명첩·족보 매매 → 양인·노비 감소, 양반 증가","사족지배체제 붕괴 → 실학(신분제 폐지)"]
 }
 ];
@@ -408,9 +651,11 @@ a:"필수 키워드: **이앙법**, **항조→도조법**, **납속첩·공명�
 hint:"‘양상’만 쓰고 ‘영향’을 빼면 절반. 실학을 인물 이름만 나열하면 감점 — 신분제 폐지·권력 평등이라는 방향을 써야 함."}
 ];
 
-const K="gomsa.v3";
+const K="gomsa.v4";
 let S={theme:"",mem:false,open:{},week:{},ans:{}};
 let TAB=1;
+let MZ=1;
+let MAPS="";
 
 function load(){
   try{
@@ -439,6 +684,89 @@ function fmt(s){
   }
   return out;
 }
+function buildMap(){
+  if(MAPS) return MAPS;
+  const W=420,CX=210;
+  let y=12,g="",trunk="";
+  MAP.forEach(function(e,ei){
+    const L=e.nodes.filter(function(n){return n.side==="L";});
+    const R=e.nodes.filter(function(n){return n.side==="R";});
+    const rows=Math.max(L.length,R.length);
+    const eraH=64;
+    let s="";
+    s+='<g class="mn e'+e.w+'" data-id="e'+ei+'">';
+    s+='<rect class="er" x="40" y="'+y+'" width="340" height="'+eraH+'" rx="18"/>';
+    s+='<rect class="eb" x="40" y="'+y+'" width="5" height="'+eraH+'" rx="2.5"/>';
+    s+='<text class="et" x="'+(CX+3)+'" y="'+(y+24)+'">'+e.w+'주차 · '+e.tag+'</text>';
+    s+='<text class="eh" x="'+(CX+3)+'" y="'+(y+47)+'">'+e.title+'</text>';
+    s+='</g>';
+    const top=y+eraH+26;
+    const rowH=62;
+    function place(list,side){
+      let o="";
+      list.forEach(function(n,i){
+        const by=top+i*rowH;
+        const bh=n.l2?56:44;
+        const bx=(side==="L")?4:294;
+        const cy=by+Math.round(bh/2);
+        const ex=(side==="L")?126:294;
+        o+='<path class="cn" d="M'+CX+' '+cy+' H'+ex+'"/>';
+        o+='<circle class="dot" cx="'+CX+'" cy="'+cy+'" r="2.4"/>';
+        o+='<g class="mn" data-id="'+n.id+'">';
+        o+='<rect class="nr" x="'+bx+'" y="'+by+'" width="122" height="'+bh+'" rx="12"/>';
+        if(n.l2){
+          o+='<text class="nl" x="'+(bx+61)+'" y="'+(by+22)+'">'+n.l1+'</text>';
+          o+='<text class="nl" x="'+(bx+61)+'" y="'+(by+39)+'">'+n.l2+'</text>';
+        }else{
+          o+='<text class="nl" x="'+(bx+61)+'" y="'+(by+27)+'">'+n.l1+'</text>';
+        }
+        o+='</g>';
+      });
+      return o;
+    }
+    g+=s+place(L,"L")+place(R,"R");
+    const lastBottom=top+(rows-1)*rowH+56;
+    const nextTop=lastBottom+34;
+    trunk+='<path class="sp" d="M'+CX+' '+(y+eraH)+' V'+nextTop+'"/>';
+    y=nextTop;
+  });
+  const H=y+14;
+  MAPS='<svg class="map" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="고중세사 9주차부터 13주차까지 전체 흐름 마인드맵">'+trunk+g+'</svg>';
+  return MAPS;
+}
+function findNode(id){
+  if(id.charAt(0)==="e"){
+    const i=parseInt(id.slice(1),10);
+    const e=MAP[i];
+    if(!e) return null;
+    return {tag:e.w+"주차 · "+e.tag,title:e.title,q:e.q,one:e.one,why:e.why,keys:e.keys,w:e.w};
+  }
+  for(let i=0;i<MAP.length;i++){
+    const n=MAP[i].nodes.filter(function(x){return x.id===id;})[0];
+    if(n) return {tag:MAP[i].w+"주차 · "+MAP[i].tag,title:n.l1+(n.l2?" "+n.l2:""),q:"",one:n.one,why:n.why,keys:n.keys,w:n.w};
+  }
+  return null;
+}
+function tabMap(){
+  let h='<div class="flow">';
+  MAP.forEach(function(e,i){
+    h+='<button class="fch c'+e.w+'" data-era="'+i+'"><span class="fnn">'+e.w+'</span>'+e.chip+'</button>';
+    if(i<MAP.length-1) h+='<span class="far">→</span>';
+  });
+  h+='</div>';
+  h+='<div class="mapbar"><span class="hint">굵은 띠가 주차, 양옆 상자가 그 주차의 핵심 갈래. 눌러서 <b>핵심·인과·키워드</b> 보기.</span>'+
+    '<button class="zbtn" id="zo">－</button><button class="zbtn" id="zi">＋</button></div>';
+  h+='<div class="mapw" id="mapw">'+buildMap()+'</div>';
+  h+='<div class="sec"><h2>핵심 인과 사슬 3개</h2><p class="sub">시대를 관통하는 세 줄기만 잡으면 총체적으로 이해된다. 서술형은 이 세 줄기에서 나온다.</p></div>';
+  CHAINS.forEach(function(c){
+    h+='<div class="chain"><div class="ct">'+c.ct+'</div><div class="cq">'+c.cq+'</div>';
+    c.steps.forEach(function(st,i){
+      h+='<div class="cs"><span class="n">'+(i+1)+'</span><div class="b"><b>'+fmt(st[0])+'</b><i>'+fmt(st[1])+'</i></div></div>';
+    });
+    h+='</div>';
+  });
+  return h;
+}
 function termHTML(x,id){
   const hid=S.mem&&!S.open[id];
   let h='<div class="trm'+(hid?' hid':'')+'" data-id="'+id+'" role="button" tabindex="0">';
@@ -449,21 +777,22 @@ function termHTML(x,id){
   h+='<span class="tp">눌러서 확인</span>';
   h+='</div>';
   h+='<div class="td">'+fmt(x.d)+'</div>';
+  if(x.e) h+='<div class="ez"><em>쉽게</em>'+fmt(x.e)+'</div>';
   h+='</div>';
   return h;
 }
 function tab1(){
-  const total=WEEKS.reduce((a,w)=>a+w.items.length,0);
-  const core=WEEKS.reduce((a,w)=>a+w.items.filter(x=>x.s).length,0);
+  const total=WEEKS.reduce(function(a,w){return a+w.items.length;},0);
+  const core=WEEKS.reduce(function(a,w){return a+w.items.filter(function(x){return x.s;}).length;},0);
   const hiddenCnt=WEEKS.reduce(function(a,w,wi){return a+w.items.filter(function(x,i){return S.mem&&!S.open[wi+"-"+i];}).length;},0);
   let h='<div class="bar">'+
     '<span class="cnt"><b>'+total+'</b>개 · ★핵심 <b>'+core+'</b></span>'+
     '<button class="sw'+(S.mem?' on':'')+'" id="mem"><b>'+(S.mem?'암기 모드 ON':'암기 모드 OFF')+'</b></button>'+
     '<button class="sw" id="allw">'+(S.mem&&hiddenCnt===0?'모두 가리기':'모두 펼치기')+'</button>'+
     '</div>';
-  h+='<div class="note">약술 5문제는 <b>용어 + 핵심 기능 한 줄</b>로 채점됨. ★만 먼저 훑고, <b>🎙 함정</b>은 교안에서 놓치기 쉬운 디테일이나 교수님이 말로 짚어낸 것 — 에브리타임 족보 기준 5개 중 1개가 여기서 나옴.</div>';
+  h+='<div class="note">약술 5문제는 <b>용어 + 핵심 기능 한 줄</b>로 채점됨. ★만 먼저 훑고, 회색 <b>쉽게</b> 칸으로 뜻을 잡은 뒤 <b>🎙 함정</b>을 보면 됨 — 에브리타임 족보 기준 5개 중 1개가 여기서 나옴.</div>';
   WEEKS.forEach(function(w,wi){
-    h+='<section class="wk"><div class="wkh"><span class="wn">'+w.w+'주차</span><span class="wt">'+w.title+'</span><span class="wc">'+w.items.length+'</span></div>';
+    h+='<section class="wk" id="wk'+w.w+'"><div class="wkh"><span class="wn">'+w.w+'주차</span><span class="wt">'+w.title+'</span><span class="wc">'+w.items.length+'</span></div>';
     w.items.forEach(function(x,i){
       if(x.s) h+=termHTML(x,wi+"-"+i);
     });
@@ -482,9 +811,16 @@ function tab1(){
   return h;
 }
 function tab2(){
-  let h='<div class="note">서술형은 <b>왜 터짐 → 어떻게 굴러감 → 결국 뭐가 바뀜</b> 순서로 외우면 안 까먹음. 각 스토리 끝 <b>감점 방지 키워드</b>는 답안지에 반드시 넣기.</div>';
+  let h='<div class="note">서술형은 <b>왜 터짐 → 어떻게 굴러감 → 결국 뭐가 바뀜</b> 순서로 외우면 안 까먹음. 위 <b>흐름 칩</b>만 줄줄 외워도 뼈대가 잡히고, 끝 <b>감점 방지 키워드</b>는 답안지에 반드시 넣기.</div>';
   STORIES.forEach(function(s){
-    h+='<article class="story"><div class="shead"><span class="stag">'+s.tag+'</span><h2>'+fmt(s.title)+'</h2><p class="hook">'+fmt(s.hook)+'</p></div><div class="steps">';
+    h+='<article class="story"><div class="shead"><span class="stag">'+s.tag+'</span><h2>'+fmt(s.title)+'</h2><p class="hook">'+fmt(s.hook)+'</p></div>';
+    h+='<div class="sflow">';
+    s.flow.forEach(function(f,i){
+      h+='<span class="f">'+fmt(f)+'</span>';
+      if(i<s.flow.length-1) h+='<span class="a">→</span>';
+    });
+    h+='</div>';
+    h+='<div class="steps">';
     s.steps.forEach(function(st){
       h+='<div class="step"><div class="lb">'+st[0]+'</div><div class="tx">'+fmt(st[1])+'</div></div>';
     });
@@ -522,10 +858,24 @@ function stickTop(){
 }
 function render(){
   const app=document.getElementById("app");
-  if(TAB===1) app.innerHTML=tab1();
-  else if(TAB===2) app.innerHTML=tab2();
+  if(TAB===1) app.innerHTML=tabMap();
+  else if(TAB===2) app.innerHTML=tab1();
+  else if(TAB===3) app.innerHTML=tab2();
   else app.innerHTML=tab3();
+  if(TAB===1) applyZoom();
   stickTop();
+}
+function applyZoom(){
+  const svg=document.querySelector(".mapw svg");
+  if(svg) svg.style.width=(MZ*100)+"%";
+}
+function selectTab(n){
+  closeSheet();
+  TAB=n;
+  document.querySelectorAll(".tab").forEach(function(x){
+    x.classList.toggle("on",parseInt(x.getAttribute("data-t"),10)===n);
+  });
+  render();
 }
 function dday(){
   const exam=new Date("2026-12-08T12:00:00+09:00").getTime();
@@ -540,15 +890,77 @@ function applyTheme(t){
   const m=document.querySelector('meta[name="theme-color"]');
   if(m) m.setAttribute("content",t==="dark"?"#0b0d0f":"#fcfbf7");
 }
+function openSheet(id){
+  const d=findNode(id);
+  if(!d) return;
+  const sh=document.getElementById("sheet");
+  let h='<div class="shtop"><span class="stag">'+d.tag+'</span><button class="x" id="sx" aria-label="닫기">✕</button></div>';
+  h+='<h3>'+fmt(d.title)+'</h3>';
+  if(d.q) h+='<p class="sq">'+fmt(d.q)+'</p>';
+  h+='<div class="r"><span class="lb">한 줄</span><p>'+fmt(d.one)+'</p></div>';
+  h+='<div class="r"><span class="lb">인과</span><p>'+fmt(d.why)+'</p></div>';
+  if(d.keys&&d.keys.length){
+    h+='<div class="chips">';
+    d.keys.forEach(function(k){h+='<span>'+fmt(k)+'</span>';});
+    h+='</div>';
+  }
+  h+='<button class="go" data-go="'+d.w+'">'+d.w+'주차 약술에서 자세히 보기 →</button>';
+  sh.innerHTML=h;
+  sh.classList.add("on");
+  sh.setAttribute("aria-hidden","false");
+}
+function closeSheet(){
+  const sh=document.getElementById("sheet");
+  if(!sh) return;
+  sh.classList.remove("on");
+  sh.setAttribute("aria-hidden","true");
+}
+function goWeek(w){
+  closeSheet();
+  selectTab(2);
+  window.requestAnimationFrame(function(){
+    const el=document.getElementById("wk"+w);
+    if(!el) return;
+    const r=el.getBoundingClientRect();
+    window.scrollTo({top:window.scrollY+r.top-140,behavior:"smooth"});
+  });
+}
 document.getElementById("tabs").addEventListener("click",function(e){
   const b=e.target.closest(".tab");
   if(!b) return;
-  TAB=parseInt(b.getAttribute("data-t"),10)||1;
-  document.querySelectorAll(".tab").forEach(function(x){x.classList.toggle("on",x===b);});
-  render();
+  selectTab(parseInt(b.getAttribute("data-t"),10)||1);
   window.scrollTo({top:0,behavior:"smooth"});
 });
 document.getElementById("app").addEventListener("click",function(e){
+  const nd=e.target.closest(".mn");
+  if(nd&&document.getElementById("mapw")&&document.getElementById("mapw").contains(nd)){
+    openSheet(nd.getAttribute("data-id"));
+    return;
+  }
+  const ch=e.target.closest(".fch");
+  if(ch){
+    const i=parseInt(ch.getAttribute("data-era"),10);
+    const g=document.querySelector('.map .e'+MAP[i].w);
+    if(g){
+      const r=g.getBoundingClientRect();
+      window.scrollTo({top:window.scrollY+r.top-190,behavior:"smooth"});
+    }else{
+      openSheet("e"+i);
+    }
+    return;
+  }
+  const zi=e.target.closest("#zi");
+  if(zi){
+    MZ=Math.min(2.4,Math.round((MZ+0.35)*100)/100);
+    applyZoom();
+    return;
+  }
+  const zo=e.target.closest("#zo");
+  if(zo){
+    MZ=Math.max(0.7,Math.round((MZ-0.35)*100)/100);
+    applyZoom();
+    return;
+  }
   const trm=e.target.closest(".trm");
   if(trm){
     if(!S.mem) return;
@@ -597,6 +1009,11 @@ document.getElementById("app").addEventListener("keydown",function(e){
   const trm=e.target.closest(".trm");
   if(!trm) return;
   if(e.key==="Enter"||e.key===" "){e.preventDefault();trm.click();}
+});
+document.getElementById("sheet").addEventListener("click",function(e){
+  if(e.target.closest("#sx")){closeSheet();return;}
+  const go=e.target.closest(".go");
+  if(go){goWeek(parseInt(go.getAttribute("data-go"),10));return;}
 });
 document.getElementById("th").addEventListener("click",function(){
   const cur=document.documentElement.getAttribute("data-theme")==="dark"?"dark":"light";
